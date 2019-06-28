@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SqlSetting>
+    <Data name="Insert_emailsendaccount">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                INSERT INTO emailsendaccount (EmailSendAccountID,EmailID,EmailAccountID,EmailSendAccountCreateTime) VALUES(@@EmailSendAccountID@@,@@EmailID@@,@@EmailAccountID@@,@@EmailSendAccountCreateTime@@);
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Update_emailsendaccount">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                UPDATE emailsendaccount SET EmailSendAccountID=@@EmailSendAccountID@@ <%=,EmailID=@@EmailID@@%><%=,EmailAccountID=@@EmailAccountID@@%><%=,EmailSendAccountCreateTime=@@EmailSendAccountCreateTime@@%> WHERE EmailSendAccountID=@@EmailSendAccountID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Delete_emailsendaccount">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                DELETE FROM emailsendaccount WHERE EmailSendAccountID=@@EmailSendAccountID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Select_emailsendaccount">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                SELECT EmailSendAccountID,EmailID,EmailAccountID,EmailSendAccountCreateTime FROM emailsendaccount WHERE 1=1 <%= AND EmailSendAccountID=@@EmailSendAccountID@@%> <%= AND EmailID=@@EmailID@@%> <%= AND EmailAccountID=@@EmailAccountID@@%> <%= AND EmailSendAccountCreateTime=@@EmailSendAccountCreateTime@@%>;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Select_emailsendaccount_List">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                SELECT EmailSendAccountID,EmailID,EmailAccountID,EmailSendAccountCreateTime FROM emailsendaccount WHERE 1=1 <%= AND EmailSendAccountID=@@EmailSendAccountID@@%> <%= AND EmailID=@@EmailID@@%> <%= AND EmailAccountID=@@EmailAccountID@@%> <%= AND EmailSendAccountCreateTime=@@EmailSendAccountCreateTime@@%> LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
+                SELECT COUNT(0) AS row_count FROM emailsendaccount WHERE 1=1 <%= AND EmailSendAccountID=@@EmailSendAccountID@@%> <%= AND EmailID=@@EmailID@@%> <%= AND EmailAccountID=@@EmailAccountID@@%> <%= AND EmailSendAccountCreateTime=@@EmailSendAccountCreateTime@@%>;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+</SqlSetting>
+

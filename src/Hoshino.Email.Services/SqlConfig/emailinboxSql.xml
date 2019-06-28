@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SqlSetting>
+    <Data name="Insert_emailinbox">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                INSERT INTO emailinbox (EmailInboxID,EmailServerUID,EmailInboxTitle,EmailInboxFrom,EmailInboxFromName,EmailInboxDate,EmailInboxFilePath,EmailInboxState,EmailInboxIsDel) VALUES(@@EmailInboxID@@,@@EmailServerUID@@,@@EmailInboxTitle@@,@@EmailInboxFrom@@,@@EmailInboxFromName@@,@@EmailInboxDate@@,@@EmailInboxFilePath@@,@@EmailInboxState@@,@@EmailInboxIsDel@@);
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Update_emailinbox">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                UPDATE emailinbox SET EmailInboxID=@@EmailInboxID@@ <%=,EmailServerUID=@@EmailServerUID@@%><%=,EmailInboxTitle=@@EmailInboxTitle@@%><%=,EmailInboxFrom=@@EmailInboxFrom@@%><%=,EmailInboxFromName=@@EmailInboxFromName@@%><%=,EmailInboxDate=@@EmailInboxDate@@%><%=,EmailInboxFilePath=@@EmailInboxFilePath@@%><%=,EmailInboxState=@@EmailInboxState@@%><%=,EmailInboxIsDel=@@EmailInboxIsDel@@%> WHERE EmailInboxID=@@EmailInboxID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Delete_emailinbox">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                DELETE FROM emailinbox WHERE EmailInboxID=@@EmailInboxID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Select_emailinbox">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                SELECT EmailInboxID,EmailServerUID,EmailInboxTitle,EmailInboxFrom,EmailInboxFromName,EmailInboxDate,EmailInboxFilePath,EmailInboxState,EmailInboxIsDel FROM emailinbox WHERE 1=1 <%= AND EmailInboxID=@@EmailInboxID@@%> <%= AND EmailServerUID=@@EmailServerUID@@%> <%= AND EmailInboxTitle=@@EmailInboxTitle@@%> <%= AND EmailInboxFrom=@@EmailInboxFrom@@%> <%= AND EmailInboxFromName=@@EmailInboxFromName@@%> <%= AND EmailInboxDate=@@EmailInboxDate@@%> <%= AND EmailInboxFilePath=@@EmailInboxFilePath@@%> <%= AND EmailInboxState=@@EmailInboxState@@%> <%= AND EmailInboxIsDel=@@EmailInboxIsDel@@%>;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Select_emailinbox_List">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                SELECT EmailInboxID,EmailServerUID,EmailInboxTitle,EmailInboxFrom,EmailInboxFromName,EmailInboxDate,EmailInboxFilePath,EmailInboxState,EmailInboxIsDel FROM emailinbox WHERE 1=1 <%= AND EmailInboxID=@@EmailInboxID@@%> <%= AND EmailServerUID=@@EmailServerUID@@%> <%= AND EmailInboxTitle=@@EmailInboxTitle@@%> <%= AND EmailInboxFrom=@@EmailInboxFrom@@%> <%= AND EmailInboxFromName=@@EmailInboxFromName@@%> <%= AND EmailInboxDate=@@EmailInboxDate@@%> <%= AND EmailInboxFilePath=@@EmailInboxFilePath@@%> <%= AND EmailInboxState=@@EmailInboxState@@%> <%= AND EmailInboxIsDel=@@EmailInboxIsDel@@%> LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
+                SELECT COUNT(0) AS row_count FROM emailinbox WHERE 1=1 <%= AND EmailInboxID=@@EmailInboxID@@%> <%= AND EmailServerUID=@@EmailServerUID@@%> <%= AND EmailInboxTitle=@@EmailInboxTitle@@%> <%= AND EmailInboxFrom=@@EmailInboxFrom@@%> <%= AND EmailInboxFromName=@@EmailInboxFromName@@%> <%= AND EmailInboxDate=@@EmailInboxDate@@%> <%= AND EmailInboxFilePath=@@EmailInboxFilePath@@%> <%= AND EmailInboxState=@@EmailInboxState@@%> <%= AND EmailInboxIsDel=@@EmailInboxIsDel@@%>;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+</SqlSetting>
+

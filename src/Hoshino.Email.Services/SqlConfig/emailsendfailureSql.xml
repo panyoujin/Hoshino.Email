@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SqlSetting>
+    <Data name="Insert_emailsendfailure">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                INSERT INTO emailsendfailure (EmailSendFailureID,EmailID,EmailBccAccountID,EmailAccountID,EmailSendFailureSendTime,Result) VALUES(@@EmailSendFailureID@@,@@EmailID@@,@@EmailBccAccountID@@,@@EmailAccountID@@,@@EmailSendFailureSendTime@@,@@Result@@);
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Update_emailsendfailure">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                UPDATE emailsendfailure SET EmailSendFailureID=@@EmailSendFailureID@@ <%=,EmailID=@@EmailID@@%><%=,EmailBccAccountID=@@EmailBccAccountID@@%><%=,EmailAccountID=@@EmailAccountID@@%><%=,EmailSendFailureSendTime=@@EmailSendFailureSendTime@@%><%=,Result=@@Result@@%> WHERE EmailSendFailureID=@@EmailSendFailureID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Delete_emailsendfailure">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                DELETE FROM emailsendfailure WHERE EmailSendFailureID=@@EmailSendFailureID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Select_emailsendfailure">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                SELECT EmailSendFailureID,EmailID,EmailBccAccountID,EmailAccountID,EmailSendFailureSendTime,Result FROM emailsendfailure WHERE 1=1 <%= AND EmailSendFailureID=@@EmailSendFailureID@@%> <%= AND EmailID=@@EmailID@@%> <%= AND EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND EmailAccountID=@@EmailAccountID@@%> <%= AND EmailSendFailureSendTime=@@EmailSendFailureSendTime@@%> <%= AND Result=@@Result@@%>;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Select_emailsendfailure_List">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                SELECT EmailSendFailureID,EmailID,EmailBccAccountID,EmailAccountID,EmailSendFailureSendTime,Result FROM emailsendfailure WHERE 1=1 <%= AND EmailSendFailureID=@@EmailSendFailureID@@%> <%= AND EmailID=@@EmailID@@%> <%= AND EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND EmailAccountID=@@EmailAccountID@@%> <%= AND EmailSendFailureSendTime=@@EmailSendFailureSendTime@@%> <%= AND Result=@@Result@@%> LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
+                SELECT COUNT(0) AS row_count FROM emailsendfailure WHERE 1=1 <%= AND EmailSendFailureID=@@EmailSendFailureID@@%> <%= AND EmailID=@@EmailID@@%> <%= AND EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND EmailAccountID=@@EmailAccountID@@%> <%= AND EmailSendFailureSendTime=@@EmailSendFailureSendTime@@%> <%= AND Result=@@Result@@%>;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+</SqlSetting>
+

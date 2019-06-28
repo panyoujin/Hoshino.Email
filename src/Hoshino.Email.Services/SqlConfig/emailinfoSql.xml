@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SqlSetting>
+    <Data name="Insert_emailinfo">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                INSERT INTO emailinfo (EmailID,EmailTitle,EmailCreateTime,EmailLastTime,EmailFilePath,EmailIsDel,EmailState,EmailStartSendTime) VALUES(@@EmailID@@,@@EmailTitle@@,@@EmailCreateTime@@,@@EmailLastTime@@,@@EmailFilePath@@,@@EmailIsDel@@,@@EmailState@@,@@EmailStartSendTime@@);
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Update_emailinfo">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                UPDATE emailinfo SET EmailID=@@EmailID@@ <%=,EmailTitle=@@EmailTitle@@%><%=,EmailCreateTime=@@EmailCreateTime@@%><%=,EmailLastTime=@@EmailLastTime@@%><%=,EmailFilePath=@@EmailFilePath@@%><%=,EmailIsDel=@@EmailIsDel@@%><%=,EmailState=@@EmailState@@%><%=,EmailStartSendTime=@@EmailStartSendTime@@%> WHERE EmailID=@@EmailID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+  <Data name="Update_EmailInfo_EmailState">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                
+UPDATE `emailinfo` ei SET ei.`EmailState`=3,EmailLastTime=NOW() WHERE NOT EXISTS (SELECT esb.`EmailID` FROM `emailsendbccaccount` esb WHERE esb.`EmailID` = ei.`EmailID` AND esb.`EmailAccountID` IS NULL AND esb.`EmailSendBccAccountState`=0);
+
+UPDATE `emailinfo` ei SET ei.`EmailState`=1,EmailLastTime=NOW() WHERE NOT EXISTS (SELECT esb.`EmailID` FROM `emailsendbccaccount` esb WHERE esb.`EmailID` = ei.`EmailID` AND esb.`EmailSendBccAccountState`=0);
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+    <Data name="Delete_emailinfo">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                DELETE FROM emailinfo WHERE EmailID=@@EmailID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Select_emailinfo">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                SELECT EmailID,EmailTitle,EmailCreateTime,EmailLastTime,EmailFilePath,EmailIsDel,EmailState,EmailStartSendTime FROM emailinfo WHERE 1=1 <%= AND EmailID=@@EmailID@@%> <%= AND EmailTitle=@@EmailTitle@@%> <%= AND EmailCreateTime=@@EmailCreateTime@@%> <%= AND EmailLastTime=@@EmailLastTime@@%> <%= AND EmailFilePath=@@EmailFilePath@@%> <%= AND EmailIsDel=@@EmailIsDel@@%> <%= AND EmailState=@@EmailState@@%> <%= AND EmailStartSendTime=@@EmailStartSendTime@@%>;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Select_emailinfo_List">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                SELECT EmailID,EmailTitle,EmailCreateTime,EmailLastTime,EmailFilePath,EmailIsDel,EmailState,EmailStartSendTime FROM emailinfo WHERE 1=1 <%= AND EmailID=@@EmailID@@%> <%= AND EmailTitle=@@EmailTitle@@%> <%= AND EmailCreateTime=@@EmailCreateTime@@%> <%= AND EmailLastTime=@@EmailLastTime@@%> <%= AND EmailFilePath=@@EmailFilePath@@%> <%= AND EmailIsDel=@@EmailIsDel@@%> <%= AND EmailState=@@EmailState@@%> <%= AND EmailStartSendTime=@@EmailStartSendTime@@%> LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
+                SELECT COUNT(0) AS row_count FROM emailinfo WHERE 1=1 <%= AND EmailID=@@EmailID@@%> <%= AND EmailTitle=@@EmailTitle@@%> <%= AND EmailCreateTime=@@EmailCreateTime@@%> <%= AND EmailLastTime=@@EmailLastTime@@%> <%= AND EmailFilePath=@@EmailFilePath@@%> <%= AND EmailIsDel=@@EmailIsDel@@%> <%= AND EmailState=@@EmailState@@%> <%= AND EmailStartSendTime=@@EmailStartSendTime@@%>;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+
+
+  <Data name="Select_NextSendEmailInfoByEmailAccount">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                SELECT ei.* FROM `emailsendaccount` esa LEFT JOIN `emailinfo` ei ON ei.`EmailID`=esa.`EmailID` WHERE esa.`EmailAccountID`='1' AND ei.`EmailIsDel`=0 AND ei.`EmailState`=0 ORDER BY ei.`EmailStartSendTime` LIMIT 1;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+</SqlSetting>
+

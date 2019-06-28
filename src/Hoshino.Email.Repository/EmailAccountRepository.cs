@@ -1,0 +1,110 @@
+﻿using System;
+using System.Collections.Generic;
+using DBHelper.SQLHelper;
+using Hoshino.Email.Entity;
+
+namespace Hoshino.Email.Repository
+{
+    public class EmailAccountRepository
+    {
+        /// <summary>
+        /// 新增
+        /// </summary>
+        public bool Insert(EmailAccountEntity model)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            if (model.EmailAccountID != null)
+            {
+                dic["EmailAccountID"] = model.EmailAccountID;
+            }
+            if (model.EmailAccountAddress != null)
+            {
+                dic["EmailAccountAddress"] = model.EmailAccountAddress;
+            }
+            if (model.EmailAccountPassWord != null)
+            {
+                dic["EmailAccountPassWord"] = model.EmailAccountPassWord;
+            }
+            if (model.EmailAccountName != null)
+            {
+                dic["EmailAccountName"] = model.EmailAccountName;
+            }
+            if (model.EmailAccountSMTP != null)
+            {
+                dic["EmailAccountSMTP"] = model.EmailAccountSMTP;
+            }
+            if (model.EmailAccountSMTPPort != null && model.EmailAccountSMTPPort.HasValue)
+            {
+                dic["EmailAccountSMTPPort"] = model.EmailAccountSMTPPort;
+            }
+            if (model.EmailAccountPOP3 != null)
+            {
+                dic["EmailAccountPOP3"] = model.EmailAccountPOP3;
+            }
+            dic["EmailAccountPOP3Port"] = model.EmailAccountPOP3Port;
+            dic["EmailAccountIsSSL"] = model.EmailAccountIsSSL;
+            dic["EmailAccountMaxEmailCount"] = model.EmailAccountMaxEmailCount;
+            dic["EmailAccountRemainEmailCount"] = model.EmailAccountRemainEmailCount;
+            dic["EmailAccountSpace"] = model.EmailAccountSpace;
+            dic["EmailAccountCreateTime"] = model.EmailAccountCreateTime;
+            dic["EmailAccountLastTime"] = model.EmailAccountLastTime;
+            dic["SendState"] = model.SendState;
+            dic["SendMode"] = model.SendMode;
+            return SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailaccount", dic) > 0;
+        }
+
+        /// <summary>
+        /// 修改剩余数量和下次发送时间
+        /// </summary>
+        public bool UpdateRemainCount(string EmailAccountID, int EmailAccountRemainEmailCount, DateTime EmailAccountNextSendTime)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic["EmailAccountID"] = EmailAccountID;
+            dic["EmailAccountRemainEmailCount"] = EmailAccountRemainEmailCount;
+            dic["EmailAccountNextSendTime"] = EmailAccountNextSendTime;
+            return SQLHelperFactory.Instance.ExecuteNonQuery("UpdateEmailAccount_RemainCount", dic) > 0;
+        }
+
+        /// <summary>
+        /// 修改占用
+        /// </summary>
+        public bool UpdateEmailAccountOccupy(EmailAccountEntity model)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic["EmailAccountID"] = model.EmailAccountID;
+            dic["OccupyIP"] = model.OccupyIP;
+            return SQLHelperFactory.Instance.ExecuteNonQuery("UpdateEmailAccount_Occupy", dic) > 0;
+        }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        public bool Delete(string EmailAccountID)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic["EmailAccountID"] = EmailAccountID;
+            return SQLHelperFactory.Instance.ExecuteNonQuery("Delete_emailaccount", dic) > 0;
+        }
+
+        /// <summary>
+        /// 获取单个
+        /// </summary>
+        public EmailAccountEntity Get(string EmailAccountID)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic["EmailAccountID"] = EmailAccountID;
+            return SQLHelperFactory.Instance.QueryForObjectByT<EmailAccountEntity>("Select_EmailAccount", dic);
+        }
+
+        /// <summary>
+        /// 获取列表
+        /// </summary>
+        public IEnumerable<EmailAccountEntity> GetList()
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            var list = SQLHelperFactory.Instance.QueryForListByT<EmailAccountEntity>("Select_EmailAccount_List", dic);
+            return list;
+        }
+
+    }
+}

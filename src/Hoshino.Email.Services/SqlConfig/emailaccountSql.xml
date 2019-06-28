@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SqlSetting>
+    <Data name="UpdateEmailAccount_RemainCount">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                UPDATE emailaccount SET EmailAccountRemainEmailCount=@@EmailAccountRemainEmailCount@@,EmailAccountPreSendTime=NOW(),EmailAccountNextSendTime=@@EmailAccountNextSendTime@@,EmailAccountLastTime=NOW() WHERE EmailAccountID=@@EmailAccountID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+  <Data name="UpdateEmailAccount_Occupy">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+        UPDATE `emailaccount` ea SET ea.`OccupyIP`=@@OccupyIP@@ , ea.`OccupyTime`=NOW(),EmailAccountLastTime=NOW() WHERE ea.`EmailAccountID`=@@EmailAccountID@@ AND (ea.`OccupyIP` IS NULL OR ea.`OccupyIP` = '' OR ea.`OccupyIP`=@@OccupyIP@@ OR ea.`OccupyTime`<DATE_SUB(NOW(),INTERVAL ea.`EmailAccountSpace`/2 MINUTE));
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+    <Data name="Select_EmailAccount">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                SELECT EmailAccountID,EmailAccountAddress,EmailAccountPassWord,EmailAccountName,EmailAccountSMTP,EmailAccountSMTPPort,EmailAccountPOP3,EmailAccountPOP3Port,EmailAccountIsSSL,EmailAccountMaxEmailCount,EmailAccountRemainEmailCount,EmailAccountSpace,SendState,SendMode,OccupyIP,OccupyTime,EmailAccountPreSendTime,EmailAccountNextSendTime FROM emailaccount WHERE EmailAccountID=@@EmailAccountID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Select_EmailAccount_List">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                SELECT EmailAccountID,OccupyIP,OccupyTime,EmailAccountPreSendTime,EmailAccountNextSendTime FROM emailaccount;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+</SqlSetting>
+
