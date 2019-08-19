@@ -1,12 +1,22 @@
-﻿<Window x:Class="Hoshino.Email.MainWindow"
+﻿<Controls:MetroWindow x:Class="Hoshino.Email.MainWindow"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hoshino.Email"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      mc:Ignorable="d" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
+        Title="新邮件系统" Height="600" Width="800">
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="主页"  x:Name="btnMain" Click="BtnMain_Click"/>
+            <Button Content="通讯录" x:Name="btnMailList"/>
+            <Button Content="邮件管理" x:Name="btnMailManage"/>
+            <Button Content="新建邮件" x:Name="btnNewMail"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
     <Grid>
-        
+
     </Grid>
-</Window>
+</Controls:MetroWindow>
