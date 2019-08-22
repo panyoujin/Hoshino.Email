@@ -13,3 +13,5 @@
 /src/Hoshino.Email.Repository/obj/Debug
 /src/Hoshino.Email.Services/obj/Debug
 /src/Hoshino.Email.Services/bin/Debug
+/src/.vs/Hoshino.Email/v15/Server/sqlite3
+/src/.vs/Hoshino.Email/v15/.suo
