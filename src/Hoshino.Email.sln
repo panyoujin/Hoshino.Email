@@ -13,6 +13,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hoshino.Email.Services", "H
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hoshino.Email.Core", "Hoshino.Email.Core\Hoshino.Email.Core.csproj", "{3852EE1A-C2B8-4D0F-B0D1-79046917D094}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 Client", "01 Client", "{985D91FA-C37F-4EC0-8C93-253B7C5008B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 Service", "02 Service", "{35F143CE-ED21-484A-9486-AE1061E641C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 Common", "03 Common", "{85DB4BBD-792D-4793-B454-200389CE1D90}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 Models", "04 Models", "{50E0E7D1-1997-41F2-B8CB-B0513616459C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +50,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6205E429-05DA-4531-A011-E2909A520334} = {985D91FA-C37F-4EC0-8C93-253B7C5008B3}
+		{E80DD4F9-61C3-44C3-B591-5E9ADCF461D0} = {50E0E7D1-1997-41F2-B8CB-B0513616459C}
+		{BC5DBA75-0EC4-44F9-8BDC-CF10A4886762} = {50E0E7D1-1997-41F2-B8CB-B0513616459C}
+		{EECB05D4-D9F8-4EA1-B464-8161EA0C8927} = {35F143CE-ED21-484A-9486-AE1061E641C5}
+		{3852EE1A-C2B8-4D0F-B0D1-79046917D094} = {85DB4BBD-792D-4793-B454-200389CE1D90}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF864F1E-B6EF-4471-B923-262A0C7F962E}

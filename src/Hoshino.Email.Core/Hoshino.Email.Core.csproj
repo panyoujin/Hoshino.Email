@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Enum.cs" />
     <Compile Include="Helper\EventHelper.cs" />
     <Compile Include="Helper\MailHelper.cs" />
     <Compile Include="Helper\NetHelper.cs" />

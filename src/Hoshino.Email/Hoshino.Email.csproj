@@ -115,6 +115,11 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Hoshino.Email.Core\Hoshino.Email.Core.csproj">
+      <Project>{3852EE1A-C2B8-4D0F-B0D1-79046917D094}</Project>
+      <Name>Hoshino.Email.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

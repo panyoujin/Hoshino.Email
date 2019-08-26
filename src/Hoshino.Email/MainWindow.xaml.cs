@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Hoshino.Email.Controls;
+using Hoshino.Email.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,25 +24,38 @@ namespace Hoshino.Email
         public class Menu
         {
             public string Name { set; get; }
+            public SysFunction SysFunction { set; get; }
+
+            public object Content { set; get; }
         }
+
+        private List<Menu> MenuList = new List<Menu>();
         public MainWindow()
         {
             InitializeComponent();
-            List<Menu> MenuList = new List<Menu>();
-            MenuList.Add(new Menu { Name = "首頁" });
-            MenuList.Add(new Menu { Name = "通訊錄" });
-            MenuList.Add(new Menu { Name = "郵件管理" });
-            MenuList.Add(new Menu { Name = "新增郵件" });
-            MenuList.Add(new Menu { Name = "郵件篩選" });
+            Init();
 
             ItemsListBox.ItemsSource = MenuList;
+        }
+
+        private void Init()
+        {
+            MenuList.Add(new Menu { Name = "首頁", SysFunction = SysFunction.HomePage ,Content=new UC_Main()});
+            MenuList.Add(new Menu { Name = "通訊錄", SysFunction = SysFunction.AddressBook });
+            MenuList.Add(new Menu { Name = "郵件管理", SysFunction = SysFunction.MailManagement });
+            MenuList.Add(new Menu { Name = "新增郵件", SysFunction = SysFunction.NewMail });
+            MenuList.Add(new Menu { Name = "郵件篩選", SysFunction = SysFunction.MailScreening });
         }
 
         #region 控件事件
         private void ItemsListBox_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            ListBoxItem lbi = ((sender as ListBox).SelectedItem as ListBoxItem);
-
+            var menuItem = (sender as ListBox).SelectedItem as Menu;
+            if (menuItem != null)
+            {
+                MainContent.Content = menuItem.Content;
+                LeftMenu.IsLeftDrawerOpen = false;
+            }
         }
         #endregion
     }
