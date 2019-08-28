@@ -30,10 +30,10 @@
                 <Setter Property="FontFamily" Value="Comic Sans MS"/>
                 <Setter Property="FontSize" Value="50"/>
             </Style>
-            <Style TargetType="{x:Type Label}">
+            <!--<Style TargetType="{x:Type Label}">
                 <Setter Property="FontFamily" Value="Comic Sans MS"/>
                 <Setter Property="FontSize" Value="20"/>
-            </Style>
+            </Style>-->
             <Style TargetType="{x:Type Button}">
                 <Setter Property="Foreground" Value="White"/>
             </Style>

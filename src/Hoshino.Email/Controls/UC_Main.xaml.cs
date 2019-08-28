@@ -26,7 +26,12 @@ namespace Hoshino.Email.Controls
 
             List<EmailInfo> EmailInfoList = new List<EmailInfo>();
             EmailInfoList.Add(new EmailInfo { Num = 1, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
-            EmailInfoList.Add(new EmailInfo { Num = 2, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "發送中", CreateTime = DateTime.Now.ToString() });
+            EmailInfoList.Add(new EmailInfo { Num = 2, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "發送中",Color= "#FFEE4545", CreateTime = DateTime.Now.ToString() });
+            EmailInfoList.Add(new EmailInfo { Num = 3, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
+            EmailInfoList.Add(new EmailInfo { Num = 4, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
+            EmailInfoList.Add(new EmailInfo { Num = 5, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
+            EmailInfoList.Add(new EmailInfo { Num = 1, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
+            EmailInfoList.Add(new EmailInfo { Num = 2, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "發送中", Color = "#FFEE4545", CreateTime = DateTime.Now.ToString() });
             EmailInfoList.Add(new EmailInfo { Num = 3, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
             EmailInfoList.Add(new EmailInfo { Num = 4, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
             EmailInfoList.Add(new EmailInfo { Num = 5, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
@@ -40,6 +45,7 @@ namespace Hoshino.Email.Controls
             public string Email { set; get; }
             public string Group { set; get; }
             public string Status { set; get; }
+            public string Color { set; get; } = "#FF65CB65";
             public string CreateTime { set; get; }
         }
     }
