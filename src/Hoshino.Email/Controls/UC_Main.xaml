@@ -4,12 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Hoshino.Email.Controls"
-             mc:Ignorable="d" Height="490" Width="850">
-    <Grid Background="White">
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" Height="490" Width="850" Background="White">
+    <Grid Background="White" Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Content="郵件:"></Label>
+        <Grid x:Name="gSearch" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="10"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="10"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                         VerticalAlignment="Center" AcceptsReturn="True"  MaxWidth="200" materialDesign:HintAssist.Hint="請輸入查詢郵件"/>
+
+        </Grid>
+
     </Grid>
 </UserControl>

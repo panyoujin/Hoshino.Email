@@ -36,6 +36,7 @@ namespace Hoshino.Email
             Init();
 
             ItemsListBox.ItemsSource = MenuList;
+            MainContent.Content = new UC_Main();
         }
 
         private void Init()
