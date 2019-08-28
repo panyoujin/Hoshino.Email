@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Hoshino.Email.Controls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" Height="490" Width="850" Background="White">
-    <Grid Background="White" Margin="10">
+    <Grid Background="White" Margin="10" >
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -21,8 +21,32 @@
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                          VerticalAlignment="Center" AcceptsReturn="True"  MaxWidth="200" materialDesign:HintAssist.Hint="請輸入查詢郵件"/>
-
+            <TextBox Grid.Column="2" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                         VerticalAlignment="Center" AcceptsReturn="True"  MaxWidth="200" materialDesign:HintAssist.Hint="請輸入查詢分類"/>
         </Grid>
+
+        <DataGrid Grid.Row="1" x:Name="dgEmail"
+          Margin="0 8 0 0" AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          materialDesign:DataGridAssist.CellPadding="4 2 2 2"
+          materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" DataContext="{Binding Source={StaticResource MainDataSource}}" ItemsSource="{Binding Collection}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn  Header="序號" Width="50" Binding="{Binding Num}"/>
+                <DataGridTextColumn Header="郵件" Width="200" Binding="{Binding Email}"/>
+                <DataGridTextColumn Header="類別" Width="200" Binding="{Binding Group}"/>
+                <DataGridTextColumn Header="狀態" Width="60" Binding="{Binding Status}"/>
+                <DataGridTextColumn Header="創建時間" Width="150" Binding="{Binding CreateTime}"/>
+                <DataGridTemplateColumn Header="操作" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel HorizontalAlignment="Left">
+                                <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Height="30" Width="70" ToolTip="Resource name: MaterialDesignRaisedButton" Content="編輯" Foreground="White"></Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </UserControl>
