@@ -13,20 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Hoshino.Email.Controls
+namespace Hoshino.Email.Controls.MainEmailInfo
 {
     /// <summary>
-    /// UC_Main.xaml 的交互逻辑
+    /// UC_MainEmail.xaml 的交互逻辑
     /// </summary>
-    public partial class UC_Main : UserControl
+    public partial class UC_MainEmail : UserControl
     {
-        public UC_Main()
+        public UC_MainEmail()
         {
             InitializeComponent();
 
+
             List<EmailInfo> EmailInfoList = new List<EmailInfo>();
             EmailInfoList.Add(new EmailInfo { Num = 1, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
-            EmailInfoList.Add(new EmailInfo { Num = 2, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "發送中",Color= "#FFEE4545", CreateTime = DateTime.Now.ToString() });
+            EmailInfoList.Add(new EmailInfo { Num = 2, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "發送中", Color = "#FFEE4545", CreateTime = DateTime.Now.ToString() });
             EmailInfoList.Add(new EmailInfo { Num = 3, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
             EmailInfoList.Add(new EmailInfo { Num = 4, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
             EmailInfoList.Add(new EmailInfo { Num = 5, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });

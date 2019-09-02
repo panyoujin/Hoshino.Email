@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hoshino.Email"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
-        Title="新郵件系統" Height="600" Width="850">
+        Title="新郵件系統" Height="630" Width="850">
     <materialDesign:DialogHost Identifier="RootDialog" >
         <materialDesign:DrawerHost x:Name="LeftMenu" IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
             <materialDesign:DrawerHost.LeftDrawerContent>
@@ -34,7 +34,11 @@
 
                         <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
                                         x:Name="MenuToggleButton"/>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Material Design In XAML Toolkit</TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock  FontSize="22" Foreground="White">New Mail System</TextBlock>
+                            <!--<TextBlock  FontSize="22">主郵件管理</TextBlock>-->
+                        </StackPanel>
+             
                     </DockPanel>
                 </materialDesign:ColorZone>
                 <Grid>
@@ -46,8 +50,8 @@
                         <ContentControl x:Name="MainContent" />
                     </ScrollViewer>
 
-                    <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar"
-                                            Grid.Row="1" />
+                    <!--<materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar"
+                                            Grid.Row="1" />-->
                 </Grid>
             </DockPanel>
         </materialDesign:DrawerHost>
