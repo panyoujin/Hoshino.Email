@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DBHelper.SQLHelper;
 using Hoshino.Email.Entity;
 
@@ -96,6 +97,60 @@ namespace Hoshino.Email.Repository
             return SQLHelperFactory.Instance.QueryForObjectByT<EmailAccountEntity>("Select_EmailAccount", dic);
         }
 
+        private List<EmailAccountEntity> EmailAccountList
+        {
+            get
+            {
+
+                List<EmailAccountEntity> list = new List<EmailAccountEntity>();
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "a13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类1", SendState = 0 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "b13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类1", SendState = 0 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "c13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类1", SendState = 0 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "d13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类1", SendState = 0 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "e13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类1", SendState = 0 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "f13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类1", SendState = 0 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "g13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类2", SendState = 1 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "h13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类1", SendState = 1 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "i13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类2", SendState = 0 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "j13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类2", SendState = 1 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "k13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类1", SendState = 0 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "l13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类1", SendState = 0 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "m13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类1", SendState = 0 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "n13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类1", SendState = 0 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "o13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类1", SendState = 0 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "p13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类1", SendState = 0 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "q13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类2", SendState = 1 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "r13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类1", SendState = 1 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "s13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类2", SendState = 0 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "t13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类2", SendState = 1 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "u13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类2", SendState = 1 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "v13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类2", SendState = 1 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "w13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类2", SendState = 1 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "x13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类2", SendState = 1 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "y13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类2", SendState = 1 });
+                list.Add(new EmailAccountEntity() { EmailAccountAddress = "z13456789@qq.com", EmailAccountCreateTime = DateTime.Now, Group = "分类2", SendState = 1 });
+                return list;
+            }
+        }
+        /// <summary>
+        /// 获取列表
+        /// </summary>
+        public (IEnumerable<EmailAccountEntity>, int) GetList(string address, string group, int pageindex, int pagesize)
+        {
+            List<EmailAccountEntity> list = this.EmailAccountList.Where(l => (string.IsNullOrWhiteSpace(group) || l.Group.IndexOf(group) >= 0) && (string.IsNullOrWhiteSpace(address) || l.EmailAccountAddress.IndexOf(address) >= 0)).OrderBy(l => l.EmailAccountAddress).Skip(pageindex <= 1 ? 0 : (pageindex - 1) * pagesize).Take(pagesize).ToList();
+            return (list, this.EmailAccountList.Count);
+            //Dictionary<string, object> dic = new Dictionary<string, object>();
+            //if (pageindex >= 0)
+            //{
+            //    dic["StartIndex"] = pageindex <= 1 ? 0 : (pageindex - 1) * pagesize;
+            //}
+            //if (pagesize > 0)
+            //{
+            //    dic["SelectCount"] = pagesize;
+            //}
+            //var list = SQLHelperFactory.Instance.QueryMultipleByPage<EmailAccountEntity>("Select_EmailAccount_List_By_Page", dic, out int total);
+            //return (list, total);
+        }
         /// <summary>
         /// 获取列表
         /// </summary>

@@ -101,5 +101,7 @@ namespace Hoshino.Email.Entity
         /// </summary>
         public DateTime? EmailAccountNextSendTime { get; set; }
 
+        public string Group { get; set; }
+
     }
 }

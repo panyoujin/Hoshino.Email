@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hoshino.Email.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,24 +21,18 @@ namespace Hoshino.Email.Controls.MainEmailInfo
     /// </summary>
     public partial class UC_MainEmail : UserControl
     {
+        EmailAccountRepository EA_Repository = new EmailAccountRepository();
+        int page = 2;
+        int pagesize = 10;
         public UC_MainEmail()
         {
             InitializeComponent();
+            this.Loaded += this.UC_MainEmail_Loaded;
+        }
 
-
-            List<EmailInfo> EmailInfoList = new List<EmailInfo>();
-            EmailInfoList.Add(new EmailInfo { Num = 1, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
-            EmailInfoList.Add(new EmailInfo { Num = 2, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "發送中", Color = "#FFEE4545", CreateTime = DateTime.Now.ToString() });
-            EmailInfoList.Add(new EmailInfo { Num = 3, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
-            EmailInfoList.Add(new EmailInfo { Num = 4, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
-            EmailInfoList.Add(new EmailInfo { Num = 5, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
-            EmailInfoList.Add(new EmailInfo { Num = 1, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
-            EmailInfoList.Add(new EmailInfo { Num = 2, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "發送中", Color = "#FFEE4545", CreateTime = DateTime.Now.ToString() });
-            EmailInfoList.Add(new EmailInfo { Num = 3, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
-            EmailInfoList.Add(new EmailInfo { Num = 4, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
-            EmailInfoList.Add(new EmailInfo { Num = 5, Email = "54f5dfsdf@qq.com", Group = "分類1", Status = "空閑", CreateTime = DateTime.Now.ToString() });
-
-            dgEmail.ItemsSource = EmailInfoList;
+        private void UC_MainEmail_Loaded(object sender, RoutedEventArgs e)
+        {
+            GetList();
         }
 
         public class EmailInfo
@@ -48,6 +43,28 @@ namespace Hoshino.Email.Controls.MainEmailInfo
             public string Status { set; get; }
             public string Color { set; get; } = "#FF65CB65";
             public string CreateTime { set; get; }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.page = 1;
+            GetList();
+        }
+
+        private void GetList()
+        {
+            var EmailInfoList = new List<EmailInfo>();
+            var (list, total) = EA_Repository.GetList(this.tbEmailAccount.Text, this.tbGroup.Text, page, pagesize);
+            var start = (page - 1) * pagesize + 1;
+            if (list != null && list.Count() > 0)
+            {
+                foreach (var info in list)
+                {
+                    EmailInfoList.Add(new EmailInfo { Num = start++, Email = info.EmailAccountAddress, Group = info.Group, Status = info.SendState == 0 ? "空闲" : "发送中", CreateTime = info.EmailAccountCreateTime.ToString() });
+                }
+            }
+
+            dgEmail.ItemsSource = EmailInfoList;
         }
     }
 }
