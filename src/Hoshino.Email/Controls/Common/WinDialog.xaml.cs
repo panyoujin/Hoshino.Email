@@ -1,5 +1,4 @@
-﻿using Hoshino.Email.Controls.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,25 +10,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Hoshino.Email.Controls.MainEmailInfo
+namespace Hoshino.Email.Controls.Common
 {
     /// <summary>
-    /// UC_MaimGroup.xaml 的交互逻辑
+    /// WinDialog.xaml 的交互逻辑
     /// </summary>
-    public partial class UC_MaimGroup : UserControl
+    public partial class WinDialog : Window
     {
-        public UC_MaimGroup()
+        public WinDialog(string msg)
         {
             InitializeComponent();
+
+
+            tbMsg.Text = msg;
         }
 
-
-        private void BtnInsertGroup_Click(object sender, RoutedEventArgs e)
+        private void BtnOK_Click(object sender, RoutedEventArgs e)
         {
-            new WinDialog("提示框").Show();
+            this.Close();
         }
     }
 }

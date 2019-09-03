@@ -1,0 +1,23 @@
+﻿<Window x:Class="Hoshino.Email.Controls.Common.WinDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hoshino.Email.Controls.Common"
+        mc:Ignorable="d" Height="200" Width="300" Background="White"
+        Title="提示"     ResizeMode="NoResize" 
+         WindowStartupLocation="CenterScreen">
+    
+    <!--<Border CornerRadius="10" Background="White" BorderThickness="1" BorderBrush="#ecdcc3">-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="tbMsg" FontSize="18" Text="WPF窗口属性设置(无边框,任务栏隐藏图标,任务管理器应..._CSDN博客" MaxWidth="220" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+
+            <Button Grid.Row="1" Style="{StaticResource MaterialDesignFlatButton}" x:Name="btnOK"  Click="BtnOK_Click" HorizontalAlignment="Center">确定</Button>
+        </Grid>
+    <!--</Border>-->
+</Window>

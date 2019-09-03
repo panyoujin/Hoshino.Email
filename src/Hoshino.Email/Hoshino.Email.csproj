@@ -73,6 +73,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\Common\WinDialog.xaml.cs">
+      <DependentUpon>WinDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MainEmailInfo\UC_MaimGroup.xaml.cs">
       <DependentUpon>UC_MaimGroup.xaml</DependentUpon>
     </Compile>
@@ -85,6 +88,10 @@
     <Compile Include="SampleData\MainDataSource\MainDataSource.xaml.cs">
       <DependentUpon>MainDataSource.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\Common\WinDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MainEmailInfo\UC_MaimGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
