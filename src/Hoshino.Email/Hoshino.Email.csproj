@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>email_128px_1223929_easyicon.net.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.4.0.1\lib\net45\ControlzEx.dll</HintPath>
@@ -76,11 +79,14 @@
     <Compile Include="Controls\Common\WinDialog.xaml.cs">
       <DependentUpon>WinDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MainEmailInfo\UC_MaimGroup.xaml.cs">
-      <DependentUpon>UC_MaimGroup.xaml</DependentUpon>
+    <Compile Include="Controls\SendEmailManage\UC_SendGroup.xaml.cs">
+      <DependentUpon>UC_SendGroup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MainEmailInfo\UC_MainEmail.xaml.cs">
-      <DependentUpon>UC_MainEmail.xaml</DependentUpon>
+    <Compile Include="Controls\SendEmailManage\UC_SendEmail.xaml.cs">
+      <DependentUpon>UC_SendEmail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SendEmailManage\Win_NewMainGroup.xaml.cs">
+      <DependentUpon>Win_NewMainGroup.xaml</DependentUpon>
     </Compile>
     <Compile Include="SampleData\MailGroupDataSource\MailGroupDataSource.xaml.cs">
       <DependentUpon>MailGroupDataSource.xaml</DependentUpon>
@@ -92,15 +98,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\MainEmailInfo\UC_MaimGroup.xaml">
+    <Page Include="Controls\SendEmailManage\UC_SendGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\MainEmailInfo\UC_Main.xaml">
+    <Page Include="Controls\SendEmailManage\UC_SendEmailManage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\MainEmailInfo\UC_MainEmail.xaml">
+    <Page Include="Controls\SendEmailManage\UC_SendEmail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SendEmailManage\Win_NewMainGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,8 +122,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\MainEmailInfo\UC_Main.xaml.cs">
-      <DependentUpon>UC_Main.xaml</DependentUpon>
+    <Compile Include="Controls\SendEmailManage\UC_SendEmailManage.xaml.cs">
+      <DependentUpon>UC_SendEmailManage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -171,6 +181,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SampleData\MainGroupDataSource\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="email_128px_1223929_easyicon.net.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="Hoshino.Email.Controls.MainEmailInfo.UC_MainEmail"
+﻿<UserControl x:Class="Hoshino.Email.Controls.SendEmailManage.UC_SendEmail"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Hoshino.Email.Controls.MainEmailInfo"
+             xmlns:local="clr-namespace:Hoshino.Email.Controls.SendEmailManage"
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              Height="470" Width="850">

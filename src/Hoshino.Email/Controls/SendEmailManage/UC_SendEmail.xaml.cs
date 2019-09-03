@@ -14,17 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Hoshino.Email.Controls.MainEmailInfo
+namespace Hoshino.Email.Controls.SendEmailManage
 {
     /// <summary>
     /// UC_MainEmail.xaml 的交互逻辑
     /// </summary>
-    public partial class UC_MainEmail : UserControl
+    public partial class UC_SendEmail : UserControl
     {
         EmailAccountRepository EA_Repository = new EmailAccountRepository();
         int page = 2;
         int pagesize = 10;
-        public UC_MainEmail()
+        public UC_SendEmail()
         {
             InitializeComponent();
             this.Loaded += this.UC_MainEmail_Loaded;
