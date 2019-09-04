@@ -66,5 +66,16 @@ namespace Hoshino.Email.Controls.SendEmailManage
 
             dgEmail.ItemsSource = EmailInfoList;
         }
+
+        private void BtnNewOneEmail_Click(object sender, RoutedEventArgs e)
+        {
+            new Win_NewOneEmail().Show();
+        }
+
+        private void BtnNewMoreEmail_Click(object sender, RoutedEventArgs e)
+        {
+            new Win_NewMoreEmail().Show();
+            
+        }
     }
 }

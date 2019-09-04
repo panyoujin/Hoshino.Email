@@ -20,7 +20,9 @@
                 <ColumnDefinition Width="30"></ColumnDefinition>
                 <ColumnDefinition Width="200"></ColumnDefinition>
                 <ColumnDefinition Width="30"></ColumnDefinition>
-                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="70"></ColumnDefinition>
+                <ColumnDefinition Width="10"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="10"></ColumnDefinition>
                 <ColumnDefinition Width="100"></ColumnDefinition>
             </Grid.ColumnDefinitions>
@@ -31,7 +33,8 @@
                          VerticalAlignment="Center" x:Name="tbGroup" />
 
             <Button Grid.Column="5" Margin="0 0 0 5" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="70" ToolTip="Resource name: MaterialDesignRaisedButton" Content="查詢" Foreground="White" Click="Button_Click"></Button>
-            <Button Grid.Column="7" Margin="0 0 0 5" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Content="新增主郵件" Foreground="White"></Button>
+            <Button x:Name="btnNewOneEmail" Click="BtnNewOneEmail_Click" Grid.Column="7" Margin="0 0 0 5" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Content="單個添加" Foreground="White"></Button>
+            <Button x:Name="btnNewMoreEmail" Click="BtnNewMoreEmail_Click" Grid.Column="9" Margin="0 0 0 5" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Content="批量添加" Foreground="White"></Button>
         </Grid>
 
         <DataGrid Grid.Row="1" x:Name="dgEmail" Height="355" VerticalAlignment="Top"

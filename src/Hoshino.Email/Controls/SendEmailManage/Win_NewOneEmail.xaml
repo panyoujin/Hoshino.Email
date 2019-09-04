@@ -1,0 +1,77 @@
+﻿<Window x:Class="Hoshino.Email.Controls.SendEmailManage.Win_NewOneEmail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hoshino.Email.Controls.SendEmailManage"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" 
+        Title="添加單個郵件" Background="White"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         Height="400" Width="700">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition Width="120"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Content="名稱：" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
+        <TextBox Grid.Row="0" Grid.Column="1" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="名稱" Text=""></TextBox>
+
+        <Label Content="郵箱地址：" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
+        <TextBox  Grid.Column="1" Grid.Row="1" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="郵箱地址" Text=""></TextBox>
+
+        <Label Content="密碼：" Grid.Row="2"  VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
+        <TextBox  Grid.Row="2" Grid.Column="1" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="密碼" Text=""></TextBox>
+
+        <Label Content="啟用SSL：" Grid.Row="3"  VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
+        <ComboBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" Width="200" HorizontalAlignment="Left" SelectedIndex="0">
+            <ComboBoxItem>
+                不啟用
+            </ComboBoxItem>
+            <ComboBoxItem>
+                啟用
+            </ComboBoxItem>
+        </ComboBox>
+
+        <Label Content="發送間隔(分鐘)：" Grid.Row="4"  VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
+        <TextBox  Grid.Row="4" Grid.Column="1" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="發送間隔(分鐘)" Text=""></TextBox>
+
+        <Label Content="最多發送數量：" Grid.Row="5"  VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
+        <TextBox  Grid.Row="5" Grid.Column="1" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="最多發送數量" Text=""></TextBox>
+
+        <Label Content="POP3：" Grid.Row="0" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
+        <TextBox  Grid.Row="0" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="最多發送數量" Text=""></TextBox>
+
+        <Label Content="POP3端口：" Grid.Row="1" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
+        <TextBox  Grid.Row="1" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="POP3端口" Text="110"></TextBox>
+
+        <Label Content="SMTP：" Grid.Row="3" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
+        <TextBox  Grid.Row="3" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="SMTP" Text=""></TextBox>
+
+        <Label Content="SMTP端口：" Grid.Row="4" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
+        <TextBox  Grid.Row="4" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="SMTP端口" Text=""></TextBox>
+
+        <Label Content="發送方式：" Grid.Row="5" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
+        <ComboBox Grid.Row="5" Grid.Column="4" VerticalAlignment="Bottom" Width="200" HorizontalAlignment="Left" SelectedIndex="0">
+            <ComboBoxItem>
+                密送
+            </ComboBoxItem>
+        </ComboBox>
+
+        <Button  Grid.Row="6" Grid.Column="3" Style="{StaticResource MaterialDesignRaisedDarkButton}"   HorizontalAlignment="Center" Content="确定"/>
+        <Button  Grid.Row="6" Grid.Column="4" Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252"  HorizontalAlignment="Left" Content="取消"/>
+
+    </Grid>
+</Window>
