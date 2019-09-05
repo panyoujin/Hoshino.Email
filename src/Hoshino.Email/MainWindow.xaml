@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hoshino.Email"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
-        Title="新郵件系統" Height="630" Width="850">
+        Title="新郵件系統" Height="640" Width="850">
     <materialDesign:DialogHost Identifier="RootDialog" >
         <materialDesign:DrawerHost x:Name="LeftMenu" IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
             <materialDesign:DrawerHost.LeftDrawerContent>
