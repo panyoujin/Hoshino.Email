@@ -200,9 +200,7 @@
       <Name>Hoshino.Email.Repository</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SampleData\MainGroupDataSource\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="email_128px_1223929_easyicon.net.ico" />
   </ItemGroup>
