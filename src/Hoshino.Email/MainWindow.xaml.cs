@@ -31,9 +31,9 @@ namespace Hoshino.Email
 
         private void Init()
         {
-            MenuList.Add(new Menu { Name = "發送郵件管理", SysFunction = SysFunction.HomePage ,Content=new UC_SendEmailManage()});
+            MenuList.Add(new Menu { Name = "發件箱管理", SysFunction = SysFunction.HomePage ,Content=new UC_SendEmailManage()});
             MenuList.Add(new Menu { Name = "通訊錄", SysFunction = SysFunction.AddressBook });
-            MenuList.Add(new Menu { Name = "接收郵件管理", SysFunction = SysFunction.MailManagement });
+            MenuList.Add(new Menu { Name = "郵件管理", SysFunction = SysFunction.MailManagement });
             MenuList.Add(new Menu { Name = "新增郵件", SysFunction = SysFunction.NewMail });
             MenuList.Add(new Menu { Name = "郵件篩選", SysFunction = SysFunction.MailScreening });
         }
