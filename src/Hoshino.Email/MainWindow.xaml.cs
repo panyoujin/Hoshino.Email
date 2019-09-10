@@ -25,7 +25,6 @@ namespace Hoshino.Email
         {
             InitializeComponent();
             Init();
-
             ItemsListBox.ItemsSource = MenuList;
             MainContent.Content = new UC_SendEmailManage();
         }

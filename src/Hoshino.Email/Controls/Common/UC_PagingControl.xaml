@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Hoshino.Email.Controls.Common"
-             mc:Ignorable="d" Height="50" Width="850">
+             mc:Ignorable="d" Height="50" Width="850" Background="White">
     <Grid>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Height="25">
             <Label Content="共"/>
@@ -19,18 +19,20 @@
             <Label Content="3/25"/>
             <Label Content="頁"/>
             <Label Content=","/>
-            <TextBlock VerticalAlignment="Center">
-                <Hyperlink  Foreground="Blue">首頁</Hyperlink>
-            </TextBlock>
-            <TextBlock VerticalAlignment="Center" Margin="15 0 0 0">
-                <Hyperlink  Foreground="Blue">上一頁</Hyperlink>
-            </TextBlock>
-            <TextBlock VerticalAlignment="Center" Margin="15 0 0 0">
-                <Hyperlink  Foreground="Blue">下一頁</Hyperlink>
-            </TextBlock>
-            <TextBlock VerticalAlignment="Center" Margin="15 0 0 0">
-                <Hyperlink  Foreground="Blue">末頁</Hyperlink>
-            </TextBlock>
+
+            <Button VerticalAlignment="Center" Padding="3" ToolTip="首頁" ToolTipService.InitialShowDelay="0" 
+                        Style="{DynamicResource MaterialDesignFlatButton}"
+                        Command="{Binding Open}" Content="首頁"/>
+
+            <Button VerticalAlignment="Center" Padding="3" Margin="10 0 0 0" ToolTip="首頁" ToolTipService.InitialShowDelay="0" 
+                        Style="{DynamicResource MaterialDesignFlatButton}"
+                        Command="{Binding Open}" Content="上一頁"/>
+            <Button VerticalAlignment="Center" Padding="3" Margin="10 0 0 0" ToolTip="首頁" ToolTipService.InitialShowDelay="0" 
+                        Style="{DynamicResource MaterialDesignFlatButton}"
+                        Command="{Binding Open}" Content="下一頁"/>
+            <Button VerticalAlignment="Center" Padding="3" Margin="10 0 0 0" ToolTip="首頁" ToolTipService.InitialShowDelay="0" 
+                        Style="{DynamicResource MaterialDesignFlatButton}"
+                        Command="{Binding Open}" Content="末頁"/>
         </StackPanel>
     </Grid>
 </UserControl>

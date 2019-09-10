@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Hoshino.Email.Controls.Common;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,5 +25,41 @@ namespace Hoshino.Email.Controls.SendEmailManage
         {
             InitializeComponent();
         }
+
+        private void BtnExportExcel_Click(object sender, RoutedEventArgs e)
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory + "Files\\excel\\SendMail.xls";
+
+            if (File.Exists(path))
+            {
+                FileInfo fi = new FileInfo(path);
+                //MessageBox.Show(fi.Name);
+
+                System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
+                sfd.Filter = "Excel文件(*.xls)|*.xls|Excel文件(*.xlsx)|*.xlsx|所有文件(*.*)|*.*";
+                sfd.FileName = fi.Name.Split('.')[0];
+                if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    ExportExcel(fi, sfd.FileName);
+                }
+            }
+            else
+            {
+                new WinDialog("沒有模板文件！").Show();
+            }
+        }
+        void ExportExcel(FileInfo fi, string savePath)
+        {
+            try
+            {
+                fi.CopyTo(savePath, true);
+                new WinDialog("模板導出成功！").Show();
+            }
+            catch (Exception ex)
+            {
+                new WinDialog("模板導出失敗！").Show();
+            }
+        }
+
     }
 }
