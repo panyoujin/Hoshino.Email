@@ -45,61 +45,68 @@
             <Button  Grid.Column="13" Padding="1" Margin="0 0 0 5" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="80" ToolTip="Resource name: MaterialDesignRaisedButton" Content="數據導出" Foreground="White"></Button>
         </Grid>
 
-        <DataGrid Grid.Row="1" x:Name="dgEmail" Height="355" VerticalAlignment="Top"
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <DataGrid  x:Name="dgEmail" Height="355" VerticalAlignment="Top"
           Margin="0 8 0 0" AutoGenerateColumns="False" CanUserResizeColumns="False"
           CanUserAddRows="False" CanUserSortColumns="False" IsReadOnly="True"
              
           materialDesign:DataGridAssist.ColumnHeaderPadding="2 2 2 2" DataContext="{Binding Source={StaticResource MainDataSource}}" ItemsSource="{Binding Collection}" >
 
-            <!--設置選中行的時候不顯示邊框-->
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell" >
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="BorderThickness" Value="0"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.CellStyle>
+                <!--設置選中行的時候不顯示邊框-->
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell" >
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="BorderThickness" Value="0"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
 
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Width="30">
-                    <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <CheckBox></CheckBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.HeaderTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox></CheckBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="郵件" Width="200" Binding="{Binding Email}"/>
-                <DataGridTextColumn Header="類別" Width="200" Binding="{Binding Group}"/>
-                <DataGridTemplateColumn Header="狀態" Width="60">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Border Width="50" Height="26" Background="{Binding Color}" CornerRadius="3" >
-                                <Label Content="{Binding Status}"></Label>
-                            </Border>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <!--<DataGridTextColumn Header="狀態" Width="60" Binding="{Binding Status}"/>-->
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="30">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <CheckBox></CheckBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox></CheckBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="郵件" Width="200" Binding="{Binding Email}"/>
+                    <DataGridTextColumn Header="類別" Width="150" Binding="{Binding Group}"/>
+                    <DataGridTemplateColumn Header="狀態" Width="60">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Width="50" Height="26" Background="{Binding Color}" CornerRadius="3" >
+                                    <Label Content="{Binding Status}"></Label>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!--<DataGridTextColumn Header="狀態" Width="60" Binding="{Binding Status}"/>-->
 
-                <DataGridTextColumn Header="創建時間" Width="150" Binding="{Binding CreateTime}"/>
-                <DataGridTemplateColumn Header="操作" >
-                    <DataGridTemplateColumn.CellTemplate >
-                        <DataTemplate>
-                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="30" Width="70" ToolTip="Resource name: MaterialDesignRaisedButton" Content="編輯" Foreground="White"></Button>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                    <DataGridTextColumn Header="創建時間" Width="150" Binding="{Binding CreateTime}"/>
+                    <DataGridTemplateColumn Header="操作" >
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="30" Width="70" ToolTip="Resource name: MaterialDesignRaisedButton" Content="編輯" Foreground="White"></Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
 
         <common:UC_PagingControl Grid.Row="2"></common:UC_PagingControl>
     </Grid>
