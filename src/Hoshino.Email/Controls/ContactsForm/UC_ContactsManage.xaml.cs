@@ -27,12 +27,14 @@ namespace Hoshino.Email.Controls.ContactsForm
 
         private void BtnContactsControl_Click(object sender, RoutedEventArgs e)
         {
-
+            gBodyContent.Children.Clear();
+            gBodyContent.Children.Add(new UC_Contacts());
         }
 
         private void BtnGroupControl_Click(object sender, RoutedEventArgs e)
         {
-
+            gBodyContent.Children.Clear();
+            gBodyContent.Children.Add(new UC_ContactsGroup());
         }
     }
 }
