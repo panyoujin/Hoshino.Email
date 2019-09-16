@@ -85,6 +85,6 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <common:UC_PagingControl Grid.Row="2"></common:UC_PagingControl>
+        <common:UC_PagingControl Grid.Row="2" x:Name="ucPage"></common:UC_PagingControl>
     </Grid>
 </UserControl>

@@ -27,16 +27,16 @@
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <Label Content="名稱：" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
-        <TextBox Grid.Row="0" Grid.Column="1" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="名稱" Text=""></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="1" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="名稱" Text="" x:Name="txtName"></TextBox>
 
         <Label Content="郵箱地址：" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
-        <TextBox  Grid.Column="1" Grid.Row="1" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="郵箱地址" Text=""></TextBox>
+        <TextBox  Grid.Column="1" Grid.Row="1" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="郵箱地址" Text="" x:Name="txtEmailAddress"></TextBox>
 
         <Label Content="密碼：" Grid.Row="2"  VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
-        <TextBox  Grid.Row="2" Grid.Column="1" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="密碼" Text=""></TextBox>
+        <TextBox  Grid.Row="2" Grid.Column="1" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="密碼" Text="" x:Name="txtPassword"></TextBox>
 
         <Label Content="啟用SSL：" Grid.Row="3"  VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
-        <ComboBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" Width="200" HorizontalAlignment="Left" SelectedIndex="0">
+        <ComboBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" Width="200" HorizontalAlignment="Left" SelectedIndex="0" x:Name="cbSSL">
             <ComboBoxItem>
                 不啟用
             </ComboBoxItem>
@@ -46,31 +46,31 @@
         </ComboBox>
 
         <Label Content="發送間隔(分鐘)：" Grid.Row="4"  VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
-        <TextBox  Grid.Row="4" Grid.Column="1" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="發送間隔(分鐘)" Text=""></TextBox>
+        <TextBox  Grid.Row="4" Grid.Column="1" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="發送間隔(分鐘)" Text="" x:Name="txtInterval"></TextBox>
 
         <Label Content="最多發送數量：" Grid.Row="5"  VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
-        <TextBox  Grid.Row="5" Grid.Column="1" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="最多發送數量" Text=""></TextBox>
+        <TextBox  Grid.Row="5" Grid.Column="1" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="最多發送數量" Text="" x:Name="txtMaxSendCount"></TextBox>
 
         <Label Content="POP3：" Grid.Row="0" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
-        <TextBox  Grid.Row="0" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="最多發送數量" Text=""></TextBox>
+        <TextBox  Grid.Row="0" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="POP3" Text="" x:Name="txtPOP3"></TextBox>
 
         <Label Content="POP3端口：" Grid.Row="1" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
-        <TextBox  Grid.Row="1" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="POP3端口" Text="110"></TextBox>
+        <TextBox  Grid.Row="1" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="POP3端口" Text="110" x:Name="txtPOPPort"></TextBox>
 
         <Label Content="SMTP：" Grid.Row="3" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
-        <TextBox  Grid.Row="3" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="SMTP" Text=""></TextBox>
+        <TextBox  Grid.Row="3" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="SMTP" Text="" x:Name="txtSMTP"></TextBox>
 
         <Label Content="SMTP端口：" Grid.Row="4" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
-        <TextBox  Grid.Row="4" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="SMTP端口" Text=""></TextBox>
+        <TextBox  Grid.Row="4" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="SMTP端口" Text="" x:Name="txtSMTPPort"></TextBox>
 
         <Label Content="發送方式：" Grid.Row="5" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
-        <ComboBox Grid.Row="5" Grid.Column="4" VerticalAlignment="Bottom" Width="200" HorizontalAlignment="Left" SelectedIndex="0">
+        <ComboBox Grid.Row="5" Grid.Column="4" VerticalAlignment="Bottom" Width="200" HorizontalAlignment="Left" SelectedIndex="0" x:Name="cbSendMode">
             <ComboBoxItem>
                 密送
             </ComboBoxItem>
         </ComboBox>
 
-        <Button  Grid.Row="6" Grid.Column="3" Style="{StaticResource MaterialDesignRaisedDarkButton}"   HorizontalAlignment="Center" Content="确定"/>
+        <Button  Grid.Row="6" Grid.Column="3" Style="{StaticResource MaterialDesignRaisedDarkButton}"   HorizontalAlignment="Center" Content="确定" Click="Button_Click"/>
         <Button  Grid.Row="6" Grid.Column="4" Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252"  HorizontalAlignment="Left" Content="取消"/>
 
     </Grid>

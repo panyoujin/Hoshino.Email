@@ -22,12 +22,17 @@ namespace Hoshino.Email.Controls.SendEmailManage
     public partial class UC_SendEmail : UserControl
     {
         EmailAccountRepository EA_Repository = new EmailAccountRepository();
-        int page = 2;
+        int page = 1;
         int pagesize = 10;
         public UC_SendEmail()
         {
             InitializeComponent();
             this.Loaded += this.UC_MainEmail_Loaded;
+            this.ucPage.ChangePageAction = (index) =>
+            {
+                this.page = index;
+                GetList();
+            };
         }
 
         private void UC_MainEmail_Loaded(object sender, RoutedEventArgs e)
@@ -65,6 +70,7 @@ namespace Hoshino.Email.Controls.SendEmailManage
             }
 
             dgEmail.ItemsSource = EmailInfoList;
+            this.ucPage.InitData(page, total, pagesize);
         }
 
         private void BtnNewOneEmail_Click(object sender, RoutedEventArgs e)
@@ -75,7 +81,7 @@ namespace Hoshino.Email.Controls.SendEmailManage
         private void BtnNewMoreEmail_Click(object sender, RoutedEventArgs e)
         {
             new Win_NewMoreEmail().Show();
-            
+
         }
     }
 }

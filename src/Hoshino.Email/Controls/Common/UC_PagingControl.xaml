@@ -8,7 +8,7 @@
     <Grid>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Height="25">
             <Label Content="共"/>
-            <Label Content="500"/>
+            <Label Content="500" x:Name="lblTotal"/>
             <Label Content="行"/>
             <Label Content=","/>
             <Label Content="每頁"/>
@@ -16,23 +16,23 @@
             <Label Content="行"/>
             <Label Content=","/>
             <Label Content="第"/>
-            <Label Content="3/25"/>
+            <Label Content="3/25" x:Name="lblPage"/>
             <Label Content="頁"/>
             <Label Content=","/>
 
             <Button VerticalAlignment="Center" Padding="3" ToolTip="首頁" ToolTipService.InitialShowDelay="0" 
                         Style="{DynamicResource MaterialDesignFlatButton}"
-                        Command="{Binding Open}" Content="首頁"/>
+                        Command="{Binding Open}" Content="首頁" x:Name="btnHome" Click="BtnHome_Click"/>
 
-            <Button VerticalAlignment="Center" Padding="3" Margin="10 0 0 0" ToolTip="首頁" ToolTipService.InitialShowDelay="0" 
+            <Button VerticalAlignment="Center" Padding="3" Margin="10 0 0 0" ToolTip="上一頁" ToolTipService.InitialShowDelay="0" 
                         Style="{DynamicResource MaterialDesignFlatButton}"
-                        Command="{Binding Open}" Content="上一頁"/>
-            <Button VerticalAlignment="Center" Padding="3" Margin="10 0 0 0" ToolTip="首頁" ToolTipService.InitialShowDelay="0" 
+                        Command="{Binding Open}" Content="上一頁" x:Name="btnPrePage" Click="BtnPrePage_Click"/>
+            <Button VerticalAlignment="Center" Padding="3" Margin="10 0 0 0" ToolTip="下一頁" ToolTipService.InitialShowDelay="0" 
                         Style="{DynamicResource MaterialDesignFlatButton}"
-                        Command="{Binding Open}" Content="下一頁"/>
-            <Button VerticalAlignment="Center" Padding="3" Margin="10 0 0 0" ToolTip="首頁" ToolTipService.InitialShowDelay="0" 
+                        Command="{Binding Open}" Content="下一頁" x:Name="btnNextPage" Click="BtnNextPage_Click"/>
+            <Button VerticalAlignment="Center" Padding="3" Margin="10 0 0 0" ToolTip="末頁" ToolTipService.InitialShowDelay="0" 
                         Style="{DynamicResource MaterialDesignFlatButton}"
-                        Command="{Binding Open}" Content="末頁"/>
+                        Command="{Binding Open}" Content="末頁" x:Name="btnLastPage" Click="BtnLastPage_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>

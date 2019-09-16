@@ -45,10 +45,7 @@ namespace Hoshino.Email.Repository
             dic["EmailAccountPOP3Port"] = model.EmailAccountPOP3Port;
             dic["EmailAccountIsSSL"] = model.EmailAccountIsSSL;
             dic["EmailAccountMaxEmailCount"] = model.EmailAccountMaxEmailCount;
-            dic["EmailAccountRemainEmailCount"] = model.EmailAccountRemainEmailCount;
             dic["EmailAccountSpace"] = model.EmailAccountSpace;
-            dic["EmailAccountCreateTime"] = model.EmailAccountCreateTime;
-            dic["EmailAccountLastTime"] = model.EmailAccountLastTime;
             dic["SendState"] = model.SendState;
             dic["SendMode"] = model.SendMode;
             return SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailaccount", dic) > 0;
@@ -137,19 +134,27 @@ namespace Hoshino.Email.Repository
         /// </summary>
         public (IEnumerable<EmailAccountEntity>, int) GetList(string address, string group, int pageindex, int pagesize)
         {
-            List<EmailAccountEntity> list = this.EmailAccountList.Where(l => (string.IsNullOrWhiteSpace(group) || l.Group.IndexOf(group) >= 0) && (string.IsNullOrWhiteSpace(address) || l.EmailAccountAddress.IndexOf(address) >= 0)).OrderBy(l => l.EmailAccountAddress).Skip(pageindex <= 1 ? 0 : (pageindex - 1) * pagesize).Take(pagesize).ToList();
-            return (list, this.EmailAccountList.Count);
-            //Dictionary<string, object> dic = new Dictionary<string, object>();
-            //if (pageindex >= 0)
-            //{
-            //    dic["StartIndex"] = pageindex <= 1 ? 0 : (pageindex - 1) * pagesize;
-            //}
-            //if (pagesize > 0)
-            //{
-            //    dic["SelectCount"] = pagesize;
-            //}
-            //var list = SQLHelperFactory.Instance.QueryMultipleByPage<EmailAccountEntity>("Select_EmailAccount_List_By_Page", dic, out int total);
-            //return (list, total);
+            //List<EmailAccountEntity> list = this.EmailAccountList.Where(l => (string.IsNullOrWhiteSpace(group) || l.Group.IndexOf(group) >= 0) && (string.IsNullOrWhiteSpace(address) || l.EmailAccountAddress.IndexOf(address) >= 0)).OrderBy(l => l.EmailAccountAddress).Skip(pageindex <= 1 ? 0 : (pageindex - 1) * pagesize).Take(pagesize).ToList();
+            //return (list, this.EmailAccountList.Count);
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            if (!string.IsNullOrWhiteSpace(address))
+            {
+                dic["EmailAccountAddress"] = address;
+            }
+            if (!string.IsNullOrWhiteSpace(group))
+            {
+                dic["Group"] = group;
+            }
+            if (pageindex >= 0)
+            {
+                dic["StartIndex"] = pageindex <= 1 ? 0 : (pageindex - 1) * pagesize;
+            }
+            if (pagesize > 0)
+            {
+                dic["SelectCount"] = pagesize;
+            }
+            var list = SQLHelperFactory.Instance.QueryMultipleByPage<EmailAccountEntity>("Select_EmailAccount_List_By_Page", dic, out int total);
+            return (list, total);
         }
         /// <summary>
         /// 获取列表
