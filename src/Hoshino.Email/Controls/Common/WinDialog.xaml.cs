@@ -29,6 +29,7 @@ namespace Hoshino.Email.Controls.Common
 
         private void BtnOK_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = true;
             this.Close();
         }
     }

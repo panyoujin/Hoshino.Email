@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DBHelper.SQLHelper;
 using Hoshino.Email.Entity;
 
@@ -13,21 +14,10 @@ namespace Hoshino.Email.Repository
         public bool Insert(EmailBccAccountEntity model)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            if (model.EmailBccAccountID != null)
-            {
-                dic["EmailBccAccountID"] = model.EmailBccAccountID;
-            }
-            if (model.EmailBccAccountAddress != null)
-            {
-                dic["EmailBccAccountAddress"] = model.EmailBccAccountAddress;
-            }
-            if (model.EmailBccAccountName != null)
-            {
-                dic["EmailBccAccountName"] = model.EmailBccAccountName;
-            }
-            dic["EmailBccAccountCreateTime"] = model.EmailBccAccountCreateTime;
-            dic["EmailBccAccountLastTime"] = model.EmailBccAccountLastTime;
-            dic["EmailBccAccountIsDel"] = model.EmailBccAccountIsDel;
+            dic["EmailBccAccountAddress"] = model.EmailBccAccountAddress;
+            dic["EmailBccAccountName"] = model.EmailBccAccountName;
+            dic["EmailBccAccountCategoryID"] = model.EmailBccAccountCategoryID;
+            dic["EmailBccAccountCategoryName"] = model.EmailBccAccountCategoryName;
             return SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailbccaccount", dic) > 0;
         }
 
@@ -37,28 +27,18 @@ namespace Hoshino.Email.Repository
         public bool Update(EmailBccAccountEntity model)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            if (model.EmailBccAccountID != null)
-            {
-                dic["EmailBccAccountID"] = model.EmailBccAccountID;
-            }
-            if (model.EmailBccAccountAddress != null)
-            {
-                dic["EmailBccAccountAddress"] = model.EmailBccAccountAddress;
-            }
-            if (model.EmailBccAccountName != null)
-            {
-                dic["EmailBccAccountName"] = model.EmailBccAccountName;
-            }
-            dic["EmailBccAccountCreateTime"] = model.EmailBccAccountCreateTime;
-            dic["EmailBccAccountLastTime"] = model.EmailBccAccountLastTime;
-            dic["EmailBccAccountIsDel"] = model.EmailBccAccountIsDel;
+            dic["EmailBccAccountID"] = model.EmailBccAccountID;
+            dic["EmailBccAccountAddress"] = model.EmailBccAccountAddress;
+            dic["EmailBccAccountName"] = model.EmailBccAccountName;
+            dic["EmailBccAccountCategoryID"] = model.EmailBccAccountCategoryID;
+            dic["EmailBccAccountCategoryName"] = model.EmailBccAccountCategoryName;
             return SQLHelperFactory.Instance.ExecuteNonQuery("Update_emailbccaccount", dic) > 0;
         }
 
         /// <summary>
         /// 删除
         /// </summary>
-        public bool Delete(string EmailBccAccountID)
+        public bool Delete(int EmailBccAccountID)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic["EmailBccAccountID"] = EmailBccAccountID;
@@ -68,19 +48,38 @@ namespace Hoshino.Email.Repository
         /// <summary>
         /// 获取单个
         /// </summary>
-        public T Get<T>(string EmailBccAccountID)
+        public EmailBccAccountEntity Get(int EmailBccAccountID)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic["EmailBccAccountID"] = EmailBccAccountID;
-            return SQLHelperFactory.Instance.QueryForObjectByT<T>("Select_emailbccaccount", dic);
+            return SQLHelperFactory.Instance.QueryForObjectByT<EmailBccAccountEntity>("Select_emailbccaccount", dic);
+        }
+        /// <summary>
+        /// 获取单个
+        /// </summary>
+        public EmailBccAccountEntity GetByAddress(string EmailBccAccountAddress)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic["EmailBccAccountAddress"] = EmailBccAccountAddress;
+            return SQLHelperFactory.Instance.QueryForObjectByT<EmailBccAccountEntity>("Select_EmailBccAccountByAddress", dic);
         }
 
         /// <summary>
         /// 获取列表
         /// </summary>
-        public (IEnumerable<T>, int) GetList<T>(int pageindex, int pagesize)
+        public (IEnumerable<EmailBccAccountEntity>, int) GetList(string address, string group, int pageindex, int pagesize)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
+            if (!string.IsNullOrWhiteSpace(address))
+            {
+                dic["EmailBccAccountAddress"] = address;
+            }
+            if (!string.IsNullOrWhiteSpace(group))
+            {
+                EmailBccAccountCategoryRepository repository = new EmailBccAccountCategoryRepository();
+                var idList = repository.GetIDList(group).Select(i => i.ID);
+                dic["EmailBccAccountCategoryID"] = string.Join("','", idList);
+            }
             if (pageindex >= 0)
             {
                 dic["StartIndex"] = pageindex <= 1 ? 0 : (pageindex - 1) * pagesize;
@@ -89,7 +88,7 @@ namespace Hoshino.Email.Repository
             {
                 dic["SelectCount"] = pagesize;
             }
-            var list = SQLHelperFactory.Instance.QueryMultipleByPage<T>("Select_emailbccaccount_List", dic, out int total);
+            var list = SQLHelperFactory.Instance.QueryMultipleByPage<EmailBccAccountEntity>("Select_emailbccaccount_ListByPage", dic, out int total);
             return (list, total);
         }
 

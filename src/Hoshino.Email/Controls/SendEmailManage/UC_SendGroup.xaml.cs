@@ -1,4 +1,5 @@
 ﻿using Hoshino.Email.Controls.Common;
+using Hoshino.Email.Entity;
 using Hoshino.Email.Repository;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,6 @@ namespace Hoshino.Email.Controls.SendEmailManage
     public partial class UC_MainGroup : UserControl
     {
         EmailAccountCategoryRepository EAC_Repository = new EmailAccountCategoryRepository();
-        int page = 1;
         public UC_MainGroup()
         {
             InitializeComponent();
@@ -57,6 +57,30 @@ namespace Hoshino.Email.Controls.SendEmailManage
         private void BtnQuery_Click(object sender, RoutedEventArgs e)
         {
             this.ucPage.RefreshList();
+        }
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var entity = (sender as Button).DataContext as EmailAccountCategoryEntity;
+            if (new Win_NewMainGroup(entity.ID).ShowDialog().Value)
+            {
+                this.ucPage.RefreshList(false);
+            }
+        }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var entity = (sender as Button).DataContext as EmailAccountCategoryEntity;
+            EAC_Repository.Delete(entity.ID);
+            this.ucPage.RefreshList(false);
         }
     }
 }

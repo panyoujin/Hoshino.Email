@@ -1,5 +1,7 @@
-﻿using Hoshino.Email.Entity;
+﻿using Hoshino.Email.Controls.Common;
+using Hoshino.Email.Entity;
 using Hoshino.Email.Repository;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -72,8 +74,11 @@ namespace Hoshino.Email.Controls.SendEmailManage
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             var entity = (sender as Button).DataContext as EmailAccountEntity;
-            EA_Repository.Delete(entity.EmailAccountID);
-            this.ucPage.RefreshList(false);
+            string.Format("是否刪除發件箱【{0}】", entity.EmailAccountAddress).ShowYesOrNoDialog(yesAction: () =>
+            {
+                EA_Repository.Delete(entity.EmailAccountID);
+                this.ucPage.RefreshList(false);
+            });
         }
     }
 }

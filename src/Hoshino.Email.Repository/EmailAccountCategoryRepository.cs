@@ -23,18 +23,9 @@ namespace Hoshino.Email.Repository
         public bool Update(EmailAccountCategoryEntity model)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            if (model.ID != 0)
-            {
-                dic["ID"] = model.ID;
-            }
-            if (model.Name != null)
-            {
-                dic["Name"] = model.Name;
-            }
-            dic["Sort"] = model.Sort;
-            dic["CreateTime"] = model.CreateTime;
-            dic["LastTime"] = model.LastTime;
-            return SQLHelperFactory.Instance.ExecuteNonQuery("Update_emailaccountcategory", dic) > 0;
+            dic["ID"] = model.ID;
+            dic["Name"] = model.Name;
+            return SQLHelperFactory.Instance.ExecuteNonQuery("Update_emailaccountcategory", dic, true) > 0;
         }
 
         /// <summary>
@@ -44,7 +35,7 @@ namespace Hoshino.Email.Repository
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic["ID"] = ID;
-            return SQLHelperFactory.Instance.ExecuteNonQuery("Delete_emailaccountcategory", dic) > 0;
+            return SQLHelperFactory.Instance.ExecuteNonQuery("Delete_emailaccountcategory", dic, true) > 0;
         }
 
         /// <summary>
@@ -57,6 +48,16 @@ namespace Hoshino.Email.Repository
             return SQLHelperFactory.Instance.QueryForObjectByT<EmailAccountCategoryEntity>("Select_emailaccountcategory", dic);
         }
 
+
+        /// <summary>
+        /// 获取单个
+        /// </summary>
+        public EmailAccountCategoryEntity Get(string name)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic["Name"] = name;
+            return SQLHelperFactory.Instance.QueryForObjectByT<EmailAccountCategoryEntity>("Select_emailaccountcategory_ByName", dic);
+        }
         /// <summary>
         /// 获取列表
         /// </summary>

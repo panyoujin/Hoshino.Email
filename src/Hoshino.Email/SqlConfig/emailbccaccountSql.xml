@@ -4,7 +4,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                INSERT INTO emailbccaccount (EmailBccAccountCategoryID,EmailBccAccountCategoryName,EmailBccAccountAddress,EmailBccAccountName,EmailBccAccountCreateTime,EmailBccAccountLastTime,EmailBccAccountIsDel) VALUES(@@EmailBccAccountCategoryID@@,@@EmailBccAccountCategoryName@@,@@EmailBccAccountAddress@@,@@EmailBccAccountName@@,@@EmailBccAccountCreateTime@@,@@EmailBccAccountLastTime@@,@@EmailBccAccountIsDel@@);
+                INSERT INTO emailbccaccount (EmailBccAccountCategoryID,EmailBccAccountCategoryName,EmailBccAccountAddress,EmailBccAccountName,EmailBccAccountCreateTime,EmailBccAccountLastTime) VALUES(@@EmailBccAccountCategoryID@@,@@EmailBccAccountCategoryName@@,@@EmailBccAccountAddress@@,@@EmailBccAccountName@@,NOW(),NOW());
                 ]]>
             </SqlCommand>
         </SqlDefinition>
@@ -13,7 +13,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                UPDATE emailbccaccount SET EmailBccAccountID=@@EmailBccAccountID@@ <%=,EmailBccAccountCategoryID=@@EmailBccAccountCategoryID@@%><%=,EmailBccAccountCategoryName=@@EmailBccAccountCategoryName@@%><%=,EmailBccAccountAddress=@@EmailBccAccountAddress@@%><%=,EmailBccAccountName=@@EmailBccAccountName@@%><%=,EmailBccAccountCreateTime=@@EmailBccAccountCreateTime@@%><%=,EmailBccAccountLastTime=@@EmailBccAccountLastTime@@%><%=,EmailBccAccountIsDel=@@EmailBccAccountIsDel@@%> WHERE EmailBccAccountID=@@EmailBccAccountID@@;
+                UPDATE emailbccaccount SET EmailBccAccountCategoryID=@@EmailBccAccountCategoryID@@,EmailBccAccountCategoryName=@@EmailBccAccountCategoryName@@,EmailBccAccountAddress=@@EmailBccAccountAddress@@,EmailBccAccountName=@@EmailBccAccountName@@,EmailBccAccountLastTime=NOW() WHERE EmailBccAccountID=@@EmailBccAccountID@@;
                 ]]>
             </SqlCommand>
         </SqlDefinition>
@@ -22,7 +22,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                DELETE FROM emailbccaccount WHERE EmailBccAccountID=@@EmailBccAccountID@@;
+                UPDATE emailbccaccount SET EmailBccAccountIsDel = 1 WHERE EmailBccAccountID=@@EmailBccAccountID@@;
                 ]]>
             </SqlCommand>
         </SqlDefinition>
@@ -31,17 +31,26 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                SELECT eba.EmailBccAccountID,eba.EmailBccAccountCategoryID,eba.EmailBccAccountCategoryName,eba.EmailBccAccountAddress,eba.EmailBccAccountName,eba.EmailBccAccountCreateTime,eba.EmailBccAccountLastTime,eba.EmailBccAccountIsDel FROM emailbccaccount AS eba WHERE 1=1 <%= AND eba.EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND eba.EmailBccAccountCategoryID=@@EmailBccAccountCategoryID@@%> <%= AND eba.EmailBccAccountCategoryName=@@EmailBccAccountCategoryName@@%> <%= AND eba.EmailBccAccountAddress=@@EmailBccAccountAddress@@%> <%= AND eba.EmailBccAccountName=@@EmailBccAccountName@@%> <%= AND eba.EmailBccAccountCreateTime=@@EmailBccAccountCreateTime@@%> <%= AND eba.EmailBccAccountLastTime=@@EmailBccAccountLastTime@@%> <%= AND eba.EmailBccAccountIsDel=@@EmailBccAccountIsDel@@%>;
+                SELECT eba.EmailBccAccountID,eba.EmailBccAccountCategoryID,eba.EmailBccAccountCategoryName,eba.EmailBccAccountAddress,eba.EmailBccAccountName,eba.EmailBccAccountCreateTime,eba.EmailBccAccountLastTime,eba.EmailBccAccountIsDel FROM emailbccaccount AS eba WHERE eba.EmailBccAccountID=@@EmailBccAccountID@@;
                 ]]>
             </SqlCommand>
         </SqlDefinition>
     </Data>
-    <Data name="Select_emailbccaccount_List">
+  <Data name="Select_EmailBccAccountByAddress">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                SELECT eba.EmailBccAccountID FROM emailbccaccount AS eba WHERE eba.EmailBccAccountAddress=@@EmailBccAccountAddress@@ AND eba.EmailBccAccountIsDel = 0;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+    <Data name="Select_emailbccaccount_ListByPage">
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                SELECT eba.EmailBccAccountID,eba.EmailBccAccountCategoryID,eba.EmailBccAccountCategoryName,eba.EmailBccAccountAddress,eba.EmailBccAccountName,eba.EmailBccAccountCreateTime,eba.EmailBccAccountLastTime,eba.EmailBccAccountIsDel FROM emailbccaccount AS eba WHERE 1=1 <%= AND eba.EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND eba.EmailBccAccountCategoryID=@@EmailBccAccountCategoryID@@%> <%= AND eba.EmailBccAccountCategoryName=@@EmailBccAccountCategoryName@@%> <%= AND eba.EmailBccAccountAddress=@@EmailBccAccountAddress@@%> <%= AND eba.EmailBccAccountName=@@EmailBccAccountName@@%> <%= AND eba.EmailBccAccountCreateTime=@@EmailBccAccountCreateTime@@%> <%= AND eba.EmailBccAccountLastTime=@@EmailBccAccountLastTime@@%> <%= AND eba.EmailBccAccountIsDel=@@EmailBccAccountIsDel@@%> LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
-                SELECT COUNT(0) AS row_count FROM emailbccaccount AS eba WHERE 1=1 <%= AND eba.EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND eba.EmailBccAccountCategoryID=@@EmailBccAccountCategoryID@@%> <%= AND eba.EmailBccAccountCategoryName=@@EmailBccAccountCategoryName@@%> <%= AND eba.EmailBccAccountAddress=@@EmailBccAccountAddress@@%> <%= AND eba.EmailBccAccountName=@@EmailBccAccountName@@%> <%= AND eba.EmailBccAccountCreateTime=@@EmailBccAccountCreateTime@@%> <%= AND eba.EmailBccAccountLastTime=@@EmailBccAccountLastTime@@%> <%= AND eba.EmailBccAccountIsDel=@@EmailBccAccountIsDel@@%>;
+                SELECT eba.EmailBccAccountID,eba.EmailBccAccountCategoryID,eba.EmailBccAccountCategoryName,eba.EmailBccAccountAddress,eba.EmailBccAccountName,eba.EmailBccAccountCreateTime,eba.EmailBccAccountLastTime,eba.EmailBccAccountIsDel FROM emailbccaccount AS eba WHERE eba.EmailBccAccountIsDel = 0 <R%= AND eba.EmailBccAccountCategoryID IN ('@@EmailBccAccountCategoryID@@')%R><R%= AND eba.EmailBccAccountAddress LIKE '%@@EmailBccAccountAddress@@%' %R> ORDER BY eba.EmailBccAccountID LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
+                SELECT COUNT(0) AS row_count FROM emailbccaccount AS eba WHERE eba.EmailBccAccountIsDel = 0 <R%= AND eba.EmailBccAccountCategoryID IN ('@@EmailBccAccountCategoryID@@')%R><R%= AND eba.EmailBccAccountAddress LIKE '%@@EmailBccAccountAddress@@%' %R>;
                 ]]>
             </SqlCommand>
         </SqlDefinition>

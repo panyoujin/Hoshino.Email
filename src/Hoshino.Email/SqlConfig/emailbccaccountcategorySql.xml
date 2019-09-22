@@ -4,7 +4,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                INSERT INTO emailbccaccountcategory (ID,Name,Sort,CreateTime,LastTime) VALUES(@@ID@@,@@Name@@,@@Sort@@,@@CreateTime@@,@@LastTime@@);
+                INSERT INTO emailbccaccountcategory (Name,CreateTime,LastTime) VALUES(@@Name@@,NOW(),NOW());
                 ]]>
             </SqlCommand>
         </SqlDefinition>
@@ -13,7 +13,8 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                UPDATE emailbccaccountcategory SET ID=@@ID@@ <%=,Name=@@Name@@%><%=,Sort=@@Sort@@%><%=,CreateTime=@@CreateTime@@%><%=,LastTime=@@LastTime@@%> WHERE ID=@@ID@@;
+                UPDATE emailbccaccountcategory SET Name=@@Name@@,LastTime=NOW() WHERE ID=@@ID@@;
+                UPDATE emailbccaccount SET EmailBccAccountCategoryName=@@Name@@,EmailBccAccountLastTime=NOW() WHERE EmailBccAccountCategoryID=@@ID@@;
                 ]]>
             </SqlCommand>
         </SqlDefinition>
@@ -23,6 +24,7 @@
             <SqlCommand>
                 <![CDATA[
                 DELETE FROM emailbccaccountcategory WHERE ID=@@ID@@;
+                UPDATE emailbccaccount SET EmailBccAccountCategoryID=-1,EmailBccAccountCategoryName='',EmailBccAccountLastTime=NOW() WHERE EmailBccAccountCategoryID=@@ID@@;
                 ]]>
             </SqlCommand>
         </SqlDefinition>
@@ -31,17 +33,26 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                SELECT ebac.ID,ebac.Name,ebac.Sort,ebac.CreateTime,ebac.LastTime FROM emailbccaccountcategory AS ebac WHERE 1=1 <%= AND ebac.ID=@@ID@@%> <%= AND ebac.Name=@@Name@@%> <%= AND ebac.Sort=@@Sort@@%> <%= AND ebac.CreateTime=@@CreateTime@@%> <%= AND ebac.LastTime=@@LastTime@@%>;
+                SELECT ebac.ID,ebac.Name,ebac.CreateTime,ebac.LastTime FROM emailbccaccountcategory AS ebac WHERE ebac.ID=@@ID@@;
                 ]]>
             </SqlCommand>
         </SqlDefinition>
     </Data>
+  <Data name="Select_emailaccountcategory_ByName">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                SELECT ebac.ID,ebac.Name,ebac.CreateTime,ebac.LastTime FROM emailbccaccountcategory AS ebac WHERE ebac.Name=@@Name@@;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
     <Data name="Select_emailbccaccountcategory_List_By_Page">
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                SELECT ebac.ID,ebac.Name,ebac.Sort,ebac.CreateTime,ebac.LastTime FROM emailbccaccountcategory AS ebac WHERE 1=1 <%= AND ebac.ID=@@ID@@%> <%= AND ebac.Name=@@Name@@%> <%= AND ebac.Sort=@@Sort@@%> <%= AND ebac.CreateTime=@@CreateTime@@%> <%= AND ebac.LastTime=@@LastTime@@%> LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
-                SELECT COUNT(0) AS row_count FROM emailbccaccountcategory AS ebac WHERE 1=1 <%= AND ebac.ID=@@ID@@%> <%= AND ebac.Name=@@Name@@%> <%= AND ebac.Sort=@@Sort@@%> <%= AND ebac.CreateTime=@@CreateTime@@%> <%= AND ebac.LastTime=@@LastTime@@%>;
+                SELECT ebac.ID,ebac.Name,ebac.CreateTime,ebac.LastTime FROM emailbccaccountcategory AS ebac WHERE 1=1 <R%= AND ebac.Name LIKE '%@@Name@@%'%R>  ORDER BY  ebac.ID LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
+                SELECT COUNT(0) AS row_count FROM emailbccaccountcategory AS ebac WHERE 1=1  <R%= AND ebac.Name LIKE '%@@Name@@%'%R>;
                 ]]>
             </SqlCommand>
         </SqlDefinition>
@@ -50,7 +61,16 @@
     <SqlDefinition type="MySql" ConnStringName="backstage_connection">
       <SqlCommand>
         <![CDATA[
-                SELECT ebac.ID,ebac.Name,ebac.Sort,ebac.CreateTime,ebac.LastTime FROM emailbccaccountcategory AS ebac;
+                SELECT ebac.ID,ebac.Name,ebac.CreateTime,ebac.LastTime FROM emailbccaccountcategory AS ebac ORDER BY  ebac.ID;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+  <Data name="Select_emailbccaccountcategory_id_List">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                SELECT ebac.ID,ebac.Name,ebac.CreateTime,ebac.LastTime FROM emailbccaccountcategory AS ebac <R%= WHERE ebac.Name LIKE '%@@Name@@%'%R>;
                 ]]>
       </SqlCommand>
     </SqlDefinition>

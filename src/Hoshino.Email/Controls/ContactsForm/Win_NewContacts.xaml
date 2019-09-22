@@ -16,16 +16,13 @@
 
         <!--<TextBox Grid.Row="0" Grid.Column="3" materialDesign:HintAssist.Hint="請輸入查詢分類" Width="200" Height="50" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          VerticalAlignment="Center" />-->
-        <ComboBox Grid.Row="0" Grid.Column="3"  VerticalAlignment="Bottom" Width="200"  SelectedIndex="0" >
-            <ComboBoxItem IsSelected="True">
-                請選擇郵件分類
-            </ComboBoxItem>
+        <ComboBox Grid.Row="0" Grid.Column="3"  VerticalAlignment="Bottom" Width="200"  SelectedIndex="0" x:Name="cbCategory" >
         </ComboBox>
         
         <TextBox Grid.Row="1" Grid.Column="3" materialDesign:HintAssist.Hint="請輸入郵箱" Width="200" Height="50" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         VerticalAlignment="Center" />
+                         VerticalAlignment="Center" x:Name="tbAddress" />
 
-        <Button  Grid.Row="2" Style="{StaticResource MaterialDesignFlatButton}" x:Name="btnOK"  HorizontalAlignment="Center" Content="确定"/>
+        <Button  Grid.Row="2" Style="{StaticResource MaterialDesignFlatButton}" x:Name="btnOK"  HorizontalAlignment="Center" Content="确定" Click="BtnOK_Click"/>
         
     </Grid>
 </Window>

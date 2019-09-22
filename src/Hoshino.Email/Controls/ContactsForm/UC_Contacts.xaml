@@ -41,7 +41,7 @@
                          VerticalAlignment="Center" x:Name="tbGroup" />
 
 
-            <Button Grid.Column="5" Padding="1" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="50" ToolTip="Resource name: MaterialDesignRaisedButton" Content="查詢" Foreground="White" />
+            <Button Grid.Column="5" Padding="1" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="50" ToolTip="Resource name: MaterialDesignRaisedButton" Content="查詢" Foreground="White" Click="Button_Click" />
             <Button x:Name="btnNewContact" Click="BtnNewContact_Click"  Grid.Column="7" Padding="1" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="80" ToolTip="Resource name: MaterialDesignRaisedButton" Content="單個添加" Foreground="White"></Button>
 
             <Button Grid.Column="9" Padding="1" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="80" ToolTip="Resource name: MaterialDesignRaisedButton" Content="導出數據" Foreground="White" />
@@ -103,8 +103,8 @@
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="28" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="編輯" Foreground="White"></Button>
-                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252" Margin="3 0 0 0" Height="28" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="刪除" Foreground="White"></Button>
+                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="28" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="編輯" Foreground="White" Click="Button_Click_1"></Button>
+                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252" Margin="3 0 0 0" Height="28" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="刪除" Foreground="White" Click="Button_Click_2"></Button>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -114,6 +114,6 @@
         <!--</Grid>-->
 
 
-        <common:UC_PagingControl Grid.Row="2" HorizontalAlignment="Left" Margin="20 0 0 0"></common:UC_PagingControl>
+        <common:UC_PagingControl Grid.Row="2" HorizontalAlignment="Left" Margin="20 0 0 0" x:Name="ucPage"></common:UC_PagingControl>
     </Grid>
 </UserControl>

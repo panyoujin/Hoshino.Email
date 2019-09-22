@@ -138,7 +138,7 @@ namespace Hoshino.Email.Repository
             }
             if (!string.IsNullOrWhiteSpace(group))
             {
-                dic["Group"] = group;
+                dic["EmailAccountCategoryName"] = group;
             }
             if (pageindex >= 0)
             {
