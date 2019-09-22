@@ -86,7 +86,7 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>-->
                 <DataGridTextColumn Header="郵件" Width="200" Binding="{Binding EmailBccAccountName}"/>
-                <DataGridTextColumn Header="類別" Width="200" Binding="{Binding EmailAccountCategoryName}"/>
+                <DataGridTextColumn Header="類別" Width="200" Binding="{Binding EmailBccAccountCategoryName}"/>
                 <!--<DataGridTemplateColumn Header="狀態" Width="60">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

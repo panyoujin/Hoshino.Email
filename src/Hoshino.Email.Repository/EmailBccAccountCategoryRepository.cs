@@ -55,7 +55,7 @@ namespace Hoshino.Email.Repository
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic["Name"] = name;
-            return SQLHelperFactory.Instance.QueryForObjectByT<EmailBccAccountCategoryEntity>("Select_emailaccountcategory_ByName", dic);
+            return SQLHelperFactory.Instance.QueryForObjectByT<EmailBccAccountCategoryEntity>("Select_emailbccaccountcategory_ByName", dic);
         }
 
         /// <summary>

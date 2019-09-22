@@ -51,9 +51,8 @@
             </DataGrid.CellStyle>
 
             <DataGrid.Columns>
-                <DataGridTextColumn  Header="序號" Width="50" Binding="{Binding EmailBccAccountName}"/>
-                <DataGridTextColumn Header="類別" Width="300" Binding="{Binding EmailAccountCategoryName}"/>
-                <DataGridTextColumn Header="創建時間" Width="300" Binding="{Binding EmailBccAccountCreateTime}"/>
+                <DataGridTextColumn Header="類別" Width="300" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="創建時間" Width="300" Binding="{Binding CreateTime}"/>
                 <DataGridTemplateColumn Header="操作" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

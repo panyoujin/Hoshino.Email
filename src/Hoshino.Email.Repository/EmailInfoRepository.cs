@@ -82,7 +82,7 @@ namespace Hoshino.Email.Repository
         /// <summary>
         /// 获取列表
         /// </summary>
-        public (IEnumerable<EmailInfoEntity>, int) GetList(int pageindex, int pagesize)
+        public (IEnumerable<EmailInfoEntity>, int) GetList(string name, int pageindex, int pagesize)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             if (pageindex >= 0)
@@ -93,7 +93,11 @@ namespace Hoshino.Email.Repository
             {
                 dic["SelectCount"] = pagesize;
             }
-            var list = SQLHelperFactory.Instance.QueryMultipleByPage<EmailInfoEntity>("Select_emailinfo_List", dic, out int total);
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                dic["EmailTitle"] = name;
+            }
+            var list = SQLHelperFactory.Instance.QueryMultipleByPage<EmailInfoEntity>("Select_emailinfo_List_ByPage", dic, out int total);
             return (list, total);
         }
 

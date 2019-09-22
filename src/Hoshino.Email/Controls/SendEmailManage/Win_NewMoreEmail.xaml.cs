@@ -45,7 +45,7 @@ namespace Hoshino.Email.Controls.SendEmailManage
             }
             else
             {
-                new WinDialog("沒有模板文件！").Show();
+                "沒有模板文件！".ShowDialog();
             }
         }
         void ExportExcel(FileInfo fi, string savePath)
@@ -53,11 +53,11 @@ namespace Hoshino.Email.Controls.SendEmailManage
             try
             {
                 fi.CopyTo(savePath, true);
-                new WinDialog("模板導出成功！").Show();
+                "模板導出成功！".ShowDialog();
             }
             catch (Exception ex)
             {
-                new WinDialog("模板導出失敗！").Show();
+                "模板導出失敗！".ShowDialog();
             }
         }
 

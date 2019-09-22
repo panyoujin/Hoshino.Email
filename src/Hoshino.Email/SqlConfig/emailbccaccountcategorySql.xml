@@ -38,7 +38,7 @@
             </SqlCommand>
         </SqlDefinition>
     </Data>
-  <Data name="Select_emailaccountcategory_ByName">
+  <Data name="Select_emailbccaccountcategory_ByName">
     <SqlDefinition type="MySql" ConnStringName="backstage_connection">
       <SqlCommand>
         <![CDATA[

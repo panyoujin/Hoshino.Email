@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hoshino.Email.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,28 @@ namespace Hoshino.Email.Controls.EmailInfoManage
     /// </summary>
     public partial class UC_EmailInfo : UserControl
     {
+        EmailInfoRepository EI_Repository = new EmailInfoRepository();
         public UC_EmailInfo()
         {
             InitializeComponent();
+            this.Loaded += this.UC_MainEmail_Loaded;
+            this.ucPage.ChangePageAction = () =>
+            {
+                GetList();
+            };
+        }
+
+        private void UC_MainEmail_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.ucPage.RefreshList();
+        }
+
+
+        private void GetList()
+        {
+            var (list, total) = EI_Repository.GetList(this.tbEmailAccount.Text, this.ucPage.PageIndex, this.ucPage.PageSize);
+            dgEmail.ItemsSource = list;
+            this.ucPage.InitData(total);
         }
 
 
@@ -34,7 +54,7 @@ namespace Hoshino.Email.Controls.EmailInfoManage
 
         private void BtnQuery_Click(object sender, RoutedEventArgs e)
         {
-            new Win_SentList().Show();
+            this.ucPage.RefreshList();
         }
 
         private void BtnSentList_Click(object sender, RoutedEventArgs e)
