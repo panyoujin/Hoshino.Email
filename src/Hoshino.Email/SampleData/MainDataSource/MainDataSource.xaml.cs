@@ -47,6 +47,10 @@ namespace Expression.Blend.SampleData.MainDataSource
         }
     }
 
+    public class ItemCollection : System.Collections.ObjectModel.ObservableCollection<Item>
+    { 
+    }
+
     public class Item : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -59,104 +63,119 @@ namespace Expression.Blend.SampleData.MainDataSource
             }
         }
 
-        private double _Num = 0;
+        private double _EmailAccountSpace = 0;
 
-        public double Num
+        public double EmailAccountSpace
         {
             get
             {
-                return this._Num;
+                return this._EmailAccountSpace;
             }
 
             set
             {
-                if (this._Num != value)
+                if (this._EmailAccountSpace != value)
                 {
-                    this._Num = value;
-                    this.OnPropertyChanged("Num");
+                    this._EmailAccountSpace = value;
+                    this.OnPropertyChanged("EmailAccountSpace");
                 }
             }
         }
 
-        private string _Email = string.Empty;
+        private double _EmailAccountMaxEmailCount = 0;
 
-        public string Email
+        public double EmailAccountMaxEmailCount
         {
             get
             {
-                return this._Email;
+                return this._EmailAccountMaxEmailCount;
             }
 
             set
             {
-                if (this._Email != value)
+                if (this._EmailAccountMaxEmailCount != value)
                 {
-                    this._Email = value;
-                    this.OnPropertyChanged("Email");
+                    this._EmailAccountMaxEmailCount = value;
+                    this.OnPropertyChanged("EmailAccountMaxEmailCount");
                 }
             }
         }
 
-        private string _Group = string.Empty;
+        private string _EmailAccountCategoryName = string.Empty;
 
-        public string Group
+        public string EmailAccountCategoryName
         {
             get
             {
-                return this._Group;
+                return this._EmailAccountCategoryName;
             }
 
             set
             {
-                if (this._Group != value)
+                if (this._EmailAccountCategoryName != value)
                 {
-                    this._Group = value;
-                    this.OnPropertyChanged("Group");
+                    this._EmailAccountCategoryName = value;
+                    this.OnPropertyChanged("EmailAccountCategoryName");
                 }
             }
         }
 
-        private string _Status = string.Empty;
+        private double _EmailAccountRemainEmailCount = 0;
 
-        public string Status
+        public double EmailAccountRemainEmailCount
         {
             get
             {
-                return this._Status;
+                return this._EmailAccountRemainEmailCount;
             }
 
             set
             {
-                if (this._Status != value)
+                if (this._EmailAccountRemainEmailCount != value)
                 {
-                    this._Status = value;
-                    this.OnPropertyChanged("Status");
+                    this._EmailAccountRemainEmailCount = value;
+                    this.OnPropertyChanged("EmailAccountRemainEmailCount");
                 }
             }
         }
 
-        private string _CreateTime = string.Empty;
+        private string _EmailAccountAddress = string.Empty;
 
-        public string CreateTime
+        public string EmailAccountAddress
         {
             get
             {
-                return this._CreateTime;
+                return this._EmailAccountAddress;
             }
 
             set
             {
-                if (this._CreateTime != value)
+                if (this._EmailAccountAddress != value)
                 {
-                    this._CreateTime = value;
-                    this.OnPropertyChanged("CreateTime");
+                    this._EmailAccountAddress = value;
+                    this.OnPropertyChanged("EmailAccountAddress");
                 }
             }
         }
-    }
 
-    public class ItemCollection : System.Collections.ObjectModel.ObservableCollection<Item>
-    { 
+        private string _EmailAccountNextSendTime = string.Empty;
+
+        public string EmailAccountNextSendTime
+        {
+            get
+            {
+                return this._EmailAccountNextSendTime;
+            }
+
+            set
+            {
+                if (this._EmailAccountNextSendTime != value)
+                {
+                    this._EmailAccountNextSendTime = value;
+                    this.OnPropertyChanged("EmailAccountNextSendTime");
+                }
+            }
+        }
     }
 #endif
 }

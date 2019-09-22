@@ -7,12 +7,12 @@
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:common="clr-namespace:Hoshino.Email.Controls.Common"
              mc:Ignorable="d" 
-             Height="470" Width="850">
+             Height="500" Width="1000">
     <Grid Background="White" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
         </Grid.RowDefinitions>
         <!--查詢條件-->
         <Grid x:Name="gSearch" Grid.Row="0">
@@ -34,9 +34,9 @@
             <TextBox Grid.Column="3" materialDesign:HintAssist.Hint="請輸入查詢分類"  Height="50" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          VerticalAlignment="Center" x:Name="tbGroup" />
 
-            <Button Grid.Column="5" Margin="0 0 0 5" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="70" ToolTip="Resource name: MaterialDesignRaisedButton" Content="查詢" Foreground="White" Click="Button_Click"></Button>
-            <Button x:Name="btnNewOneEmail" Click="BtnNewOneEmail_Click" Grid.Column="7" Margin="0 0 0 5" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Content="單個添加" Foreground="White"></Button>
-            <Button x:Name="btnNewMoreEmail" Click="BtnNewMoreEmail_Click" Grid.Column="9" Margin="0 0 0 5" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Content="批量添加" Foreground="White"></Button>
+            <Button Grid.Column="5" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="70" ToolTip="Resource name: MaterialDesignRaisedButton" Content="查詢" Foreground="White" Click="Button_Click"></Button>
+            <Button x:Name="btnNewOneEmail" Click="BtnNewOneEmail_Click" Grid.Column="7" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Content="單個添加" Foreground="White"></Button>
+            <Button x:Name="btnNewMoreEmail" Click="BtnNewMoreEmail_Click" Grid.Column="9" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Content="批量添加" Foreground="White"></Button>
         </Grid>
 
         <DataGrid Grid.Row="1" x:Name="dgEmail" Height="355" VerticalAlignment="Top"
@@ -57,27 +57,19 @@
             </DataGrid.CellStyle>
 
             <DataGrid.Columns>
-                <DataGridTextColumn  Header="序號" Width="50" Binding="{Binding Num}"/>
-                <DataGridTextColumn Header="郵件" Width="200" Binding="{Binding Email}"/>
-                <DataGridTextColumn Header="類別" Width="200" Binding="{Binding Group}"/>
-                <DataGridTemplateColumn Header="狀態" Width="60">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Border Width="50" Height="26" Background="{Binding Color}" CornerRadius="3" >
-                                <Label Content="{Binding Status}"></Label>
-                            </Border>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <!--<DataGridTextColumn Header="狀態" Width="60" Binding="{Binding Status}"/>-->
-
-                <DataGridTextColumn Header="創建時間" Width="150" Binding="{Binding CreateTime}"/>
+                <!--<DataGridTextColumn  Header="序號" Width="50" Binding="{Binding Num}"/>-->
+                <DataGridTextColumn Header="郵件地址" Width="200" Binding="{Binding EmailAccountAddress}"/>
+                <DataGridTextColumn Header="類別" Width="200" Binding="{Binding EmailAccountCategoryName}"/>
+                <DataGridTextColumn Header="發送間隔" Width="100" Binding="{Binding EmailAccountSpace}"/>
+                <DataGridTextColumn Header="最大" Width="50" Binding="{Binding EmailAccountMaxEmailCount}"/>
+                <DataGridTextColumn Header="剩餘" Width="50" Binding="{Binding EmailAccountRemainEmailCount}"/>
+                <DataGridTextColumn Header="下次發送時間" Width="150" Binding="{Binding EmailAccountNextSendTime}"/>
                 <DataGridTemplateColumn Header="操作" >
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="30" Width="70" ToolTip="Resource name: MaterialDesignRaisedButton" Content="編輯" Foreground="White"></Button>
-                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252" Margin="3 0 0 0" Height="30" Width="70" ToolTip="Resource name: MaterialDesignRaisedButton" Content="刪除" Foreground="White"></Button>
+                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="28" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="編輯" Foreground="White"></Button>
+                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252" Margin="3 0 0 0" Height="28" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="刪除" Foreground="White"></Button>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -85,6 +77,6 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <common:UC_PagingControl Grid.Row="2" x:Name="ucPage"></common:UC_PagingControl>
+        <common:UC_PagingControl Grid.Row="2" x:Name="ucPage" HorizontalAlignment="Left" Margin="20 0 0 0"></common:UC_PagingControl>
     </Grid>
 </UserControl>

@@ -5,15 +5,15 @@
 -->
 <MainDataSource:MainDataSource xmlns:MainDataSource="clr-namespace:Expression.Blend.SampleData.MainDataSource">
 	<MainDataSource:MainDataSource.Collection>
-		<MainDataSource:Item Num="15" Email="Nam class aliquam" Group="Curae cras integer aenean" Status="Donec etiam" CreateTime="Fusce maecenas praesent duis"/>
-		<MainDataSource:Item Num="58" Email="Lorem morbi mauris sed" Group="Nunc dis est" Status="Quisque nulla amet ante" CreateTime="Nullam vivamus"/>
-		<MainDataSource:Item Num="44" Email="Hac accumsan arcu diam" Group="Proin aliquam aptent auctor" Status="Congue cursus augue dolor" CreateTime="Eget elit"/>
-		<MainDataSource:Item Num="68" Email="Fames aliquet felis" Group="Ipsum justo" Status="Bibendum dictum dictumst enim" CreateTime="Leo lectus"/>
-		<MainDataSource:Item Num="34" Email="Eleifend mus" Group="Erat eros" Status="Libero nec ligula blandit" CreateTime="Lacus litora commodo non"/>
-		<MainDataSource:Item Num="68" Email="Nibh per" Group="Nisi nisl luctus" Status="Facilisi faucibus nunc magnis" CreateTime="Habitant inceptos"/>
-		<MainDataSource:Item Num="38" Email="Conubia sed" Group="Sem interdum lobortis mattis" Status="Odio sit" CreateTime="Mauris orci cubilia"/>
-		<MainDataSource:Item Num="78" Email="Lorem mollis" Group="Magna massa nascetur metus" Status="Pharetra montes dapibus nostra" CreateTime="Egestas ornare pede quam"/>
-		<MainDataSource:Item Num="75" Email="Vel platea placerat pulvinar" Group="Morbi euismod" Status="Sagittis nam quis" CreateTime="Primis urna rutrum cras"/>
-		<MainDataSource:Item Num="44" Email="Feugiat sed duis neque" Group="Dis senectus" Status="Netus gravida" CreateTime="Sapien sociosqu nunc est"/>
+		<MainDataSource:Item EmailAccountSpace="15" EmailAccountMaxEmailCount="78" EmailAccountCategoryName="Curae cras integer aenean" EmailAccountRemainEmailCount="57" EmailAccountAddress="Fusce maecenas praesent duis" EmailAccountNextSendTime="November 5, 2003"/>
+		<MainDataSource:Item EmailAccountSpace="58" EmailAccountMaxEmailCount="97" EmailAccountCategoryName="Nunc dis est" EmailAccountRemainEmailCount="95" EmailAccountAddress="Nullam vivamus" EmailAccountNextSendTime="December 29, 2006"/>
+		<MainDataSource:Item EmailAccountSpace="44" EmailAccountMaxEmailCount="77" EmailAccountCategoryName="Proin aliquam aptent auctor" EmailAccountRemainEmailCount="56" EmailAccountAddress="Eget elit" EmailAccountNextSendTime="January 19, 2004"/>
+		<MainDataSource:Item EmailAccountSpace="68" EmailAccountMaxEmailCount="70" EmailAccountCategoryName="Ipsum justo" EmailAccountRemainEmailCount="94" EmailAccountAddress="Leo lectus" EmailAccountNextSendTime="December 22, 2007"/>
+		<MainDataSource:Item EmailAccountSpace="34" EmailAccountMaxEmailCount="30" EmailAccountCategoryName="Erat eros" EmailAccountRemainEmailCount="61" EmailAccountAddress="Lacus litora commodo non" EmailAccountNextSendTime="August 23, 2003"/>
+		<MainDataSource:Item EmailAccountSpace="68" EmailAccountMaxEmailCount="37" EmailAccountCategoryName="Nisi nisl luctus" EmailAccountRemainEmailCount="11" EmailAccountAddress="Habitant inceptos" EmailAccountNextSendTime="May 27, 2007"/>
+		<MainDataSource:Item EmailAccountSpace="38" EmailAccountMaxEmailCount="58" EmailAccountCategoryName="Sem interdum lobortis mattis" EmailAccountRemainEmailCount="79" EmailAccountAddress="Mauris orci cubilia" EmailAccountNextSendTime="May 24, 2006"/>
+		<MainDataSource:Item EmailAccountSpace="78" EmailAccountMaxEmailCount="21" EmailAccountCategoryName="Magna massa nascetur metus" EmailAccountRemainEmailCount="27" EmailAccountAddress="Egestas ornare pede quam" EmailAccountNextSendTime="September 19, 2004"/>
+		<MainDataSource:Item EmailAccountSpace="75" EmailAccountMaxEmailCount="96" EmailAccountCategoryName="Morbi euismod" EmailAccountRemainEmailCount="24" EmailAccountAddress="Primis urna rutrum cras" EmailAccountNextSendTime="August 10, 2003"/>
+		<MainDataSource:Item EmailAccountSpace="44" EmailAccountMaxEmailCount="94" EmailAccountCategoryName="Dis senectus" EmailAccountRemainEmailCount="53" EmailAccountAddress="Sapien sociosqu nunc est" EmailAccountNextSendTime="September 20, 2007"/>
 	</MainDataSource:MainDataSource.Collection>
 </MainDataSource:MainDataSource>

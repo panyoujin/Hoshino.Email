@@ -80,20 +80,20 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="郵件" Width="200" Binding="{Binding Email}"/>
-                    <DataGridTextColumn Header="類別" Width="150" Binding="{Binding Group}"/>
+                    <DataGridTextColumn Header="郵件" Width="200" Binding="{Binding EmailAccountMaxEmailCount}"/>
+                    <DataGridTextColumn Header="類別" Width="150" Binding="{Binding EmailAccountCategoryName}"/>
                     <DataGridTemplateColumn Header="狀態" Width="60">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Width="50" Height="26" Background="{Binding Color}" CornerRadius="3" >
-                                    <Label Content="{Binding Status}"></Label>
+                                    <Label Content="{Binding EmailAccountRemainEmailCount}"></Label>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <!--<DataGridTextColumn Header="狀態" Width="60" Binding="{Binding Status}"/>-->
 
-                    <DataGridTextColumn Header="創建時間" Width="150" Binding="{Binding CreateTime}"/>
+                    <DataGridTextColumn Header="創建時間" Width="150" Binding="{Binding EmailAccountAddress}"/>
                     <DataGridTemplateColumn Header="操作" >
                         <DataGridTemplateColumn.CellTemplate >
                             <DataTemplate>

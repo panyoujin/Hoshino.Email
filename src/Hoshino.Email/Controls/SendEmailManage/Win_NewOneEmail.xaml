@@ -51,11 +51,18 @@
         <Label Content="最多發送數量：" Grid.Row="5"  VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
         <TextBox  Grid.Row="5" Grid.Column="1" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="最多發送數量" Text="" x:Name="txtMaxSendCount"></TextBox>
 
-        <Label Content="POP3：" Grid.Row="0" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
-        <TextBox  Grid.Row="0" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="POP3" Text="" x:Name="txtPOP3"></TextBox>
+        <Label Content="分類：" Grid.Row="0" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
+        <ComboBox Grid.Row="0" Grid.Column="4" VerticalAlignment="Bottom" Width="200" HorizontalAlignment="Left" SelectedIndex="0" >
+            <ComboBoxItem>
+                分類1
+            </ComboBoxItem>
+        </ComboBox>
+        
+        <Label Content="POP3：" Grid.Row="1" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
+        <TextBox  Grid.Row="1" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="POP3" Text="" x:Name="txtPOP3"></TextBox>
 
-        <Label Content="POP3端口：" Grid.Row="1" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
-        <TextBox  Grid.Row="1" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="POP3端口" Text="110" x:Name="txtPOPPort"></TextBox>
+        <Label Content="POP3端口：" Grid.Row="2" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
+        <TextBox  Grid.Row="2" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="POP3端口" Text="110" x:Name="txtPOPPort"></TextBox>
 
         <Label Content="SMTP：" Grid.Row="3" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Label>
         <TextBox  Grid.Row="3" Grid.Column="4" Width="200" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="SMTP" Text="" x:Name="txtSMTP"></TextBox>
@@ -71,7 +78,7 @@
         </ComboBox>
 
         <Button  Grid.Row="6" Grid.Column="3" Style="{StaticResource MaterialDesignRaisedDarkButton}"   HorizontalAlignment="Center" Content="确定" Click="Button_Click"/>
-        <Button  Grid.Row="6" Grid.Column="4" Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252"  HorizontalAlignment="Left" Content="取消"/>
+        <Button  Grid.Row="6" Grid.Column="4" Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252"  HorizontalAlignment="Left" Content="取消" x:Name="btnCancel" Click="BtnCancel_Click"/>
 
     </Grid>
 </Window>

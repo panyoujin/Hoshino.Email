@@ -17,10 +17,11 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="Item">
-    <xs:attribute blend:FormatParameters="2" name="Num" type="xs:double" />
-    <xs:attribute name="Email" type="xs:string" />
-    <xs:attribute name="Group" type="xs:string" />
-    <xs:attribute name="Status" type="xs:string" />
-    <xs:attribute name="CreateTime" type="xs:string" />
+    <xs:attribute name="EmailAccountSpace" type="xs:double" />
+    <xs:attribute blend:FormatParameters="2" name="EmailAccountMaxEmailCount" type="xs:double" />
+    <xs:attribute name="EmailAccountCategoryName" type="xs:string" />
+    <xs:attribute blend:FormatParameters="2" name="EmailAccountRemainEmailCount" type="xs:double" />
+    <xs:attribute name="EmailAccountAddress" type="xs:string" />
+    <xs:attribute blend:Format="日期" name="EmailAccountNextSendTime" type="xs:string" />
   </xs:complexType>
 </xs:schema>

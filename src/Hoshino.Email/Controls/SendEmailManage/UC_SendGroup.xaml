@@ -7,12 +7,12 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              x:Class="Hoshino.Email.Controls.SendEmailManage.UC_MainGroup"
               xmlns:common="clr-namespace:Hoshino.Email.Controls.Common"
-             mc:Ignorable="d" Height="470" Width="850">
+             mc:Ignorable="d" Height="500" Width="1000">
     <Grid Background="White" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <!--查詢條件-->
         <Grid x:Name="gSearch" Grid.Row="0">
@@ -29,8 +29,8 @@
             <TextBox Grid.Column="1" materialDesign:HintAssist.Hint="請輸入查詢分類"  Height="50" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          VerticalAlignment="Center" />
 
-            <Button Grid.Column="3" Margin="0 0 0 5" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="70" ToolTip="Resource name: MaterialDesignRaisedButton" Content="查詢" Foreground="White"/>
-            <Button x:Name="btnInsertGroup" Click="BtnInsertGroup_Click" Grid.Column="5" Margin="0 0 0 5" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="90" ToolTip="Resource name: MaterialDesignRaisedButton" Content="新增分類" Foreground="White"/>
+            <Button Grid.Column="3" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="70" ToolTip="Resource name: MaterialDesignRaisedButton" Content="查詢" Foreground="White"/>
+            <Button x:Name="btnInsertGroup" Click="BtnInsertGroup_Click" Grid.Column="5" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="90" ToolTip="Resource name: MaterialDesignRaisedButton" Content="新增分類" Foreground="White"/>
         </Grid>
 
         <DataGrid Grid.Row="1" x:Name="dgEmail" Height="355" VerticalAlignment="Top"
@@ -58,8 +58,8 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="30" Width="70" ToolTip="Resource name: MaterialDesignRaisedButton" Content="編輯" Foreground="White"/>
-                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252" Margin="3 0 0 0" Height="30" Width="70" ToolTip="Resource name: MaterialDesignRaisedButton" Content="刪除" Foreground="White"></Button>
+                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="28" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="編輯" Foreground="White"/>
+                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252" Margin="3 0 0 0" Height="28" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="刪除" Foreground="White"></Button>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -67,6 +67,6 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <common:UC_PagingControl Grid.Row="2"></common:UC_PagingControl>
+        <common:UC_PagingControl Grid.Row="2" Margin="20 0 0 0" HorizontalAlignment="Left"></common:UC_PagingControl>
     </Grid>
 </UserControl>

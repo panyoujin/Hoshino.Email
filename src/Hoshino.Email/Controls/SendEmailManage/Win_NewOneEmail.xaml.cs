@@ -51,5 +51,10 @@ namespace Hoshino.Email.Controls.SendEmailManage
             };
             EA_Repository.Insert(entity);
         }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
