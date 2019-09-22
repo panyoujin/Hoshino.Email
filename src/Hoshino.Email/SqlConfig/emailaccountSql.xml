@@ -1,50 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <SqlSetting>
-    <Data name="Insert_emailaccount">
-        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
-            <SqlCommand>
-                <![CDATA[
-                INSERT INTO emailaccount (EmailAccountID,EmailAccountAddress,EmailAccountPassWord,EmailAccountName,EmailAccountSMTP,EmailAccountSMTPPort,EmailAccountPOP3,EmailAccountPOP3Port,EmailAccountIsSSL,EmailAccountMaxEmailCount,EmailAccountRemainEmailCount,EmailAccountSpace,EmailAccountNextSendTime,EmailAccountCreateTime,EmailAccountLastTime,SendState,SendMode) VALUES(@@EmailAccountID@@,@@EmailAccountAddress@@,@@EmailAccountPassWord@@,@@EmailAccountName@@,@@EmailAccountSMTP@@,@@EmailAccountSMTPPort@@,@@EmailAccountPOP3@@,@@EmailAccountPOP3Port@@,@@EmailAccountIsSSL@@,@@EmailAccountMaxEmailCount@@,@@EmailAccountMaxEmailCount@@,@@EmailAccountSpace@@,NOW(),NOW(),NOW(),0,@@SendMode@@);
+  <Data name="Insert_emailaccount">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                INSERT INTO emailaccount (EmailAccountCategoryID,EmailAccountCategoryName,EmailAccountAddress,EmailAccountPassWord,EmailAccountName,EmailAccountSMTP,EmailAccountSMTPPort,EmailAccountPOP3,EmailAccountPOP3Port,EmailAccountIsSSL,EmailAccountMaxEmailCount,EmailAccountRemainEmailCount,EmailAccountSpace,EmailAccountNextSendTime,EmailAccountCreateTime,EmailAccountLastTime,SendState,SendMode) VALUES(@@EmailAccountCategoryID@@,@@EmailAccountCategoryName@@,@@EmailAccountAddress@@,@@EmailAccountPassWord@@,@@EmailAccountName@@,@@EmailAccountSMTP@@,@@EmailAccountSMTPPort@@,@@EmailAccountPOP3@@,@@EmailAccountPOP3Port@@,@@EmailAccountIsSSL@@,@@EmailAccountMaxEmailCount@@,@@EmailAccountMaxEmailCount@@,@@EmailAccountSpace@@,NOW(),NOW(),NOW(),0,@@SendMode@@);
+                
                 ]]>
-            </SqlCommand>
-        </SqlDefinition>
-    </Data>
-    <Data name="Update_emailaccount">
-        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
-            <SqlCommand>
-                <![CDATA[
-                UPDATE emailaccount SET EmailAccountID=@@EmailAccountID@@ <%=,EmailAccountAddress=@@EmailAccountAddress@@%><%=,EmailAccountPassWord=@@EmailAccountPassWord@@%><%=,EmailAccountName=@@EmailAccountName@@%><%=,EmailAccountSMTP=@@EmailAccountSMTP@@%><%=,EmailAccountSMTPPort=@@EmailAccountSMTPPort@@%><%=,EmailAccountPOP3=@@EmailAccountPOP3@@%><%=,EmailAccountPOP3Port=@@EmailAccountPOP3Port@@%><%=,EmailAccountIsSSL=@@EmailAccountIsSSL@@%><%=,EmailAccountMaxEmailCount=@@EmailAccountMaxEmailCount@@%><%=,EmailAccountRemainEmailCount=@@EmailAccountRemainEmailCount@@%><%=,EmailAccountSpace=@@EmailAccountSpace@@%><%=,EmailAccountCreateTime=@@EmailAccountCreateTime@@%><%=,EmailAccountLastTime=@@EmailAccountLastTime@@%><%=,SendState=@@SendState@@%><%=,SendMode=@@SendMode@@%> WHERE EmailAccountID=@@EmailAccountID@@;
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+  <Data name="Update_emailaccount">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                UPDATE emailaccount SET EmailAccountCategoryID=@@EmailAccountCategoryID@@,EmailAccountCategoryName=@@EmailAccountCategoryName@@,EmailAccountAddress=@@EmailAccountAddress@@,EmailAccountPassWord=@@EmailAccountPassWord@@,EmailAccountName=@@EmailAccountName@@,EmailAccountSMTP=@@EmailAccountSMTP@@,EmailAccountSMTPPort=@@EmailAccountSMTPPort@@,EmailAccountPOP3=@@EmailAccountPOP3@@,EmailAccountPOP3Port=@@EmailAccountPOP3Port@@,EmailAccountIsSSL=@@EmailAccountIsSSL@@,EmailAccountMaxEmailCount=@@EmailAccountMaxEmailCount@@,EmailAccountSpace=@@EmailAccountSpace@@,EmailAccountLastTime=NOW(),SendMode=@@SendMode@@ WHERE EmailAccountID=@@EmailAccountID@@;
                 ]]>
-            </SqlCommand>
-        </SqlDefinition>
-    </Data>
-    <Data name="Delete_emailaccount">
-        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
-            <SqlCommand>
-                <![CDATA[
-                DELETE FROM emailaccount WHERE EmailAccountID=@@EmailAccountID@@;
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+  <Data name="Delete_emailaccount">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+        UPDATE emailaccount SET EmailAccountState = 0,EmailAccountLastTime=NOW() WHERE EmailAccountID=@@EmailAccountID@@;
                 ]]>
-            </SqlCommand>
-        </SqlDefinition>
-    </Data>
-    <Data name="Select_emailaccount">
-        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
-            <SqlCommand>
-                <![CDATA[
-                SELECT EmailAccountID,EmailAccountAddress,EmailAccountPassWord,EmailAccountName,EmailAccountSMTP,EmailAccountSMTPPort,EmailAccountPOP3,EmailAccountPOP3Port,EmailAccountIsSSL,EmailAccountMaxEmailCount,EmailAccountRemainEmailCount,EmailAccountSpace,EmailAccountCreateTime,EmailAccountLastTime,SendState,SendMode FROM emailaccount WHERE 1=1 <%= AND EmailAccountID=@@EmailAccountID@@%> <%= AND EmailAccountAddress=@@EmailAccountAddress@@%> <%= AND EmailAccountPassWord=@@EmailAccountPassWord@@%> <%= AND EmailAccountName=@@EmailAccountName@@%> <%= AND EmailAccountSMTP=@@EmailAccountSMTP@@%> <%= AND EmailAccountSMTPPort=@@EmailAccountSMTPPort@@%> <%= AND EmailAccountPOP3=@@EmailAccountPOP3@@%> <%= AND EmailAccountPOP3Port=@@EmailAccountPOP3Port@@%> <%= AND EmailAccountIsSSL=@@EmailAccountIsSSL@@%> <%= AND EmailAccountMaxEmailCount=@@EmailAccountMaxEmailCount@@%> <%= AND EmailAccountRemainEmailCount=@@EmailAccountRemainEmailCount@@%> <%= AND EmailAccountSpace=@@EmailAccountSpace@@%> <%= AND EmailAccountCreateTime=@@EmailAccountCreateTime@@%> <%= AND EmailAccountLastTime=@@EmailAccountLastTime@@%> <%= AND SendState=@@SendState@@%> <%= AND SendMode=@@SendMode@@%>;
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+  <Data name="Select_EmailAccount">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                SELECT ea.EmailAccountID,ea.EmailAccountCategoryID,ea.EmailAccountCategoryName,ea.EmailAccountAddress,ea.EmailAccountPassWord,ea.EmailAccountName,ea.EmailAccountSMTP,ea.EmailAccountSMTPPort,ea.EmailAccountPOP3,ea.EmailAccountPOP3Port,ea.EmailAccountIsSSL,ea.EmailAccountMaxEmailCount,ea.EmailAccountRemainEmailCount,ea.EmailAccountSpace,ea.EmailAccountCreateTime,ea.EmailAccountLastTime,ea.EmailAccountPreSendTime,ea.EmailAccountNextSendTime,ea.SendState,ea.SendMode,ea.OccupyIP,ea.OccupyTime,ea.EmailAccountState FROM emailaccount AS ea WHERE ea.EmailAccountID=@@EmailAccountID@@;
                 ]]>
-            </SqlCommand>
-        </SqlDefinition>
-    </Data>
-    <Data name="Select_EmailAccount_List_By_Page">
-        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
-            <SqlCommand>
-                <![CDATA[
-                SELECT EmailAccountID,EmailAccountAddress,EmailAccountPassWord,EmailAccountName,EmailAccountSMTP,EmailAccountSMTPPort,EmailAccountPOP3,EmailAccountPOP3Port,EmailAccountIsSSL,EmailAccountMaxEmailCount,EmailAccountRemainEmailCount,EmailAccountSpace,EmailAccountCreateTime,EmailAccountLastTime,SendState,SendMode FROM emailaccount WHERE 1=1 <%= AND EmailAccountID=@@EmailAccountID@@%> <%= AND EmailAccountAddress=@@EmailAccountAddress@@%> <%= AND EmailAccountPassWord=@@EmailAccountPassWord@@%> <%= AND EmailAccountName=@@EmailAccountName@@%> <%= AND EmailAccountSMTP=@@EmailAccountSMTP@@%> <%= AND EmailAccountSMTPPort=@@EmailAccountSMTPPort@@%> <%= AND EmailAccountPOP3=@@EmailAccountPOP3@@%> <%= AND EmailAccountPOP3Port=@@EmailAccountPOP3Port@@%> <%= AND EmailAccountIsSSL=@@EmailAccountIsSSL@@%> <%= AND EmailAccountMaxEmailCount=@@EmailAccountMaxEmailCount@@%> <%= AND EmailAccountRemainEmailCount=@@EmailAccountRemainEmailCount@@%> <%= AND EmailAccountSpace=@@EmailAccountSpace@@%> <%= AND EmailAccountCreateTime=@@EmailAccountCreateTime@@%> <%= AND EmailAccountLastTime=@@EmailAccountLastTime@@%> <%= AND SendState=@@SendState@@%> <%= AND SendMode=@@SendMode@@%> LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
-                SELECT COUNT(0) AS row_count FROM emailaccount WHERE 1=1 <%= AND EmailAccountID=@@EmailAccountID@@%> <%= AND EmailAccountAddress=@@EmailAccountAddress@@%> <%= AND EmailAccountPassWord=@@EmailAccountPassWord@@%> <%= AND EmailAccountName=@@EmailAccountName@@%> <%= AND EmailAccountSMTP=@@EmailAccountSMTP@@%> <%= AND EmailAccountSMTPPort=@@EmailAccountSMTPPort@@%> <%= AND EmailAccountPOP3=@@EmailAccountPOP3@@%> <%= AND EmailAccountPOP3Port=@@EmailAccountPOP3Port@@%> <%= AND EmailAccountIsSSL=@@EmailAccountIsSSL@@%> <%= AND EmailAccountMaxEmailCount=@@EmailAccountMaxEmailCount@@%> <%= AND EmailAccountRemainEmailCount=@@EmailAccountRemainEmailCount@@%> <%= AND EmailAccountSpace=@@EmailAccountSpace@@%> <%= AND EmailAccountCreateTime=@@EmailAccountCreateTime@@%> <%= AND EmailAccountLastTime=@@EmailAccountLastTime@@%> <%= AND SendState=@@SendState@@%> <%= AND SendMode=@@SendMode@@%>;
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+  <Data name="Select_EmailAccountByAddress">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                SELECT ea.EmailAccountID FROM emailaccount AS ea WHERE ea.EmailAccountAddress=@@EmailAccountAddress@@ AND ea.EmailAccountState = 1;
                 ]]>
-            </SqlCommand>
-        </SqlDefinition>
-    </Data>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+  <Data name="Select_EmailAccount_List_By_Page">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                SELECT ea.EmailAccountID,ea.EmailAccountCategoryID,ea.EmailAccountCategoryName,ea.EmailAccountAddress,ea.EmailAccountPassWord,ea.EmailAccountName,ea.EmailAccountSMTP,ea.EmailAccountSMTPPort,ea.EmailAccountPOP3,ea.EmailAccountPOP3Port,ea.EmailAccountIsSSL,ea.EmailAccountMaxEmailCount,ea.EmailAccountRemainEmailCount,ea.EmailAccountSpace,ea.EmailAccountCreateTime,ea.EmailAccountLastTime,ea.EmailAccountPreSendTime,ea.EmailAccountNextSendTime,ea.SendState,ea.SendMode,ea.OccupyIP,ea.OccupyTime,ea.EmailAccountState FROM emailaccount AS ea WHERE ea.EmailAccountState = 1 <R%= AND ea.EmailAccountCategoryName LIKE '@@EmailAccountCategoryName@@'%R> <R%= AND ea.EmailAccountAddress LIKE '@@EmailAccountAddress@@'%R> ORDER BY ea.EmailAccountCreateTime LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
+                SELECT COUNT(0) AS row_count FROM emailaccount AS ea WHERE ea.EmailAccountState = 1 <R%= AND ea.EmailAccountCategoryName LIKE '@@EmailAccountCategoryName@@'%R> <R%= AND ea.EmailAccountAddress LIKE '@@EmailAccountAddress@@'%R> 
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
 </SqlSetting>
 

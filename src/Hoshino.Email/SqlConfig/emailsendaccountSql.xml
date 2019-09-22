@@ -4,7 +4,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                INSERT INTO emailsendaccount (EmailSendAccountID,EmailID,EmailAccountID,EmailSendAccountCreateTime) VALUES(@@EmailSendAccountID@@,@@EmailID@@,@@EmailAccountID@@,@@EmailSendAccountCreateTime@@);
+                INSERT INTO emailsendaccount (EmailID,EmailAccountID,EmailSendAccountCreateTime) VALUES(@@EmailID@@,@@EmailAccountID@@,@@EmailSendAccountCreateTime@@);
                 ]]>
             </SqlCommand>
         </SqlDefinition>
@@ -31,7 +31,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                SELECT EmailSendAccountID,EmailID,EmailAccountID,EmailSendAccountCreateTime FROM emailsendaccount WHERE 1=1 <%= AND EmailSendAccountID=@@EmailSendAccountID@@%> <%= AND EmailID=@@EmailID@@%> <%= AND EmailAccountID=@@EmailAccountID@@%> <%= AND EmailSendAccountCreateTime=@@EmailSendAccountCreateTime@@%>;
+                SELECT esa.EmailSendAccountID,esa.EmailID,esa.EmailAccountID,esa.EmailSendAccountCreateTime FROM emailsendaccount AS esa WHERE 1=1 <%= AND esa.EmailSendAccountID=@@EmailSendAccountID@@%> <%= AND esa.EmailID=@@EmailID@@%> <%= AND esa.EmailAccountID=@@EmailAccountID@@%> <%= AND esa.EmailSendAccountCreateTime=@@EmailSendAccountCreateTime@@%>;
                 ]]>
             </SqlCommand>
         </SqlDefinition>
@@ -40,8 +40,8 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                SELECT EmailSendAccountID,EmailID,EmailAccountID,EmailSendAccountCreateTime FROM emailsendaccount WHERE 1=1 <%= AND EmailSendAccountID=@@EmailSendAccountID@@%> <%= AND EmailID=@@EmailID@@%> <%= AND EmailAccountID=@@EmailAccountID@@%> <%= AND EmailSendAccountCreateTime=@@EmailSendAccountCreateTime@@%> LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
-                SELECT COUNT(0) AS row_count FROM emailsendaccount WHERE 1=1 <%= AND EmailSendAccountID=@@EmailSendAccountID@@%> <%= AND EmailID=@@EmailID@@%> <%= AND EmailAccountID=@@EmailAccountID@@%> <%= AND EmailSendAccountCreateTime=@@EmailSendAccountCreateTime@@%>;
+                SELECT esa.EmailSendAccountID,esa.EmailID,esa.EmailAccountID,esa.EmailSendAccountCreateTime FROM emailsendaccount AS esa WHERE 1=1 <%= AND esa.EmailSendAccountID=@@EmailSendAccountID@@%> <%= AND esa.EmailID=@@EmailID@@%> <%= AND esa.EmailAccountID=@@EmailAccountID@@%> <%= AND esa.EmailSendAccountCreateTime=@@EmailSendAccountCreateTime@@%> LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
+                SELECT COUNT(0) AS row_count FROM emailsendaccount AS esa WHERE 1=1 <%= AND esa.EmailSendAccountID=@@EmailSendAccountID@@%> <%= AND esa.EmailID=@@EmailID@@%> <%= AND esa.EmailAccountID=@@EmailAccountID@@%> <%= AND esa.EmailSendAccountCreateTime=@@EmailSendAccountCreateTime@@%>;
                 ]]>
             </SqlCommand>
         </SqlDefinition>

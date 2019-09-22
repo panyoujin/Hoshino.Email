@@ -21,10 +21,36 @@ namespace Hoshino.Email.Controls.SendEmailManage
     /// </summary>
     public partial class Win_NewOneEmail : Window
     {
+        public int EmailAccountID = -1;
         EmailAccountRepository EA_Repository = new EmailAccountRepository();
+        EmailAccountCategoryRepository EAC_Repository = new EmailAccountCategoryRepository();
         public Win_NewOneEmail()
         {
             InitializeComponent();
+            this.EmailAccountID = -1;
+            this.cbCategory.ItemsSource = EAC_Repository.GetList();
+            this.cbCategory.DisplayMemberPath = "Name";
+        }
+        public Win_NewOneEmail(int EmailAccountID)
+        {
+            InitializeComponent();
+            this.EmailAccountID = EmailAccountID;
+            this.cbCategory.ItemsSource = EAC_Repository.GetList();
+            this.cbCategory.DisplayMemberPath = "Name";
+            var entity = EA_Repository.Get(this.EmailAccountID);
+            this.txtName.Text = entity.EmailAccountName;
+            this.txtEmailAddress.Text = entity.EmailAccountAddress;
+            this.txtPassword.Text = entity.EmailAccountPassWord;
+            this.txtInterval.Text = entity.EmailAccountSpace + "";
+            this.txtMaxSendCount.Text = entity.EmailAccountMaxEmailCount + "";
+            this.txtPOP3.Text = entity.EmailAccountPOP3;
+            this.txtPOPPort.Text = entity.EmailAccountPOP3Port + "";
+            this.txtSMTP.Text = entity.EmailAccountSMTP;
+            this.txtSMTPPort.Text = entity.EmailAccountSMTPPort + "";
+            this.cbCategory.SelectedValue = entity.EmailAccountCategoryID;
+            this.cbCategory.Text = entity.EmailAccountCategoryName;
+            this.cbSendMode.Text = entity.SendMode == 0 ? "發送" : "密送";
+            this.cbSSL.SelectedIndex = entity.EmailAccountIsSSL;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -34,22 +60,59 @@ namespace Hoshino.Email.Controls.SendEmailManage
                 MessageBox.Show("請填寫完整再提交");
                 return;
             }
-            EmailAccountEntity entity = new EmailAccountEntity
+            var category = this.cbCategory.SelectedItem as EmailAccountCategoryEntity;
+            var entity = EA_Repository.GetByAddress(txtEmailAddress.Text.Trim());
+            if (this.EmailAccountID == -1 && entity != null)
             {
-                EmailAccountID = Guid.NewGuid().ToString(),
-                EmailAccountAddress = txtEmailAddress.Text.Trim(),
-                EmailAccountName = txtName.Text.Trim(),
-                EmailAccountIsSSL = cbSSL.SelectedIndex,
-                EmailAccountMaxEmailCount = int.Parse(txtMaxSendCount.Text.Trim()),
-                EmailAccountSpace = int.Parse(txtInterval.Text.Trim()),
-                EmailAccountPassWord = txtPassword.Text.Trim(),
-                EmailAccountPOP3 = txtPOP3.Text.Trim(),
-                EmailAccountPOP3Port = int.Parse(txtPOPPort.Text.Trim()),
-                EmailAccountSMTP = txtSMTP.Text.Trim(),
-                EmailAccountSMTPPort = int.Parse(txtSMTPPort.Text.Trim()),
-                SendMode = (this.cbSendMode.Text == "發送" ? 0 : 1)
-            };
-            EA_Repository.Insert(entity);
+                MessageBox.Show("郵箱已存在，請不要重複添加");
+                return;
+            }
+            if (this.EmailAccountID != -1 && entity != null && this.EmailAccountID != entity.EmailAccountID)
+            {
+                MessageBox.Show("郵箱已存在");
+                return;
+            }
+            if (entity == null)
+            {
+                entity = new EmailAccountEntity
+                {
+                    EmailAccountAddress = txtEmailAddress.Text.Trim(),
+                    EmailAccountName = txtName.Text.Trim(),
+                    EmailAccountIsSSL = cbSSL.SelectedIndex,
+                    EmailAccountMaxEmailCount = int.Parse(txtMaxSendCount.Text.Trim()),
+                    EmailAccountSpace = int.Parse(txtInterval.Text.Trim()),
+                    EmailAccountPassWord = txtPassword.Text.Trim(),
+                    EmailAccountPOP3 = txtPOP3.Text.Trim(),
+                    EmailAccountPOP3Port = int.Parse(txtPOPPort.Text.Trim()),
+                    EmailAccountSMTP = txtSMTP.Text.Trim(),
+                    EmailAccountSMTPPort = int.Parse(txtSMTPPort.Text.Trim()),
+                    SendMode = (this.cbSendMode.Text == "發送" ? 0 : 1),
+                    EmailAccountCategoryID = category.ID,
+                    EmailAccountCategoryName = category.Name
+                };
+                EA_Repository.Insert(entity);
+            }
+            else
+            {
+                entity.EmailAccountAddress = txtEmailAddress.Text.Trim();
+                entity.EmailAccountAddress = txtEmailAddress.Text.Trim();
+                entity.EmailAccountName = txtName.Text.Trim();
+                entity.EmailAccountIsSSL = cbSSL.SelectedIndex;
+                entity.EmailAccountMaxEmailCount = int.Parse(txtMaxSendCount.Text.Trim());
+                entity.EmailAccountSpace = int.Parse(txtInterval.Text.Trim());
+                entity.EmailAccountPassWord = txtPassword.Text.Trim();
+                entity.EmailAccountPOP3 = txtPOP3.Text.Trim();
+                entity.EmailAccountPOP3Port = int.Parse(txtPOPPort.Text.Trim());
+                entity.EmailAccountSMTP = txtSMTP.Text.Trim();
+                entity.EmailAccountSMTPPort = int.Parse(txtSMTPPort.Text.Trim());
+                entity.SendMode = (this.cbSendMode.Text == "發送" ? 0 : 1);
+                entity.EmailAccountCategoryID = category.ID;
+                entity.EmailAccountCategoryName = category.Name;
+                EA_Repository.Update(entity);
+            }
+            MessageBox.Show("成功");
+            this.DialogResult = true;
+            this.Close();
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)

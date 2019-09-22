@@ -43,10 +43,10 @@ namespace Hoshino.Email.Services.Tasks
                                 break;
                             }
                             //3. 判断下一次发送时间和当期时间对比
-                            if (EmailAccount.EmailAccountNextSendTime.HasValue && EmailAccount.EmailAccountNextSendTime >= DateTime.Now)
+                            if (EmailAccount.EmailAccountNextSendTime >= DateTime.Now)
                             {
                                 //还没到时间执行
-                                Interval = (EmailAccount.EmailAccountNextSendTime.Value - DateTime.Now).Seconds + 1;
+                                Interval = (EmailAccount.EmailAccountNextSendTime - DateTime.Now).Seconds + 1;
                                 continue;
                             }
                             //4. 获取发送列表，按照指定数量获取
@@ -60,8 +60,7 @@ namespace Hoshino.Email.Services.Tasks
                             var sendCount = EmailAccount.EmailAccountRemainEmailCount;
                             //如果减少了最大发送数量，或者上一次发送离现在已经超过一个间隔
                             if (sendCount > EmailAccount.EmailAccountMaxEmailCount
-                            || !EmailAccount.EmailAccountPreSendTime.HasValue
-                            || EmailAccount.EmailAccountPreSendTime.Value.AddMinutes(EmailAccount.EmailAccountSpace) < DateTime.Now)
+                            || EmailAccount.EmailAccountPreSendTime.AddMinutes(EmailAccount.EmailAccountSpace) < DateTime.Now)
                             {
                                 sendCount = EmailAccount.EmailAccountMaxEmailCount;
                             }

@@ -32,10 +32,7 @@ namespace Hoshino.Email.Repository
                 {
                     dic["EmailAccountID"] = model.EmailAccountID;
                 }
-                if (model.EmailSendFailureSendTime != null && model.EmailSendFailureSendTime.HasValue)
-                {
-                    dic["EmailSendFailureSendTime"] = model.EmailSendFailureSendTime;
-                }
+                dic["EmailSendFailureSendTime"] = model.EmailSendFailureSendTime;
                 dic["Result"] = "无";
                 if (string.IsNullOrWhiteSpace(model.Result))
                 {
@@ -68,10 +65,7 @@ namespace Hoshino.Email.Repository
             {
                 dic["EmailAccountID"] = model.EmailAccountID;
             }
-            if (model.EmailSendFailureSendTime != null && model.EmailSendFailureSendTime.HasValue)
-            {
-                dic["EmailSendFailureSendTime"] = model.EmailSendFailureSendTime;
-            }
+            dic["EmailSendFailureSendTime"] = model.EmailSendFailureSendTime;
             if (model.Result != null)
             {
                 dic["Result"] = model.Result;

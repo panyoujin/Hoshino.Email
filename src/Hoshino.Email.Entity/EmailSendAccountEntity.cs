@@ -7,22 +7,22 @@ namespace Hoshino.Email.Entity
         /// <summary>
         /// 
         /// </summary>
-        public string EmailSendAccountID { get; set; }
+        public int EmailSendAccountID { get; set; }
 
         /// <summary>
         /// 邮件ID
         /// </summary>
-        public string EmailID { get; set; }
+        public int EmailID { get; set; }
 
         /// <summary>
         /// 发件箱ID
         /// </summary>
-        public string EmailAccountID { get; set; }
+        public int EmailAccountID { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? EmailSendAccountCreateTime { get; set; }
+        public DateTime EmailSendAccountCreateTime { get; set; }
 
     }
 }

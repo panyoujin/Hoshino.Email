@@ -7,7 +7,17 @@ namespace Hoshino.Email.Entity
         /// <summary>
         /// 
         /// </summary>
-        public string EmailAccountID { get; set; }
+        public int EmailAccountID { get; set; }
+
+        /// <summary>
+        /// 分类ID
+        /// </summary>
+        public int EmailAccountCategoryID { get; set; }
+
+        /// <summary>
+        /// 分类名称
+        /// </summary>
+        public string EmailAccountCategoryName { get; set; }
 
         /// <summary>
         /// 发件箱地址
@@ -32,7 +42,7 @@ namespace Hoshino.Email.Entity
         /// <summary>
         /// SMTP端口
         /// </summary>
-        public int? EmailAccountSMTPPort { get; set; }
+        public int EmailAccountSMTPPort { get; set; }
 
         /// <summary>
         /// POP3信息
@@ -67,15 +77,25 @@ namespace Hoshino.Email.Entity
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime? EmailAccountCreateTime { get; set; }
+        public DateTime EmailAccountCreateTime { get; set; }
 
         /// <summary>
         /// 最后修改时间
         /// </summary>
-        public DateTime? EmailAccountLastTime { get; set; }
+        public DateTime EmailAccountLastTime { get; set; }
 
         /// <summary>
-        /// 状态0空闲，1正在发送
+        /// 上一次发送时间
+        /// </summary>
+        public DateTime EmailAccountPreSendTime { get; set; }
+
+        /// <summary>
+        /// 下一次发送时间
+        /// </summary>
+        public DateTime EmailAccountNextSendTime { get; set; }
+
+        /// <summary>
+        /// 状态0空闲，1正在发送， 2已发送
         /// </summary>
         public int SendState { get; set; }
 
@@ -83,6 +103,7 @@ namespace Hoshino.Email.Entity
         /// 0发送，1密送
         /// </summary>
         public int SendMode { get; set; }
+
         /// <summary>
         /// 占用服务器IP
         /// </summary>
@@ -91,17 +112,12 @@ namespace Hoshino.Email.Entity
         /// <summary>
         /// 占用时间
         /// </summary>
-        public DateTime? OccupyTime { get; set; }
-        /// <summary>
-        /// 上一次发送时间
-        /// </summary>
-        public DateTime? EmailAccountPreSendTime { get; set; }
-        /// <summary>
-        /// 下一次发送时间
-        /// </summary>
-        public DateTime? EmailAccountNextSendTime { get; set; }
+        public DateTime OccupyTime { get; set; }
 
-        public string Group { get; set; }
+        /// <summary>
+        /// 帐号状态 1 有效 ; 0 删除
+        /// </summary>
+        public int EmailAccountState { get; set; }
 
     }
 }

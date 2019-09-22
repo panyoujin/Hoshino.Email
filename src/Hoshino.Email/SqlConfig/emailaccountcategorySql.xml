@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SqlSetting>
+    <Data name="Insert_emailaccountcategory">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                INSERT INTO emailaccountcategory (Name,CreateTime,LastTime) VALUES(@@Name@@,NOW(),NOW());
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Update_emailaccountcategory">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                UPDATE emailaccountcategory SET Name=@@Name@@,LastTime=NOW() WHERE ID=@@ID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Delete_emailaccountcategory">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                DELETE FROM emailaccountcategory WHERE ID=@@ID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Select_emailaccountcategory">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                SELECT eac.ID,eac.Name,eac.Sort,eac.CreateTime,eac.LastTime FROM emailaccountcategory AS eac WHERE 1=1 <%= AND eac.ID=@@ID@@%> <%= AND eac.Name=@@Name@@%>;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Select_emailaccountcategory_List_By_Page">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                SELECT eac.ID,eac.Name,eac.Sort,eac.CreateTime,eac.LastTime FROM emailaccountcategory AS eac WHERE 1=1 <%= AND eac.ID=@@ID@@%> <%= AND eac.Name=@@Name@@%> LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
+                SELECT COUNT(0) AS row_count FROM emailaccountcategory AS eac WHERE 1=1 <%= AND eac.ID=@@ID@@%> <%= AND eac.Name=@@Name@@%> ;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+  <Data name="Select_emailaccountcategory_List">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                SELECT eac.ID,eac.Name,eac.Sort,eac.CreateTime,eac.LastTime FROM emailaccountcategory AS eac ORDER BY eac.Sort,eac.ID;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+</SqlSetting>
+

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hoshino.Email.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,23 @@ namespace Hoshino.Email.Controls.SendEmailManage
     /// </summary>
     public partial class Win_NewMainGroup : Window
     {
+        EmailAccountCategoryRepository EAC_Repository = new EmailAccountCategoryRepository();
         public Win_NewMainGroup()
         {
             InitializeComponent();
+        }
+
+        private void BtnOK_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(this.tbGroup.Text.Trim()))
+            {
+                MessageBox.Show("請輸入分類名稱");
+                return;
+            }
+            EAC_Repository.Insert(this.tbGroup.Text.Trim());
+            MessageBox.Show("成功");
+            this.DialogResult = true;
+            this.Close();
         }
     }
 }

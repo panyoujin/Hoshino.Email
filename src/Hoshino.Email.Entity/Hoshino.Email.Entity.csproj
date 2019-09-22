@@ -41,7 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="EmailAccountCategoryEntity.cs" />
     <Compile Include="EmailAccountEntity.cs" />
+    <Compile Include="EmailBccAccountCategoryEntity.cs" />
     <Compile Include="EmailBccAccountEntity.cs" />
     <Compile Include="EmailInBoxEntity.cs" />
     <Compile Include="EmailInfoEntity.cs" />

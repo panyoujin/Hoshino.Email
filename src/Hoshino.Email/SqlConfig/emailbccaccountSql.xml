@@ -4,7 +4,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                INSERT INTO emailbccaccount (EmailBccAccountID,EmailBccAccountAddress,EmailBccAccountName,EmailBccAccountCreateTime,EmailBccAccountLastTime,EmailBccAccountIsDel) VALUES(@@EmailBccAccountID@@,@@EmailBccAccountAddress@@,@@EmailBccAccountName@@,@@EmailBccAccountCreateTime@@,@@EmailBccAccountLastTime@@,@@EmailBccAccountIsDel@@);
+                INSERT INTO emailbccaccount (EmailBccAccountCategoryID,EmailBccAccountCategoryName,EmailBccAccountAddress,EmailBccAccountName,EmailBccAccountCreateTime,EmailBccAccountLastTime,EmailBccAccountIsDel) VALUES(@@EmailBccAccountCategoryID@@,@@EmailBccAccountCategoryName@@,@@EmailBccAccountAddress@@,@@EmailBccAccountName@@,@@EmailBccAccountCreateTime@@,@@EmailBccAccountLastTime@@,@@EmailBccAccountIsDel@@);
                 ]]>
             </SqlCommand>
         </SqlDefinition>
@@ -13,7 +13,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                UPDATE emailbccaccount SET EmailBccAccountID=@@EmailBccAccountID@@ <%=,EmailBccAccountAddress=@@EmailBccAccountAddress@@%><%=,EmailBccAccountName=@@EmailBccAccountName@@%><%=,EmailBccAccountCreateTime=@@EmailBccAccountCreateTime@@%><%=,EmailBccAccountLastTime=@@EmailBccAccountLastTime@@%><%=,EmailBccAccountIsDel=@@EmailBccAccountIsDel@@%> WHERE EmailBccAccountID=@@EmailBccAccountID@@;
+                UPDATE emailbccaccount SET EmailBccAccountID=@@EmailBccAccountID@@ <%=,EmailBccAccountCategoryID=@@EmailBccAccountCategoryID@@%><%=,EmailBccAccountCategoryName=@@EmailBccAccountCategoryName@@%><%=,EmailBccAccountAddress=@@EmailBccAccountAddress@@%><%=,EmailBccAccountName=@@EmailBccAccountName@@%><%=,EmailBccAccountCreateTime=@@EmailBccAccountCreateTime@@%><%=,EmailBccAccountLastTime=@@EmailBccAccountLastTime@@%><%=,EmailBccAccountIsDel=@@EmailBccAccountIsDel@@%> WHERE EmailBccAccountID=@@EmailBccAccountID@@;
                 ]]>
             </SqlCommand>
         </SqlDefinition>
@@ -31,7 +31,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                SELECT EmailBccAccountID,EmailBccAccountAddress,EmailBccAccountName,EmailBccAccountCreateTime,EmailBccAccountLastTime,EmailBccAccountIsDel FROM emailbccaccount WHERE 1=1 <%= AND EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND EmailBccAccountAddress=@@EmailBccAccountAddress@@%> <%= AND EmailBccAccountName=@@EmailBccAccountName@@%> <%= AND EmailBccAccountCreateTime=@@EmailBccAccountCreateTime@@%> <%= AND EmailBccAccountLastTime=@@EmailBccAccountLastTime@@%> <%= AND EmailBccAccountIsDel=@@EmailBccAccountIsDel@@%>;
+                SELECT eba.EmailBccAccountID,eba.EmailBccAccountCategoryID,eba.EmailBccAccountCategoryName,eba.EmailBccAccountAddress,eba.EmailBccAccountName,eba.EmailBccAccountCreateTime,eba.EmailBccAccountLastTime,eba.EmailBccAccountIsDel FROM emailbccaccount AS eba WHERE 1=1 <%= AND eba.EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND eba.EmailBccAccountCategoryID=@@EmailBccAccountCategoryID@@%> <%= AND eba.EmailBccAccountCategoryName=@@EmailBccAccountCategoryName@@%> <%= AND eba.EmailBccAccountAddress=@@EmailBccAccountAddress@@%> <%= AND eba.EmailBccAccountName=@@EmailBccAccountName@@%> <%= AND eba.EmailBccAccountCreateTime=@@EmailBccAccountCreateTime@@%> <%= AND eba.EmailBccAccountLastTime=@@EmailBccAccountLastTime@@%> <%= AND eba.EmailBccAccountIsDel=@@EmailBccAccountIsDel@@%>;
                 ]]>
             </SqlCommand>
         </SqlDefinition>
@@ -40,8 +40,8 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                SELECT EmailBccAccountID,EmailBccAccountAddress,EmailBccAccountName,EmailBccAccountCreateTime,EmailBccAccountLastTime,EmailBccAccountIsDel FROM emailbccaccount WHERE 1=1 <%= AND EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND EmailBccAccountAddress=@@EmailBccAccountAddress@@%> <%= AND EmailBccAccountName=@@EmailBccAccountName@@%> <%= AND EmailBccAccountCreateTime=@@EmailBccAccountCreateTime@@%> <%= AND EmailBccAccountLastTime=@@EmailBccAccountLastTime@@%> <%= AND EmailBccAccountIsDel=@@EmailBccAccountIsDel@@%> LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
-                SELECT COUNT(0) AS row_count FROM emailbccaccount WHERE 1=1 <%= AND EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND EmailBccAccountAddress=@@EmailBccAccountAddress@@%> <%= AND EmailBccAccountName=@@EmailBccAccountName@@%> <%= AND EmailBccAccountCreateTime=@@EmailBccAccountCreateTime@@%> <%= AND EmailBccAccountLastTime=@@EmailBccAccountLastTime@@%> <%= AND EmailBccAccountIsDel=@@EmailBccAccountIsDel@@%>;
+                SELECT eba.EmailBccAccountID,eba.EmailBccAccountCategoryID,eba.EmailBccAccountCategoryName,eba.EmailBccAccountAddress,eba.EmailBccAccountName,eba.EmailBccAccountCreateTime,eba.EmailBccAccountLastTime,eba.EmailBccAccountIsDel FROM emailbccaccount AS eba WHERE 1=1 <%= AND eba.EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND eba.EmailBccAccountCategoryID=@@EmailBccAccountCategoryID@@%> <%= AND eba.EmailBccAccountCategoryName=@@EmailBccAccountCategoryName@@%> <%= AND eba.EmailBccAccountAddress=@@EmailBccAccountAddress@@%> <%= AND eba.EmailBccAccountName=@@EmailBccAccountName@@%> <%= AND eba.EmailBccAccountCreateTime=@@EmailBccAccountCreateTime@@%> <%= AND eba.EmailBccAccountLastTime=@@EmailBccAccountLastTime@@%> <%= AND eba.EmailBccAccountIsDel=@@EmailBccAccountIsDel@@%> LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
+                SELECT COUNT(0) AS row_count FROM emailbccaccount AS eba WHERE 1=1 <%= AND eba.EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND eba.EmailBccAccountCategoryID=@@EmailBccAccountCategoryID@@%> <%= AND eba.EmailBccAccountCategoryName=@@EmailBccAccountCategoryName@@%> <%= AND eba.EmailBccAccountAddress=@@EmailBccAccountAddress@@%> <%= AND eba.EmailBccAccountName=@@EmailBccAccountName@@%> <%= AND eba.EmailBccAccountCreateTime=@@EmailBccAccountCreateTime@@%> <%= AND eba.EmailBccAccountLastTime=@@EmailBccAccountLastTime@@%> <%= AND eba.EmailBccAccountIsDel=@@EmailBccAccountIsDel@@%>;
                 ]]>
             </SqlCommand>
         </SqlDefinition>

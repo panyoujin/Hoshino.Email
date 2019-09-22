@@ -7,27 +7,27 @@ namespace Hoshino.Email.Entity
         /// <summary>
         /// 
         /// </summary>
-        public string EmailSendFailureID { get; set; }
+        public int EmailSendFailureID { get; set; }
 
         /// <summary>
         /// 邮件ID
         /// </summary>
-        public string EmailID { get; set; }
+        public int EmailID { get; set; }
 
         /// <summary>
         /// 收件人ID
         /// </summary>
-        public string EmailBccAccountID { get; set; }
+        public int EmailBccAccountID { get; set; }
 
         /// <summary>
         /// 发件人ID
         /// </summary>
-        public string EmailAccountID { get; set; }
+        public int EmailAccountID { get; set; }
 
         /// <summary>
         /// 发送失败的时间
         /// </summary>
-        public DateTime? EmailSendFailureSendTime { get; set; }
+        public DateTime EmailSendFailureSendTime { get; set; }
 
         /// <summary>
         /// 失败原因

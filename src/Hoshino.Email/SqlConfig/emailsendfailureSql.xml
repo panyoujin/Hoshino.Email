@@ -4,7 +4,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                INSERT INTO emailsendfailure (EmailSendFailureID,EmailID,EmailBccAccountID,EmailAccountID,EmailSendFailureSendTime,Result) VALUES(@@EmailSendFailureID@@,@@EmailID@@,@@EmailBccAccountID@@,@@EmailAccountID@@,@@EmailSendFailureSendTime@@,@@Result@@);
+                INSERT INTO emailsendfailure (EmailID,EmailBccAccountID,EmailAccountID,EmailSendFailureSendTime,Result) VALUES(@@EmailID@@,@@EmailBccAccountID@@,@@EmailAccountID@@,@@EmailSendFailureSendTime@@,@@Result@@);
                 ]]>
             </SqlCommand>
         </SqlDefinition>
@@ -31,7 +31,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                SELECT EmailSendFailureID,EmailID,EmailBccAccountID,EmailAccountID,EmailSendFailureSendTime,Result FROM emailsendfailure WHERE 1=1 <%= AND EmailSendFailureID=@@EmailSendFailureID@@%> <%= AND EmailID=@@EmailID@@%> <%= AND EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND EmailAccountID=@@EmailAccountID@@%> <%= AND EmailSendFailureSendTime=@@EmailSendFailureSendTime@@%> <%= AND Result=@@Result@@%>;
+                SELECT esf.EmailSendFailureID,esf.EmailID,esf.EmailBccAccountID,esf.EmailAccountID,esf.EmailSendFailureSendTime,esf.Result FROM emailsendfailure AS esf WHERE 1=1 <%= AND esf.EmailSendFailureID=@@EmailSendFailureID@@%> <%= AND esf.EmailID=@@EmailID@@%> <%= AND esf.EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND esf.EmailAccountID=@@EmailAccountID@@%> <%= AND esf.EmailSendFailureSendTime=@@EmailSendFailureSendTime@@%> <%= AND esf.Result=@@Result@@%>;
                 ]]>
             </SqlCommand>
         </SqlDefinition>
@@ -40,8 +40,8 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                SELECT EmailSendFailureID,EmailID,EmailBccAccountID,EmailAccountID,EmailSendFailureSendTime,Result FROM emailsendfailure WHERE 1=1 <%= AND EmailSendFailureID=@@EmailSendFailureID@@%> <%= AND EmailID=@@EmailID@@%> <%= AND EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND EmailAccountID=@@EmailAccountID@@%> <%= AND EmailSendFailureSendTime=@@EmailSendFailureSendTime@@%> <%= AND Result=@@Result@@%> LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
-                SELECT COUNT(0) AS row_count FROM emailsendfailure WHERE 1=1 <%= AND EmailSendFailureID=@@EmailSendFailureID@@%> <%= AND EmailID=@@EmailID@@%> <%= AND EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND EmailAccountID=@@EmailAccountID@@%> <%= AND EmailSendFailureSendTime=@@EmailSendFailureSendTime@@%> <%= AND Result=@@Result@@%>;
+                SELECT esf.EmailSendFailureID,esf.EmailID,esf.EmailBccAccountID,esf.EmailAccountID,esf.EmailSendFailureSendTime,esf.Result FROM emailsendfailure AS esf WHERE 1=1 <%= AND esf.EmailSendFailureID=@@EmailSendFailureID@@%> <%= AND esf.EmailID=@@EmailID@@%> <%= AND esf.EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND esf.EmailAccountID=@@EmailAccountID@@%> <%= AND esf.EmailSendFailureSendTime=@@EmailSendFailureSendTime@@%> <%= AND esf.Result=@@Result@@%> LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
+                SELECT COUNT(0) AS row_count FROM emailsendfailure AS esf WHERE 1=1 <%= AND esf.EmailSendFailureID=@@EmailSendFailureID@@%> <%= AND esf.EmailID=@@EmailID@@%> <%= AND esf.EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND esf.EmailAccountID=@@EmailAccountID@@%> <%= AND esf.EmailSendFailureSendTime=@@EmailSendFailureSendTime@@%> <%= AND esf.Result=@@Result@@%>;
                 ]]>
             </SqlCommand>
         </SqlDefinition>

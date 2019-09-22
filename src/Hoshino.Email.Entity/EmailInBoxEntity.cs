@@ -32,7 +32,7 @@ namespace Hoshino.Email.Entity
         /// <summary>
         /// 收件时间
         /// </summary>
-        public int? EmailInboxDate { get; set; }
+        public int EmailInboxDate { get; set; }
 
         /// <summary>
         /// eml地址
@@ -42,12 +42,12 @@ namespace Hoshino.Email.Entity
         /// <summary>
         /// 状态1:已阅读;0:未阅读
         /// </summary>
-        public int? EmailInboxState { get; set; }
+        public int EmailInboxState { get; set; }
 
         /// <summary>
         /// 是否删除
         /// </summary>
-        public int? EmailInboxIsDel { get; set; }
+        public int EmailInboxIsDel { get; set; }
 
     }
 }

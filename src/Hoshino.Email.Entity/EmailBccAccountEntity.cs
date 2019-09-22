@@ -7,7 +7,17 @@ namespace Hoshino.Email.Entity
         /// <summary>
         /// 
         /// </summary>
-        public string EmailBccAccountID { get; set; }
+        public int EmailBccAccountID { get; set; }
+
+        /// <summary>
+        /// 分类ID
+        /// </summary>
+        public int EmailBccAccountCategoryID { get; set; }
+
+        /// <summary>
+        /// 分类名称
+        /// </summary>
+        public string EmailBccAccountCategoryName { get; set; }
 
         /// <summary>
         /// 收件箱地址
@@ -22,17 +32,17 @@ namespace Hoshino.Email.Entity
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? EmailBccAccountCreateTime { get; set; }
+        public DateTime EmailBccAccountCreateTime { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? EmailBccAccountLastTime { get; set; }
+        public DateTime EmailBccAccountLastTime { get; set; }
 
         /// <summary>
         /// 是否删除 1:已删除;0:未删除
         /// </summary>
-        public int? EmailBccAccountIsDel { get; set; }
+        public int EmailBccAccountIsDel { get; set; }
 
     }
 }

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SqlSetting>
+    <Data name="Insert_emailbccaccountcategory">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                INSERT INTO emailbccaccountcategory (ID,Name,Sort,CreateTime,LastTime) VALUES(@@ID@@,@@Name@@,@@Sort@@,@@CreateTime@@,@@LastTime@@);
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Update_emailbccaccountcategory">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                UPDATE emailbccaccountcategory SET ID=@@ID@@ <%=,Name=@@Name@@%><%=,Sort=@@Sort@@%><%=,CreateTime=@@CreateTime@@%><%=,LastTime=@@LastTime@@%> WHERE ID=@@ID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Delete_emailbccaccountcategory">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                DELETE FROM emailbccaccountcategory WHERE ID=@@ID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Select_emailbccaccountcategory">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                SELECT ebac.ID,ebac.Name,ebac.Sort,ebac.CreateTime,ebac.LastTime FROM emailbccaccountcategory AS ebac WHERE 1=1 <%= AND ebac.ID=@@ID@@%> <%= AND ebac.Name=@@Name@@%> <%= AND ebac.Sort=@@Sort@@%> <%= AND ebac.CreateTime=@@CreateTime@@%> <%= AND ebac.LastTime=@@LastTime@@%>;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Select_emailbccaccountcategory_List_By_Page">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                SELECT ebac.ID,ebac.Name,ebac.Sort,ebac.CreateTime,ebac.LastTime FROM emailbccaccountcategory AS ebac WHERE 1=1 <%= AND ebac.ID=@@ID@@%> <%= AND ebac.Name=@@Name@@%> <%= AND ebac.Sort=@@Sort@@%> <%= AND ebac.CreateTime=@@CreateTime@@%> <%= AND ebac.LastTime=@@LastTime@@%> LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
+                SELECT COUNT(0) AS row_count FROM emailbccaccountcategory AS ebac WHERE 1=1 <%= AND ebac.ID=@@ID@@%> <%= AND ebac.Name=@@Name@@%> <%= AND ebac.Sort=@@Sort@@%> <%= AND ebac.CreateTime=@@CreateTime@@%> <%= AND ebac.LastTime=@@LastTime@@%>;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+  <Data name="Select_emailbccaccountcategory_List">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                SELECT ebac.ID,ebac.Name,ebac.Sort,ebac.CreateTime,ebac.LastTime FROM emailbccaccountcategory AS ebac;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+</SqlSetting>
+

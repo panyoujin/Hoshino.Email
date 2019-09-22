@@ -27,9 +27,9 @@
 
 
             <TextBox Grid.Column="1" materialDesign:HintAssist.Hint="請輸入查詢分類"  Height="50" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         VerticalAlignment="Center" />
+                         VerticalAlignment="Center" x:Name="tbCategory" />
 
-            <Button Grid.Column="3" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="70" ToolTip="Resource name: MaterialDesignRaisedButton" Content="查詢" Foreground="White"/>
+            <Button Grid.Column="3" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="70" ToolTip="Resource name: MaterialDesignRaisedButton" Content="查詢" Foreground="White" x:Name="btnQuery" Click="BtnQuery_Click"/>
             <Button x:Name="btnInsertGroup" Click="BtnInsertGroup_Click" Grid.Column="5" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="90" ToolTip="Resource name: MaterialDesignRaisedButton" Content="新增分類" Foreground="White"/>
         </Grid>
 
@@ -67,6 +67,6 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <common:UC_PagingControl Grid.Row="2" Margin="20 0 0 0" HorizontalAlignment="Left"></common:UC_PagingControl>
+        <common:UC_PagingControl Grid.Row="2" Margin="20 0 0 0" HorizontalAlignment="Left" x:Name="ucPage"></common:UC_PagingControl>
     </Grid>
 </UserControl>

@@ -29,26 +29,11 @@ namespace Hoshino.Email.Repository
             {
                 dic["EmailAccountID"] = model.EmailAccountID;
             }
-            if (model.EmailSendBccAccountState != null && model.EmailSendBccAccountState.HasValue)
-            {
-                dic["EmailSendBccAccountState"] = model.EmailSendBccAccountState;
-            }
-            if (model.EmailSendBccAccountCreateTime != null && model.EmailSendBccAccountCreateTime.HasValue)
-            {
-                dic["EmailSendBccAccountCreateTime"] = model.EmailSendBccAccountCreateTime;
-            }
-            if (model.EmailSendBccAccountLastTime != null && model.EmailSendBccAccountLastTime.HasValue)
-            {
-                dic["EmailSendBccAccountLastTime"] = model.EmailSendBccAccountLastTime;
-            }
-            if (model.EmailSendBccAccountSendTime != null && model.EmailSendBccAccountSendTime.HasValue)
-            {
-                dic["EmailSendBccAccountSendTime"] = model.EmailSendBccAccountSendTime;
-            }
-            if (model.Result != null)
-            {
-                dic["Result"] = model.Result;
-            }
+            dic["EmailSendBccAccountState"] = model.EmailSendBccAccountState;
+            dic["EmailSendBccAccountCreateTime"] = model.EmailSendBccAccountCreateTime;
+            dic["EmailSendBccAccountLastTime"] = model.EmailSendBccAccountLastTime;
+            dic["EmailSendBccAccountSendTime"] = model.EmailSendBccAccountSendTime;
+            dic["Result"] = model.Result;
             return SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailsendbccaccount", dic) > 0;
         }
 
@@ -74,26 +59,11 @@ namespace Hoshino.Email.Repository
             {
                 dic["EmailAccountID"] = model.EmailAccountID;
             }
-            if (model.EmailSendBccAccountState != null && model.EmailSendBccAccountState.HasValue)
-            {
-                dic["EmailSendBccAccountState"] = model.EmailSendBccAccountState;
-            }
-            if (model.EmailSendBccAccountCreateTime != null && model.EmailSendBccAccountCreateTime.HasValue)
-            {
-                dic["EmailSendBccAccountCreateTime"] = model.EmailSendBccAccountCreateTime;
-            }
-            if (model.EmailSendBccAccountLastTime != null && model.EmailSendBccAccountLastTime.HasValue)
-            {
-                dic["EmailSendBccAccountLastTime"] = model.EmailSendBccAccountLastTime;
-            }
-            if (model.EmailSendBccAccountSendTime != null && model.EmailSendBccAccountSendTime.HasValue)
-            {
-                dic["EmailSendBccAccountSendTime"] = model.EmailSendBccAccountSendTime;
-            }
-            if (model.Result != null)
-            {
-                dic["Result"] = model.Result;
-            }
+            dic["EmailSendBccAccountState"] = model.EmailSendBccAccountState;
+            dic["EmailSendBccAccountCreateTime"] = model.EmailSendBccAccountCreateTime;
+            dic["EmailSendBccAccountLastTime"] = model.EmailSendBccAccountLastTime;
+            dic["EmailSendBccAccountSendTime"] = model.EmailSendBccAccountSendTime;
+            dic["Result"] = model.Result;
             return SQLHelperFactory.Instance.ExecuteNonQuery("Update_emailsendbccaccount", dic) > 0;
         }
 
@@ -162,10 +132,7 @@ namespace Hoshino.Email.Repository
                 {
                     dic["EmailSendBccAccountID"] = model.EmailSendBccAccountID;
                 }
-                if (model.EmailSendBccAccountState != null && model.EmailSendBccAccountState.HasValue)
-                {
-                    dic["EmailSendBccAccountState"] = model.EmailSendBccAccountState;
-                }
+                dic["EmailSendBccAccountState"] = model.EmailSendBccAccountState;
                 dic["Result"] = "无";
                 if (string.IsNullOrWhiteSpace(model.Result))
                 {

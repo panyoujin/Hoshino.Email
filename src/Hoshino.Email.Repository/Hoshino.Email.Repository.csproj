@@ -54,7 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="EmailAccountCategoryRepository.cs" />
     <Compile Include="EmailAccountRepository.cs" />
+    <Compile Include="EmailBccAccountCategoryRepository.cs" />
     <Compile Include="EmailBccAccountRepository.cs" />
     <Compile Include="EmailInBoxRepository.cs" />
     <Compile Include="EmailInfoRepository.cs" />

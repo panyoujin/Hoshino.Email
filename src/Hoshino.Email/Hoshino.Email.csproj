@@ -92,6 +92,7 @@
     <Compile Include="Controls\ContactsForm\UC_ContactsGroup.xaml.cs">
       <DependentUpon>UC_ContactsGroup.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="Controls\ContactsForm\Win_NewContacts.xaml.cs">
       <DependentUpon>Win_NewContacts.xaml</DependentUpon>
     </Compile>
@@ -109,8 +110,7 @@
     </Compile>
     <Compile Include="Controls\EmailInfoManage\Win_ReceiptList.xaml.cs">
       <DependentUpon>Win_ReceiptList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SendEmailManage\UC_SendGroup.xaml.cs">
+    </Compile>    <Compile Include="Controls\SendEmailManage\UC_SendGroup.xaml.cs">
       <DependentUpon>UC_SendGroup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SendEmailManage\UC_SendEmail.xaml.cs">
@@ -125,19 +125,19 @@
     <Compile Include="Controls\SendEmailManage\Win_NewOneEmail.xaml.cs">
       <DependentUpon>Win_NewOneEmail.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="SampleData\EmailInfoDataSource\EmailInfoDataSource.xaml.cs">
       <DependentUpon>EmailInfoDataSource.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SampleData\MailGroupDataSource\MailGroupDataSource.xaml.cs">
+    </Compile>    <Compile Include="SampleData\MailGroupDataSource\MailGroupDataSource.xaml.cs">
       <DependentUpon>MailGroupDataSource.xaml</DependentUpon>
     </Compile>
     <Compile Include="SampleData\MainDataSource\MainDataSource.xaml.cs">
       <DependentUpon>MainDataSource.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="SampleData\ReceiptListDataSource\ReceiptListDataSource.xaml.cs">
       <DependentUpon>ReceiptListDataSource.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Controls\Common\UC_PagingControl.xaml">
+    </Compile>    <Page Include="Controls\Common\UC_PagingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -157,6 +157,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+
     <Page Include="Controls\ContactsForm\Win_NewContacts.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -180,8 +181,7 @@
     <Page Include="Controls\EmailInfoManage\Win_ReceiptList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\SendEmailManage\UC_SendGroup.xaml">
+    </Page>    <Page Include="Controls\SendEmailManage\UC_SendGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -220,11 +220,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+
     <Page Include="SampleData\EmailInfoDataSource\EmailInfoDataSource.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SampleData\MailGroupDataSource\MailGroupDataSource.xaml">
+    </Page>    <Page Include="SampleData\MailGroupDataSource\MailGroupDataSource.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -232,11 +232,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+
     <Page Include="SampleData\ReceiptListDataSource\ReceiptListDataSource.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
+    </Page>  </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -251,9 +251,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="SqlConfig\emailaccountcategorySql.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="SqlConfig\emailaccountSql.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="SqlConfig\emailbccaccountcategorySql.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="SqlConfig\emailbccaccountSql.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -288,11 +294,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="SampleData\EmailInfoDataSource\EmailInfoDataSource.xsd" />
     <None Include="SampleData\MailGroupDataSource\MailGroupDataSource.xsd" />
     <None Include="SampleData\MainDataSource\MainDataSource.xsd" />
-    <None Include="SampleData\ReceiptListDataSource\ReceiptListDataSource.xsd" />
-  </ItemGroup>
+
+    <None Include="SampleData\EmailInfoDataSource\EmailInfoDataSource.xsd" />
+    <None Include="SampleData\ReceiptListDataSource\ReceiptListDataSource.xsd" />  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hoshino.Email.Core\Hoshino.Email.Core.csproj">
       <Project>{3852EE1A-C2B8-4D0F-B0D1-79046917D094}</Project>

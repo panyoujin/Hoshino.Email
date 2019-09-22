@@ -68,8 +68,8 @@
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="28" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="編輯" Foreground="White"></Button>
-                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252" Margin="3 0 0 0" Height="28" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="刪除" Foreground="White"></Button>
+                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="28" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="編輯" Foreground="White" Click="Button_Click_1"></Button>
+                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252" Margin="3 0 0 0" Height="28" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="刪除" Foreground="White" Click="Button_Click_2"></Button>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

@@ -20,45 +20,81 @@ namespace Hoshino.Email.Controls.Common
     /// </summary>
     public partial class UC_PagingControl : UserControl
     {
-        public Action<int> ChangePageAction;
-        private int PageIndex;
-        private int PageTotal;
+        public Action ChangePageAction;
+        private int _PageIndex;
+        public int PageIndex
+        {
+            get { return _PageIndex; }
+            set
+            {
+                if (_PageIndex != value)
+                {
+                    _PageIndex = value;
+                    ChangePageAction?.Invoke();
+                }
+            }
+        }
+        private int _PageSize;
+        public int PageSize
+        {
+            get { return _PageSize; }
+            set
+            {
+                if (_PageSize != value)
+                {
+                    _PageSize = value;
+                    this.PageIndex = 1;
+                    ChangePageAction?.Invoke();
+                }
+            }
+        }
+        public int PageTotal;
         public UC_PagingControl()
         {
             InitializeComponent();
+            this.PageIndex = 0;
+            this.PageSize = 10;
         }
-        public void InitData(int index, int total, int size)
+        public void InitData(int total)
         {
-            this.PageIndex = index;
-            this.PageTotal = (int)Math.Ceiling((decimal)total / size);
+            this.PageTotal = (int)Math.Ceiling((decimal)total / this.PageSize);
             this.lblTotal.Content = total + "";
             this.lblPage.Content = string.Format("{0}/{1}", this.PageIndex, this.PageTotal);
         }
 
         private void BtnHome_Click(object sender, RoutedEventArgs e)
         {
-            ChangePageAction?.Invoke(1);
+            this.PageIndex = 1;
         }
 
         private void BtnPrePage_Click(object sender, RoutedEventArgs e)
         {
             if (this.PageIndex > 1)
             {
-                ChangePageAction?.Invoke(--this.PageIndex);
+                this.PageIndex--;
             }
         }
 
         private void BtnLastPage_Click(object sender, RoutedEventArgs e)
         {
-            ChangePageAction?.Invoke(this.PageTotal);
+            this.PageIndex = this.PageTotal;
         }
 
         private void BtnNextPage_Click(object sender, RoutedEventArgs e)
         {
             if (this.PageIndex < this.PageTotal)
             {
-                ChangePageAction?.Invoke(++this.PageIndex);
+                this.PageIndex++;
             }
+        }
+
+        public void RefreshList(bool gotoHome = true)
+        {
+            if (gotoHome)
+            {
+                _PageIndex = 1;
+            }
+            ChangePageAction?.Invoke();
         }
     }
 }

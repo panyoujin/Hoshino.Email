@@ -1,18 +1,7 @@
-﻿using Hoshino.Email.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hoshino.Email.Entity;
+using Hoshino.Email.Repository;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Hoshino.Email.Controls.SendEmailManage
 {
@@ -22,66 +11,69 @@ namespace Hoshino.Email.Controls.SendEmailManage
     public partial class UC_SendEmail : UserControl
     {
         EmailAccountRepository EA_Repository = new EmailAccountRepository();
-        int page = 1;
-        int pagesize = 10;
         public UC_SendEmail()
         {
             InitializeComponent();
             this.Loaded += this.UC_MainEmail_Loaded;
-            this.ucPage.ChangePageAction = (index) =>
+            this.ucPage.ChangePageAction = () =>
             {
-                this.page = index;
                 GetList();
             };
         }
 
         private void UC_MainEmail_Loaded(object sender, RoutedEventArgs e)
         {
-            GetList();
-        }
-
-        public class EmailInfo
-        {
-            public int Num { set; get; }
-            public string Email { set; get; }
-            public string Group { set; get; }
-            public string Status { set; get; }
-            public string Color { set; get; } = "#FF65CB65";
-            public string CreateTime { set; get; }
+            this.ucPage.RefreshList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.page = 1;
-            GetList();
+            this.ucPage.RefreshList();
         }
 
         private void GetList()
         {
-            var EmailInfoList = new List<EmailInfo>();
-            var (list, total) = EA_Repository.GetList(this.tbEmailAccount.Text, this.tbGroup.Text, page, pagesize);
-            var start = (page - 1) * pagesize + 1;
-            if (list != null && list.Count() > 0)
-            {
-                foreach (var info in list)
-                {
-                    EmailInfoList.Add(new EmailInfo { Num = start++, Email = info.EmailAccountAddress, Group = info.Group, Status = info.SendState == 0 ? "空闲" : "发送中", CreateTime = info.EmailAccountCreateTime.ToString() });
-                }
-            }
-
-            dgEmail.ItemsSource = EmailInfoList;
-            this.ucPage.InitData(page, total, pagesize);
+            var (list, total) = EA_Repository.GetList(this.tbEmailAccount.Text, this.tbGroup.Text, this.ucPage.PageIndex, this.ucPage.PageSize);
+            dgEmail.ItemsSource = list;
+            this.ucPage.InitData(total);
         }
 
         private void BtnNewOneEmail_Click(object sender, RoutedEventArgs e)
         {
-            new Win_NewOneEmail().Show();
+            if (new Win_NewOneEmail().ShowDialog().Value)
+            {
+                this.ucPage.RefreshList();
+            }
         }
 
         private void BtnNewMoreEmail_Click(object sender, RoutedEventArgs e)
         {
             new Win_NewMoreEmail().Show();
 
+        }
+        /// <summary>
+        /// 編輯
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var entity = (sender as Button).DataContext as EmailAccountEntity;
+            if (new Win_NewOneEmail(entity.EmailAccountID).ShowDialog().Value)
+            {
+                this.ucPage.RefreshList(false);
+            }
+        }
+        /// <summary>
+        /// 刪除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var entity = (sender as Button).DataContext as EmailAccountEntity;
+            EA_Repository.Delete(entity.EmailAccountID);
+            this.ucPage.RefreshList(false);
         }
     }
 }

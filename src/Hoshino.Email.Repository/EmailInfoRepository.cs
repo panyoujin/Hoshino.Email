@@ -13,39 +13,24 @@ namespace Hoshino.Email.Repository
         public bool Insert(EmailInfoEntity model)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            if(model.EmailID != null)
+            if (model.EmailID != null)
             {
                 dic["EmailID"] = model.EmailID;
             }
-            if(model.EmailTitle != null)
+            if (model.EmailTitle != null)
             {
                 dic["EmailTitle"] = model.EmailTitle;
             }
-            if(model.EmailCreateTime != null && model.EmailCreateTime.HasValue)
-            {
-                dic["EmailCreateTime"] = model.EmailCreateTime;
-            }
-            if(model.EmailLastTime != null && model.EmailLastTime.HasValue)
-            {
-                dic["EmailLastTime"] = model.EmailLastTime;
-            }
-            if(model.EmailFilePath != null)
+            dic["EmailCreateTime"] = model.EmailCreateTime;
+            dic["EmailLastTime"] = model.EmailLastTime;
+            if (model.EmailFilePath != null)
             {
                 dic["EmailFilePath"] = model.EmailFilePath;
             }
-            if(model.EmailIsDel != null && model.EmailIsDel.HasValue)
-            {
-                dic["EmailIsDel"] = model.EmailIsDel;
-            }
-            if(model.EmailState != null && model.EmailState.HasValue)
-            {
-                dic["EmailState"] = model.EmailState;
-            }
-            if(model.EmailStartSendTime != null && model.EmailStartSendTime.HasValue)
-            {
-                dic["EmailStartSendTime"] = model.EmailStartSendTime;
-            }
-            return SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailinfo", dic) >0 ;
+            dic["EmailIsDel"] = model.EmailIsDel;
+            dic["EmailState"] = model.EmailState;
+            dic["EmailStartSendTime"] = model.EmailStartSendTime;
+            return SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailinfo", dic) > 0;
         }
 
         /// <summary>
@@ -54,39 +39,24 @@ namespace Hoshino.Email.Repository
         public bool Update(EmailInfoEntity model)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            if(model.EmailID != null)
+            if (model.EmailID != null)
             {
                 dic["EmailID"] = model.EmailID;
             }
-            if(model.EmailTitle != null)
+            if (model.EmailTitle != null)
             {
                 dic["EmailTitle"] = model.EmailTitle;
             }
-            if(model.EmailCreateTime != null && model.EmailCreateTime.HasValue)
-            {
-                dic["EmailCreateTime"] = model.EmailCreateTime;
-            }
-            if(model.EmailLastTime != null && model.EmailLastTime.HasValue)
-            {
-                dic["EmailLastTime"] = model.EmailLastTime;
-            }
-            if(model.EmailFilePath != null)
+            dic["EmailCreateTime"] = model.EmailCreateTime;
+            dic["EmailLastTime"] = model.EmailLastTime;
+            if (model.EmailFilePath != null)
             {
                 dic["EmailFilePath"] = model.EmailFilePath;
             }
-            if(model.EmailIsDel != null && model.EmailIsDel.HasValue)
-            {
-                dic["EmailIsDel"] = model.EmailIsDel;
-            }
-            if(model.EmailState != null && model.EmailState.HasValue)
-            {
-                dic["EmailState"] = model.EmailState;
-            }
-            if(model.EmailStartSendTime != null && model.EmailStartSendTime.HasValue)
-            {
-                dic["EmailStartSendTime"] = model.EmailStartSendTime;
-            }
-            return SQLHelperFactory.Instance.ExecuteNonQuery("Update_emailinfo", dic) >0 ;
+            dic["EmailIsDel"] = model.EmailIsDel;
+            dic["EmailState"] = model.EmailState;
+            dic["EmailStartSendTime"] = model.EmailStartSendTime;
+            return SQLHelperFactory.Instance.ExecuteNonQuery("Update_emailinfo", dic) > 0;
         }
 
         /// <summary>
@@ -96,7 +66,7 @@ namespace Hoshino.Email.Repository
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic["EmailID"] = EmailID;
-            return SQLHelperFactory.Instance.ExecuteNonQuery("Delete_emailinfo", dic) >0 ;
+            return SQLHelperFactory.Instance.ExecuteNonQuery("Delete_emailinfo", dic) > 0;
         }
 
         /// <summary>
@@ -112,7 +82,7 @@ namespace Hoshino.Email.Repository
         /// <summary>
         /// 获取列表
         /// </summary>
-        public (IEnumerable<EmailInfoEntity>,int) GetList(int pageindex,int pagesize)
+        public (IEnumerable<EmailInfoEntity>, int) GetList(int pageindex, int pagesize)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             if (pageindex >= 0)
@@ -123,8 +93,8 @@ namespace Hoshino.Email.Repository
             {
                 dic["SelectCount"] = pagesize;
             }
-            var list = SQLHelperFactory.Instance.QueryMultipleByPage<EmailInfoEntity>("Select_emailinfo_List", dic,out int total);
-            return (list,total);
+            var list = SQLHelperFactory.Instance.QueryMultipleByPage<EmailInfoEntity>("Select_emailinfo_List", dic, out int total);
+            return (list, total);
         }
 
         /// <summary>
