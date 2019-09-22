@@ -17,8 +17,8 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="Item">
-    <xs:attribute blend:FormatParameters="2" name="Num" type="xs:double" />
-    <xs:attribute name="Group" type="xs:string" />
-    <xs:attribute name="CreateTime" type="xs:string" />
+    <xs:attribute blend:Format="Lorem ipsum" blend:FormatParameters="4,8" name="EmailBccAccountName" type="xs:string" />
+    <xs:attribute name="EmailAccountCategoryName" type="xs:string" />
+    <xs:attribute blend:Format="日期" name="EmailBccAccountCreateTime" type="xs:string" />
   </xs:complexType>
 </xs:schema>

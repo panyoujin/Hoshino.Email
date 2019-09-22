@@ -47,6 +47,10 @@ namespace Expression.Blend.SampleData.MailGroupDataSource
         }
     }
 
+    public class ItemCollection : System.Collections.ObjectModel.ObservableCollection<Item>
+    { 
+    }
+
     public class Item : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -59,66 +63,62 @@ namespace Expression.Blend.SampleData.MailGroupDataSource
             }
         }
 
-        private double _Num = 0;
+        private string _EmailBccAccountName = string.Empty;
 
-        public double Num
+        public string EmailBccAccountName
         {
             get
             {
-                return this._Num;
+                return this._EmailBccAccountName;
             }
 
             set
             {
-                if (this._Num != value)
+                if (this._EmailBccAccountName != value)
                 {
-                    this._Num = value;
-                    this.OnPropertyChanged("Num");
+                    this._EmailBccAccountName = value;
+                    this.OnPropertyChanged("EmailBccAccountName");
                 }
             }
         }
 
-        private string _Group = string.Empty;
+        private string _EmailAccountCategoryName = string.Empty;
 
-        public string Group
+        public string EmailAccountCategoryName
         {
             get
             {
-                return this._Group;
+                return this._EmailAccountCategoryName;
             }
 
             set
             {
-                if (this._Group != value)
+                if (this._EmailAccountCategoryName != value)
                 {
-                    this._Group = value;
-                    this.OnPropertyChanged("Group");
+                    this._EmailAccountCategoryName = value;
+                    this.OnPropertyChanged("EmailAccountCategoryName");
                 }
             }
         }
 
-        private string _CreateTime = string.Empty;
+        private string _EmailBccAccountCreateTime = string.Empty;
 
-        public string CreateTime
+        public string EmailBccAccountCreateTime
         {
             get
             {
-                return this._CreateTime;
+                return this._EmailBccAccountCreateTime;
             }
 
             set
             {
-                if (this._CreateTime != value)
+                if (this._EmailBccAccountCreateTime != value)
                 {
-                    this._CreateTime = value;
-                    this.OnPropertyChanged("CreateTime");
+                    this._EmailBccAccountCreateTime = value;
+                    this.OnPropertyChanged("EmailBccAccountCreateTime");
                 }
             }
         }
-    }
-
-    public class ItemCollection : System.Collections.ObjectModel.ObservableCollection<Item>
-    { 
     }
 #endif
 }

@@ -26,7 +26,9 @@ namespace Hoshino.Email.Controls.ContactsForm
             InitializeComponent();
         }
 
-
-
+        private void BtnInsertGroup_Click(object sender, RoutedEventArgs e)
+        {
+            new Win_NewContactsGroup().Show();
+        }
     }
 }

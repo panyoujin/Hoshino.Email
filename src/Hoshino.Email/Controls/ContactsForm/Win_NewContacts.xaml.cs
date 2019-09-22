@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hoshino.Email.Controls.ContactsForm
 {
     /// <summary>
-    /// UC_Contacts.xaml 的交互逻辑
+    /// Win_NewMainGroup.xaml 的交互逻辑
     /// </summary>
-    public partial class UC_Contacts : UserControl
+    public partial class Win_NewContacts : Window
     {
-        public UC_Contacts()
+        public Win_NewContacts()
         {
             InitializeComponent();
-        }
-
-        private void BtnNewContact_Click(object sender, RoutedEventArgs e)
-        {
-            new Win_NewContacts().Show();
         }
     }
 }

@@ -92,6 +92,12 @@
     <Compile Include="Controls\ContactsForm\UC_ContactsGroup.xaml.cs">
       <DependentUpon>UC_ContactsGroup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ContactsForm\Win_NewContacts.xaml.cs">
+      <DependentUpon>Win_NewContacts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ContactsForm\Win_NewContactsGroup.xaml.cs">
+      <DependentUpon>Win_NewContactsGroup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SendEmailManage\UC_SendGroup.xaml.cs">
       <DependentUpon>UC_SendGroup.xaml</DependentUpon>
     </Compile>
@@ -130,6 +136,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ContactsForm\UC_ContactsGroup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ContactsForm\Win_NewContacts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ContactsForm\Win_NewContactsGroup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

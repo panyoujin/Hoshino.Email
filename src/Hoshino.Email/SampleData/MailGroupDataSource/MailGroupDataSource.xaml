@@ -5,15 +5,15 @@
 -->
 <MailGroupDataSource:MailGroupDataSource xmlns:MailGroupDataSource="clr-namespace:Expression.Blend.SampleData.MailGroupDataSource">
 	<MailGroupDataSource:MailGroupDataSource.Collection>
-		<MailGroupDataSource:Item Num="28" Group="Maecenas class cras" CreateTime="Aenean mauris nullam class"/>
-		<MailGroupDataSource:Item Num="32" Group="Nam duis" CreateTime="Maecenas aptent cras"/>
-		<MailGroupDataSource:Item Num="60" Group="Aenean curae" CreateTime="Praesent auctor duis nunc"/>
-		<MailGroupDataSource:Item Num="76" Group="Praesent donec" CreateTime="Amet curae congue"/>
-		<MailGroupDataSource:Item Num="53" Group="Accumsan aliquam nunc integer" CreateTime="Accumsan ante nam aliquam"/>
-		<MailGroupDataSource:Item Num="28" Group="Bibendum sed" CreateTime="Arcu cursus bibendum"/>
-		<MailGroupDataSource:Item Num="21" Group="Mauris nullam" CreateTime="Dictumst dictum"/>
-		<MailGroupDataSource:Item Num="49" Group="Dictumst aptent auctor" CreateTime="Lectus integer"/>
-		<MailGroupDataSource:Item Num="28" Group="Dis quisque congue cursus" CreateTime="Sed eleifend dis"/>
-		<MailGroupDataSource:Item Num="84" Group="Amet etiam" CreateTime="Diam est facilisi libero"/>
+		<MailGroupDataSource:Item EmailBccAccountName="Aliquam integer nam" EmailAccountCategoryName="Maecenas class cras" EmailBccAccountCreateTime="November 5, 2003"/>
+		<MailGroupDataSource:Item EmailBccAccountName="Aenean class mauris curae" EmailAccountCategoryName="Nam duis" EmailBccAccountCreateTime="December 29, 2006"/>
+		<MailGroupDataSource:Item EmailBccAccountName="Nullam quisque" EmailAccountCategoryName="Aenean curae" EmailBccAccountCreateTime="January 19, 2004"/>
+		<MailGroupDataSource:Item EmailBccAccountName="Donec etiam cras duis" EmailAccountCategoryName="Praesent donec" EmailBccAccountCreateTime="December 22, 2007"/>
+		<MailGroupDataSource:Item EmailBccAccountName="Aptent auctor" EmailAccountCategoryName="Accumsan aliquam nunc integer" EmailBccAccountCreateTime="August 23, 2003"/>
+		<MailGroupDataSource:Item EmailBccAccountName="Congue cursus sed" EmailAccountCategoryName="Bibendum sed" EmailBccAccountCreateTime="May 27, 2007"/>
+		<MailGroupDataSource:Item EmailBccAccountName="Dis maecenas" EmailAccountCategoryName="Mauris nullam" EmailBccAccountCreateTime="May 24, 2006"/>
+		<MailGroupDataSource:Item EmailBccAccountName="Dictum nunc lectus libero" EmailAccountCategoryName="Dictumst aptent auctor" EmailBccAccountCreateTime="September 19, 2004"/>
+		<MailGroupDataSource:Item EmailBccAccountName="Amet ligula" EmailAccountCategoryName="Dis quisque congue cursus" EmailBccAccountCreateTime="August 10, 2003"/>
+		<MailGroupDataSource:Item EmailBccAccountName="Praesent est vivamus" EmailAccountCategoryName="Amet etiam" EmailBccAccountCreateTime="September 20, 2007"/>
 	</MailGroupDataSource:MailGroupDataSource.Collection>
 </MailGroupDataSource:MailGroupDataSource>
