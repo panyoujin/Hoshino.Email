@@ -6,6 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:MainDataSource="clr-namespace:Expression.Blend.SampleData.MainDataSource" 
     xmlns:MailGroupDataSource="clr-namespace:Expression.Blend.SampleData.MailGroupDataSource"
+    xmlns:EmailInfoDataSource="clr-namespace:Expression.Blend.SampleData.EmailInfoDataSource"
+    xmlns:ReceiptListDataSource="clr-namespace:Expression.Blend.SampleData.ReceiptListDataSource"
     mc:Ignorable="d" x:Class="Hoshino.Email.App"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
@@ -27,6 +29,10 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
+
+            <ReceiptListDataSource:ReceiptListDataSource x:Key="ReceiptListDataSource" d:IsDataSource="True"/>
+
+            <EmailInfoDataSource:EmailInfoDataSource x:Key="EmailInfoDataSource" d:IsDataSource="True"/>
 
             <MailGroupDataSource:MailGroupDataSource x:Key="MailGroupDataSource" d:IsDataSource="True"/>
 

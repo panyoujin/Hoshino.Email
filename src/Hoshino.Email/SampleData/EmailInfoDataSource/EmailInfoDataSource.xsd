@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+   *********  请勿修改此文件   *********
+   此文件由设计工具再生成。更改
+   此文件可能会导致错误。
+-->
+<xs:schema xmlns:blend="http://schemas.microsoft.com/expression/blend/2008" xmlns:tns="Expression.Blend.SampleData.EmailInfoDataSource" targetNamespace="Expression.Blend.SampleData.EmailInfoDataSource" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="EmailInfoDataSource" type="tns:EmailInfoDataSource" />
+  <xs:complexType name="EmailInfoDataSource">
+    <xs:sequence>
+      <xs:element name="Collection" type="tns:ItemCollection" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemCollection">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="Item" type="tns:Item" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Item">
+    <xs:attribute blend:Format="公司名称" name="EmailTitle" type="xs:string" />
+    <xs:attribute blend:FormatParameters="2" name="TotalQty" type="xs:double" />
+    <xs:attribute blend:FormatParameters="2" name="AlreadySentQty" type="xs:double" />
+    <xs:attribute blend:FormatParameters="2" name="NeedSentQty" type="xs:double" />
+    <xs:attribute blend:FormatParameters="2" name="FailQty" type="xs:double" />
+    <xs:attribute blend:Format="颜色" name="EmailState" type="xs:string" />
+  </xs:complexType>
+</xs:schema>

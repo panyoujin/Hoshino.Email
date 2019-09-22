@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="Hoshino.Email.Controls.EmailInfoManage.UC_EmailInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Hoshino.Email.Controls.EmailInfoManage"
+             xmlns:common="clr-namespace:Hoshino.Email.Controls.Common"
+             mc:Ignorable="d" 
+             Height="500" Width="1000">
+    <Grid Background="White" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--查詢條件-->
+        <Grid x:Name="gSearch" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+                <ColumnDefinition Width="70"></ColumnDefinition>
+                <ColumnDefinition Width="10"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="10"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Height="50" Grid.Column="1" VerticalAlignment="Center" x:Name="tbEmailAccount"  Text="" materialDesign:HintAssist.Hint="請輸入查詢郵件標題" Style="{StaticResource MaterialDesignFloatingHintTextBox}" ></TextBox>
+
+            <Button x:Name="btnQuery" Click="BtnQuery_Click" Grid.Column="3" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="70" ToolTip="Resource name: MaterialDesignRaisedButton" Content="查詢" Foreground="White" ></Button>
+
+        </Grid>
+
+        <DataGrid Grid.Row="1" x:Name="dgEmail" Height="355" VerticalAlignment="Top"
+          Margin="0 8 0 0" AutoGenerateColumns="False" CanUserResizeColumns="False"
+          CanUserAddRows="False" CanUserSortColumns="False" IsReadOnly="True"
+          materialDesign:DataGridAssist.ColumnHeaderPadding="2 2 2 2" DataContext="{Binding Source={StaticResource EmailInfoDataSource}}"  ItemsSource="{Binding Collection}"  >
+
+            <!--設置選中行的時候不顯示邊框-->
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell" >
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="郵件標題" Width="300" Binding="{Binding EmailTitle}"/>
+                <DataGridTextColumn Header="總數量" Width="50" Binding="{Binding TotalQty}"/>
+                <DataGridTextColumn Header="已發送" Width="50" Binding="{Binding AlreadySentQty}"/>
+                <DataGridTextColumn Header="剩餘" Width="50" Binding="{Binding NeedSentQty}"/>
+                <DataGridTextColumn Header="失敗" Width="50" Binding="{Binding FailQty}"/>
+                <DataGridTextColumn Header="狀態" Width="150" Binding="{Binding EmailState}"/>
+                <DataGridTemplateColumn Header="操作" >
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="28" Width="80"  Content="發送列表" x:Name="btnReceiptList" Click="BtnReceiptList_Click" Foreground="White" Padding="0"></Button>
+                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Margin="3 0 0 0" Height="28" Width="80" Content="發送賬號" x:Name="btnSentList" Click="BtnSentList_Click" Foreground="White" Padding="0"></Button>
+                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252" Margin="3 0 0 0" Height="28" Width="80"  Content="停止發送" Foreground="White" Padding="0"></Button>
+                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252" Margin="3 0 0 0" Height="28" Width="50"  Content="刪除" Foreground="White" Padding="0"></Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <common:UC_PagingControl Grid.Row="2" x:Name="ucPage" HorizontalAlignment="Left" Margin="20 0 0 0"></common:UC_PagingControl>
+    </Grid>
+</UserControl>

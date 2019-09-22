@@ -1,0 +1,19 @@
+﻿<!--
+   *********  请勿修改此文件   *********
+   此文件由设计工具再生成。更改
+   此文件可能会导致错误。
+-->
+<ReceiptListDataSource:ReceiptListDataSource xmlns:ReceiptListDataSource="clr-namespace:Expression.Blend.SampleData.ReceiptListDataSource">
+	<ReceiptListDataSource:ReceiptListDataSource.Collection>
+		<ReceiptListDataSource:Item EmailTitle="Nam maecenas" EmailBccAccountName="someone@example.com" EmailAccountName="someone@example.com" EmailSendBccAccountState="Nam class1" EmailSendBccAccountSendTime="November 5, 2003"/>
+		<ReceiptListDataSource:Item EmailTitle="Cras praesent accumsan duis" EmailBccAccountName="user@adventure-works.com" EmailAccountName="user@adventure-works.com" EmailSendBccAccountState="Aenean maecenas" EmailSendBccAccountSendTime="December 29, 2006"/>
+		<ReceiptListDataSource:Item EmailTitle="Aenean bibendum" EmailBccAccountName="someone@adventure-works.com" EmailAccountName="someone@adventure-works.com" EmailSendBccAccountState="Mauris nullam curae aliquam" EmailSendBccAccountSendTime="January 19, 2004"/>
+		<ReceiptListDataSource:Item EmailTitle="Dictumst mauris class aliquam" EmailBccAccountName="user@example.com" EmailAccountName="user@example.com" EmailSendBccAccountState="Aptent cras" EmailSendBccAccountSendTime="December 22, 2007"/>
+		<ReceiptListDataSource:Item EmailTitle="Nullam aptent sed eleifend" EmailBccAccountName="user-3@fabrikam.com" EmailAccountName="user-3@fabrikam.com" EmailSendBccAccountState="Praesent duis sed" EmailSendBccAccountSendTime="August 23, 2003"/>
+		<ReceiptListDataSource:Item EmailTitle="Integer nunc" EmailBccAccountName="user-4@fabrikam.com" EmailAccountName="user-4@fabrikam.com" EmailSendBccAccountState="Auctor congue" EmailSendBccAccountSendTime="May 27, 2007"/>
+		<ReceiptListDataSource:Item EmailTitle="Amet ante facilisi" EmailBccAccountName="user-5@fabrikam.com" EmailAccountName="user-5@fabrikam.com" EmailSendBccAccountState="Integer dis" EmailSendBccAccountSendTime="May 24, 2006"/>
+		<ReceiptListDataSource:Item EmailTitle="Curae quisque arcu faucibus" EmailBccAccountName="user-6@fabrikam.com" EmailAccountName="user-6@fabrikam.com" EmailSendBccAccountState="Nunc amet donec accumsan" EmailSendBccAccountSendTime="September 19, 2004"/>
+		<ReceiptListDataSource:Item EmailTitle="Dis auctor vivamus aliquam" EmailBccAccountName="user-7@fabrikam.com" EmailAccountName="user-7@fabrikam.com" EmailSendBccAccountState="Ante etiam bibendum" EmailSendBccAccountSendTime="August 10, 2003"/>
+		<ReceiptListDataSource:Item EmailTitle="Congue aliquet donec" EmailBccAccountName="user-8@fabrikam.com" EmailAccountName="user-8@fabrikam.com" EmailSendBccAccountState="Cursus est dictum" EmailSendBccAccountSendTime="September 20, 2007"/>
+	</ReceiptListDataSource:ReceiptListDataSource.Collection>
+</ReceiptListDataSource:ReceiptListDataSource>

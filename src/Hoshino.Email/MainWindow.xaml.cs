@@ -1,4 +1,5 @@
 ﻿using Hoshino.Email.Controls.ContactsForm;
+using Hoshino.Email.Controls.EmailInfoManage;
 using Hoshino.Email.Controls.SendEmailManage;
 using Hoshino.Email.Core;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace Hoshino.Email
         {
             MenuList.Add(new Menu { Name = "發件箱管理", SysFunction = SysFunction.HomePage ,Content=new UC_SendEmailManage()});
             MenuList.Add(new Menu { Name = "通訊錄", SysFunction = SysFunction.AddressBook,Content=new UC_ContactsManage() });
-            MenuList.Add(new Menu { Name = "郵件管理", SysFunction = SysFunction.MailManagement });
+            MenuList.Add(new Menu { Name = "郵件管理", SysFunction = SysFunction.MailManagement,Content=new UC_EmailInfoManage() });
             MenuList.Add(new Menu { Name = "新增郵件", SysFunction = SysFunction.NewMail });
             MenuList.Add(new Menu { Name = "郵件篩選", SysFunction = SysFunction.MailScreening });
         }

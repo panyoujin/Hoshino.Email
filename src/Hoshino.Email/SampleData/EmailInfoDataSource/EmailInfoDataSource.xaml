@@ -1,0 +1,19 @@
+﻿<!--
+   *********  请勿修改此文件   *********
+   此文件由设计工具再生成。更改
+   此文件可能会导致错误。
+-->
+<EmailInfoDataSource:EmailInfoDataSource xmlns:EmailInfoDataSource="clr-namespace:Expression.Blend.SampleData.EmailInfoDataSource">
+	<EmailInfoDataSource:EmailInfoDataSource.Collection>
+		<EmailInfoDataSource:Item EmailTitle="A. Datum Corporation" TotalQty="17" AlreadySentQty="80" NeedSentQty="20" FailQty="84" EmailState="#FF8DD3C7"/>
+		<EmailInfoDataSource:Item EmailTitle="Adventure Works" TotalQty="43" AlreadySentQty="13" NeedSentQty="70" FailQty="95" EmailState="#FFFFFFB3"/>
+		<EmailInfoDataSource:Item EmailTitle="Adventure Works" TotalQty="73" AlreadySentQty="54" NeedSentQty="94" FailQty="60" EmailState="#FFBEBADA"/>
+		<EmailInfoDataSource:Item EmailTitle="Alpine Ski House" TotalQty="25" AlreadySentQty="26" NeedSentQty="18" FailQty="29" EmailState="#FFFB8072"/>
+		<EmailInfoDataSource:Item EmailTitle="Contoso, Ltd" TotalQty="81" AlreadySentQty="19" NeedSentQty="50" FailQty="55" EmailState="#FFFDB462"/>
+		<EmailInfoDataSource:Item EmailTitle="Contoso Pharmaceuticals" TotalQty="36" AlreadySentQty="56" NeedSentQty="36" FailQty="42" EmailState="#FFB3DE69"/>
+		<EmailInfoDataSource:Item EmailTitle="Fabrikam, Inc." TotalQty="91" AlreadySentQty="89" NeedSentQty="73" FailQty="83" EmailState="#FFFCCDE5"/>
+		<EmailInfoDataSource:Item EmailTitle="Fourth Coffee" TotalQty="29" AlreadySentQty="90" NeedSentQty="24" FailQty="21" EmailState="#FFD9D9D9"/>
+		<EmailInfoDataSource:Item EmailTitle="Graphic Design Institute" TotalQty="22" AlreadySentQty="44" NeedSentQty="94" FailQty="28" EmailState="#FFBC80BD"/>
+		<EmailInfoDataSource:Item EmailTitle="Humongous Insurance" TotalQty="67" AlreadySentQty="85" NeedSentQty="85" FailQty="98" EmailState="#FFCCEBC5"/>
+	</EmailInfoDataSource:EmailInfoDataSource.Collection>
+</EmailInfoDataSource:EmailInfoDataSource>
