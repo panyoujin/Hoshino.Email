@@ -1,5 +1,6 @@
 ﻿using Hoshino.Email.Controls.ContactsForm;
 using Hoshino.Email.Controls.EmailInfoManage;
+using Hoshino.Email.Controls.NewMessageForm;
 using Hoshino.Email.Controls.SendEmailManage;
 using Hoshino.Email.Core;
 using System.Collections.Generic;
@@ -33,10 +34,10 @@ namespace Hoshino.Email
 
         private void Init()
         {
-            MenuList.Add(new Menu { Name = "發件箱管理", SysFunction = SysFunction.HomePage ,Content=new UC_SendEmailManage()});
-            MenuList.Add(new Menu { Name = "通訊錄", SysFunction = SysFunction.AddressBook,Content=new UC_ContactsManage() });
-            MenuList.Add(new Menu { Name = "郵件管理", SysFunction = SysFunction.MailManagement,Content=new UC_EmailInfoManage() });
-            MenuList.Add(new Menu { Name = "新增郵件", SysFunction = SysFunction.NewMail });
+            MenuList.Add(new Menu { Name = "發件箱管理", SysFunction = SysFunction.HomePage, Content = new UC_SendEmailManage() });
+            MenuList.Add(new Menu { Name = "通訊錄", SysFunction = SysFunction.AddressBook, Content = new UC_ContactsManage() });
+            MenuList.Add(new Menu { Name = "郵件管理", SysFunction = SysFunction.MailManagement, Content = new UC_EmailInfoManage() });
+            MenuList.Add(new Menu { Name = "新增郵件", SysFunction = SysFunction.NewMail, Content = new UC_NewMessageForm() });
             MenuList.Add(new Menu { Name = "郵件篩選", SysFunction = SysFunction.MailScreening });
         }
 
@@ -46,7 +47,10 @@ namespace Hoshino.Email
             var menuItem = (sender as ListBox).SelectedItem as Menu;
             if (menuItem != null)
             {
+
                 MainContent.Content = menuItem.Content;
+
+
                 LeftMenu.IsLeftDrawerOpen = false;
             }
         }

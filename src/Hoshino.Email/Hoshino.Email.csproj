@@ -56,6 +56,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -110,6 +111,9 @@
     <Compile Include="Controls\EmailInfoManage\Win_ReceiptList.xaml.cs">
       <DependentUpon>Win_ReceiptList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NewMessageForm\UC_NewMessageForm.xaml.cs">
+      <DependentUpon>UC_NewMessageForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SendEmailManage\UC_SendGroup.xaml.cs">
       <DependentUpon>UC_SendGroup.xaml</DependentUpon>
     </Compile>
@@ -125,8 +129,8 @@
     <Compile Include="Controls\SendEmailManage\Win_NewOneEmail.xaml.cs">
       <DependentUpon>Win_NewOneEmail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Extentions\StringExt.cs" />
-    <Compile Include="SampleData\EmailInfoDataSource\EmailInfoDataSource.xaml.cs">
+
+    <Compile Include="Extentions\StringExt.cs" />    <Compile Include="SampleData\EmailInfoDataSource\EmailInfoDataSource.xaml.cs">
       <DependentUpon>EmailInfoDataSource.xaml</DependentUpon>
     </Compile>
     <Compile Include="SampleData\MailGroupDataSource\MailGroupDataSource.xaml.cs">
@@ -179,6 +183,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\EmailInfoManage\Win_ReceiptList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NewMessageForm\UC_NewMessageForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

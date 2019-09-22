@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Hoshino.Email.Controls.NewMessageForm.UC_NewMessageForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Hoshino.Email.Controls.NewMessageForm"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             Height="560" Width="1000" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32" />
+            <RowDefinition Height="32" />
+            <RowDefinition Height="32" />
+            <RowDefinition Height="32" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"></ColumnDefinition>
+            <ColumnDefinition Width="80"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Column="1" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Center"  Height="27" Width="70"  Content="導入eml"  Foreground="White" Padding="0"></Button>
+        <TextBox Grid.Column="2" Margin="10 0 10 0" materialDesign:HintAssist.Hint="導入路徑"   Height="30" />
+        
+        <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Center"  Height="27" Width="70"  Content="發件人(S)"  Foreground="White" Padding="0"></Button>
+        <TextBox Grid.Row="1" Grid.Column="2"  Margin="10 0 10 0"    Height="32" />
+        <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Center"  Height="27" Width="70"  Content="抄送人(C)"  Foreground="White" Padding="0"></Button>
+        <TextBox Grid.Row="2" Grid.Column="2"  Margin="10 0 10 0"   Height="32" />
+        <Button Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Center"  Height="56" Width="70"  Content="發送(S)"  Foreground="White" Padding="0"></Button>
+
+        <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="主題(U)"></Label>
+        <TextBox Grid.Row="3" Grid.Column="2"  Margin="10 0 10 0"   Height="32" />
+        <!--<wfi:WindowsFormsHost Grid.Row="4" Grid.ColumnSpan="3">
+            <ui:HtmlEditUserControl x:Name="htmlEditUserControl1"></ui:HtmlEditUserControl>
+        </wfi:WindowsFormsHost>-->
+    </Grid>
+</UserControl>
