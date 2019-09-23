@@ -43,6 +43,10 @@
     <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.4.0.1\lib\net45\ControlzEx.dll</HintPath>
     </Reference>
+    <Reference Include="LumiSoft.Net, Version=2.0.5161.15943, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\LumiSoft.Net.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.2.0.1418, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.2.0-ci1418\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -51,6 +55,9 @@
     </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.0.1\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="Smith.WPF.HtmlEditor">
+      <HintPath>..\Lib\Smith.WPF.HtmlEditor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -114,6 +121,12 @@
     <Compile Include="Controls\NewMessageForm\UC_NewMessageForm.xaml.cs">
       <DependentUpon>UC_NewMessageForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NewMessageForm\Win_ReceiptEmailList.xaml.cs">
+      <DependentUpon>Win_ReceiptEmailList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NewMessageForm\Win_SentEmailList.xaml.cs">
+      <DependentUpon>Win_SentEmailList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SendEmailManage\UC_SendGroup.xaml.cs">
       <DependentUpon>UC_SendGroup.xaml</DependentUpon>
     </Compile>
@@ -129,8 +142,8 @@
     <Compile Include="Controls\SendEmailManage\Win_NewOneEmail.xaml.cs">
       <DependentUpon>Win_NewOneEmail.xaml</DependentUpon>
     </Compile>
-
-    <Compile Include="Extentions\StringExt.cs" />    <Compile Include="SampleData\EmailInfoDataSource\EmailInfoDataSource.xaml.cs">
+    <Compile Include="Extentions\StringExt.cs" />
+    <Compile Include="SampleData\EmailInfoDataSource\EmailInfoDataSource.xaml.cs">
       <DependentUpon>EmailInfoDataSource.xaml</DependentUpon>
     </Compile>
     <Compile Include="SampleData\MailGroupDataSource\MailGroupDataSource.xaml.cs">
@@ -189,6 +202,14 @@
     <Page Include="Controls\NewMessageForm\UC_NewMessageForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NewMessageForm\Win_ReceiptEmailList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\NewMessageForm\Win_SentEmailList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\SendEmailManage\UC_SendGroup.xaml">
       <SubType>Designer</SubType>
@@ -263,6 +284,21 @@
     <None Include="SqlConfig\emailaccountcategorySql.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="SmithHtmlEditor\en-US\Smith.WPF.HtmlEditor.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SmithHtmlEditor\smithhtmleditor.config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SmithHtmlEditor\smithhtmleditor.stylesheet.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SmithHtmlEditor\zh-CN\Smith.WPF.HtmlEditor.Demo.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SmithHtmlEditor\zh-CN\Smith.WPF.HtmlEditor.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="SqlConfig\emailaccountSql.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

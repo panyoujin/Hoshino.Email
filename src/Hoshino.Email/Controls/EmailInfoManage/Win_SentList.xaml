@@ -8,7 +8,7 @@
         xmlns:common="clr-namespace:Hoshino.Email.Controls.Common"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize" 
         mc:Ignorable="d"
-        Title="發送賬號列表" Height="530" Width="1000">
+        Title="發送賬號列表" Height="530" Width="700">
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="80"></RowDefinition>
@@ -43,6 +43,7 @@
             <!--設置選中行的時候不顯示邊框-->
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell" >
+                    <Setter Property="Height" Value="33" />
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="BorderThickness" Value="0"/>
