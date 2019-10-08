@@ -139,7 +139,7 @@ namespace Hoshino.Email.Repository
                 dics.Add(dic);
                 if (dics.Count > 1000)
                 {
-                    SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailbccaccount", dics);
+                    SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailbccaccount_temp", dics);
                     dics.Clear();
                 }
             }
@@ -147,7 +147,6 @@ namespace Hoshino.Email.Repository
             {
                 SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailbccaccount_temp", dics);
             }
-            CopyEmailBccAccount();
             return true;
         }
 
@@ -167,6 +166,26 @@ namespace Hoshino.Email.Repository
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             return SQLHelperFactory.Instance.ExecuteNonQuery("Delete_emailbccaccount_temp", dic) > 0;
+        }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        public bool ImportDelete()
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            var ids = SQLHelperFactory.Instance.QueryForListByT<int>("Get_Delete_emailbccaccount_import", dic);
+            while (ids != null && ids.Count > 0)
+            {
+                if (ids != null && ids.Count > 0)
+                {
+                    dic["EmailBccAccountID"] = string.Join(",", SQLHelperFactory.Instance.QueryForListByT<int>("Get_Delete_emailbccaccount_import", dic));
+                    SQLHelperFactory.Instance.ExecuteNonQuery("Delete_emailbccaccount_import", dic);
+                }
+                ids = SQLHelperFactory.Instance.QueryForListByT<int>("Get_Delete_emailbccaccount_import", dic);
+
+            }
+            DeleteTemp();
+            return true;
         }
     }
 }

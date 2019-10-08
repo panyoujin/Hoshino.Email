@@ -104,12 +104,16 @@ namespace Hoshino.Email.Controls.ContactsForm
                         var list = s as string[];
                         foreach (var file in list)
                         {
+                            DateTime t = DateTime.Now;
+                            this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("準備導入【{0}】", file));
                             ImportData(file);
+                            EBA_Repository.CopyEmailBccAccount();
+                            this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("導入【{0}】完成,耗時:{1}ms", file, (DateTime.Now - t).TotalMilliseconds));
                         }
                     });
                     thread.Start(op.FileNames);
 
-                    "正在後臺進行批量導入！（读取excel文档时间60000条数据需要10分钟左右的时间，插入数据库60000条数据接近70秒。）".ShowDialog();
+                    "正在後臺進行批量導入！".ShowDialog();
                 }
             }
             catch (Exception ex)
@@ -135,24 +139,26 @@ namespace Hoshino.Email.Controls.ContactsForm
                 //最后一列的标号  即总的行数
                 int rowCount = sheet.LastRowNum;
                 int rowFirst = sheet.FirstRowNum;
-
+                this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("當前導入數據{0}行", rowCount - rowFirst));
                 for (int i = (rowFirst + 1); i < rowCount + 1; i++)
                 {
                     HSSFRow row = (HSSFRow)sheet.GetRow(i);
                     if (row.GetCell(1) != null && !string.IsNullOrEmpty(row.GetCell(1).ToString()))
                     {
                         string bccAccountAddress = row.GetCell(1).ToString().Trim();
+                        string bccCategoryName = row.GetCell(2).ToString().Trim();
                         string bccAccountName = "";
                         if (row.GetCell(0) != null)
                         {
                             bccAccountName = row.GetCell(0).ToString().Trim();
                         }
-                        list.Add(new EmailBccAccountEntity() { EmailBccAccountName = bccAccountName, EmailBccAccountAddress = bccAccountAddress });
+                        list.Add(new EmailBccAccountEntity() { EmailBccAccountName = bccAccountName, EmailBccAccountAddress = bccAccountAddress, EmailBccAccountCategoryName = bccCategoryName });
                     }
                 }
                 stream.Close();
                 EBA_Repository.DeleteTemp();
                 EBA_Repository.InsertTemp(list);
+                this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("導入數據{0}行成功", rowCount - rowFirst));
             }
             catch (Exception ex)
             {
@@ -199,7 +205,42 @@ namespace Hoshino.Email.Controls.ContactsForm
 
         private void BtnDeleteExport_Click(object sender, RoutedEventArgs e)
         {
+            if (EBA_Repository.ExistsEmailbccaccountTemp())
+            {
+                "正在導入數據中，請稍後再試".ShowDialog();
+                return;
+            }
+            try
+            {
+                System.Windows.Forms.OpenFileDialog op = new System.Windows.Forms.OpenFileDialog
+                {
+                    Filter = "Excel文件(*.xls)|*.xls|Excel文件(*.xlsx)|*.xlsx|所有文件(*.*)|*.*",
+                    Multiselect = true
+                };
+                if (op.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    Thread thread = new Thread(s =>
+                    {
+                        var list = s as string[];
+                        foreach (var file in list)
+                        {
+                            DateTime t = DateTime.Now;
+                            this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("準備導入【{0}】", file));
+                            ImportData(file);
+                            EBA_Repository.ImportDelete();
+                            this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("導入【{0}】完成,耗時:{1}ms", file, (DateTime.Now - t).TotalMilliseconds));
+                        }
+                    });
+                    thread.Start(op.FileNames);
 
+                    "正在後臺進行批量導入！".ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error("批量導入異常", ex);
+                "批量導入失敗！".ShowDialog();
+            }
         }
     }
 }

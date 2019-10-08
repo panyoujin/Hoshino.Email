@@ -3,6 +3,7 @@ using Hoshino.Email.Controls.EmailInfoManage;
 using Hoshino.Email.Controls.NewMessageForm;
 using Hoshino.Email.Controls.SendEmailManage;
 using Hoshino.Email.Core;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,6 +16,7 @@ namespace Hoshino.Email
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Action<string> ShowMessage;
         public class Menu
         {
             public string Name { set; get; }
@@ -29,7 +31,14 @@ namespace Hoshino.Email
             InitializeComponent();
             Init();
             ItemsListBox.ItemsSource = MenuList;
-            MainContent.Content = new UC_NewMessageForm();
+            MainContent.Content = new UC_ContactsManage();
+            ShowMessage = (message) =>
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    this.tbMessage.Text = message;
+                });
+            };
         }
 
         private void Init()
