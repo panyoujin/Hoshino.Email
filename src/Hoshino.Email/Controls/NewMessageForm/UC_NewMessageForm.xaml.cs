@@ -1,5 +1,6 @@
 ﻿using Hoshino.Email.Controls.EmailInfoManage;
 using Hoshino.Email.Core.Helper;
+using Hoshino.Email.Entity;
 using LumiSoft.Net.MIME;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,20 @@ namespace Hoshino.Email.Controls.NewMessageForm
     /// </summary>
     public partial class UC_NewMessageForm : UserControl
     {
+        /// <summary>
+        /// 發件人
+        /// </summary>
+        public static List<EmailAccountEntity> _SendMailList = new List<EmailAccountEntity>();
+
+
         public UC_NewMessageForm()
         {
             InitializeComponent();
+        }
+
+        ~UC_NewMessageForm()
+        {
+            _SendMailList.Clear();
         }
 
         #region 空間event
@@ -60,6 +72,7 @@ namespace Hoshino.Email.Controls.NewMessageForm
         private void BtnSent_Click(object sender, RoutedEventArgs e)
         {
             new Win_SentEmailList().Show();
+
         }
         #endregion
 

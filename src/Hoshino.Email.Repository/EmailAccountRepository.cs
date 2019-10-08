@@ -151,6 +151,25 @@ namespace Hoshino.Email.Repository
             var list = SQLHelperFactory.Instance.QueryMultipleByPage<EmailAccountEntity>("Select_EmailAccount_List_By_Page", dic, out int total);
             return (list, total);
         }
+
+        /// <summary>
+        /// 获取列表
+        /// </summary>
+        public IEnumerable<EmailAccountEntity> GetEmailAccountList(string address, string group)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            if (!string.IsNullOrWhiteSpace(address))
+            {
+                dic["EmailAccountAddress"] = address;
+            }
+            if (!string.IsNullOrWhiteSpace(group))
+            {
+                dic["EmailAccountCategoryName"] = group;
+            }
+            var list = SQLHelperFactory.Instance.QueryForListByT<EmailAccountEntity>("Select_EmailAccount_All", dic);
+            return list;
+        }
+
         /// <summary>
         /// 获取列表
         /// </summary>

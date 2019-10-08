@@ -95,7 +95,7 @@ namespace Hoshino.Email.Entity
         public DateTime EmailAccountNextSendTime { get; set; }
 
         /// <summary>
-        /// 状态0空闲，1正在发送， 2已发送
+        /// 状态 0空闲，1正在发送， 2已发送
         /// </summary>
         public int SendState { get; set; }
 

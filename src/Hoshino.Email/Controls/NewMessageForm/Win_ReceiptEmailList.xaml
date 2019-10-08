@@ -71,6 +71,6 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <common:UC_PagingControl Grid.Row="2" x:Name="ucPage" HorizontalAlignment="Left" Margin="20 0 0 0"></common:UC_PagingControl>
+        <common:UC_PagingControl  Width="600" Grid.Row="2" x:Name="ucPage" HorizontalAlignment="Left" Margin="20 0 0 0"></common:UC_PagingControl>
     </Grid>
 </Window>
