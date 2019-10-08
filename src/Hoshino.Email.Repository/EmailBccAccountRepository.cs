@@ -111,6 +111,62 @@ namespace Hoshino.Email.Repository
             return SQLHelperFactory.Instance.QueryForListByT<EmailBccAccountEntity>("Select_emailbccaccount_All", dic);
         }
 
-        
+
+        /// <summary>
+        /// 判斷temp表是否有數據
+        /// </summary>
+        public bool ExistsEmailbccaccountTemp()
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            var f = SQLHelperFactory.Instance.QueryForObjectByT<string>("Exists_emailbccaccount_temp", dic);
+            return !string.IsNullOrWhiteSpace(f);
+        }
+
+        /// <summary>
+        /// 新增
+        /// </summary>
+        public bool InsertTemp(List<EmailBccAccountEntity> list)
+        {
+            List<Dictionary<string, object>> dics = new List<Dictionary<string, object>>();
+            foreach (var model in list)
+            {
+                Dictionary<string, object> dic = new Dictionary<string, object>
+                {
+                    ["EmailBccAccountAddress"] = model.EmailBccAccountAddress,
+                    ["EmailBccAccountName"] = model.EmailBccAccountName,
+                    ["EmailBccAccountCategoryName"] = model.EmailBccAccountCategoryName
+                };
+                dics.Add(dic);
+                if (dics.Count > 1000)
+                {
+                    SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailbccaccount", dics);
+                    dics.Clear();
+                }
+            }
+            if (dics.Count > 0)
+            {
+                SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailbccaccount_temp", dics);
+            }
+            CopyEmailBccAccount();
+            return true;
+        }
+
+        /// <summary>
+        /// 複製臨時表數據到正式表
+        /// </summary>
+        public bool CopyEmailBccAccount()
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            return SQLHelperFactory.Instance.ExecuteNonQuery("copy_emailbccaccount_temp", dic) > 0;
+        }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        public bool DeleteTemp()
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            return SQLHelperFactory.Instance.ExecuteNonQuery("Delete_emailbccaccount_temp", dic) > 0;
+        }
     }
 }

@@ -64,5 +64,58 @@
       </SqlCommand>
     </SqlDefinition>
   </Data>
+  
+  
+  <Data name="Exists_emailbccaccount_temp">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+        select EmailBccAccountCategoryName from emailbccaccount where EmailBccAccountCreateTime>SUBDATE(NOW(),INTERVAL 10 MINUTE) limit 1;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+  <Data name="Delete_emailbccaccount_temp">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+        TRUNCATE TABLE emailbccaccount;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+
+  <Data name="Insert_emailbccaccount_temp">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+        INSERT INTO emailbccaccount (EmailBccAccountCategoryName,EmailBccAccountAddress,EmailBccAccountName,EmailBccAccountCreateTime) VALUES(@@EmailBccAccountCategoryName@@,@@EmailBccAccountAddress@@,@@EmailBccAccountName@@,NOW());
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+
+  <Data name="copy_emailbccaccount_temp">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+        
+INSERT INTO `emailbccaccountcategory`(`Name`,`Sort`,`CreateTime`,`LastTime`)
+SELECT `EmailBccAccountCategoryName`,0,NOW(),NOW() 
+FROM `emailbccaccount_temp` et
+LEFT JOIN `emailbccaccountcategory` ec ON ec.`Name`=et.`EmailBccAccountCategoryName`
+WHERE ec.`ID` IS NULL
+GROUP BY `EmailBccAccountCategoryName`;
+INSERT INTO `emailbccaccount`(`EmailBccAccountCategoryID`,`EmailBccAccountCategoryName`,`EmailBccAccountAddress`,`EmailBccAccountName`,`EmailBccAccountCreateTime`,`EmailBccAccountLastTime`,`EmailBccAccountIsDel`)
+SELECT ec.`ID`,et.`EmailBccAccountCategoryName`,et.`EmailBccAccountAddress`,et.`EmailBccAccountName`,NOW(),NOW(),0 
+FROM `emailbccaccount_temp` et
+LEFT JOIN `emailbccaccount` ebc ON et.`EmailBccAccountAddress`=ebc.`EmailBccAccountAddress`
+LEFT JOIN `emailbccaccountcategory` ec ON ec.`Name`=et.`EmailBccAccountCategoryName`
+WHERE ebc.`EmailBccAccountID` IS NULL;
+TRUNCATE TABLE `emailbccaccount_temp`;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
 </SqlSetting>
 
