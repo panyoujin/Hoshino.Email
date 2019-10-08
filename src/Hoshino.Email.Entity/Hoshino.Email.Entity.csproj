@@ -50,6 +50,7 @@
     <Compile Include="EmailSendAccountEntity.cs" />
     <Compile Include="EmailSendBccAccountEntity.cs" />
     <Compile Include="EmailSendFailureEntity.cs" />
+    <Compile Include="FailEmailAccountEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

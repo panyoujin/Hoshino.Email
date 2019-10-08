@@ -13,7 +13,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button VerticalAlignment="Center"  Grid.Column="0" Style="{StaticResource MaterialDesignRaisedDarkButton}"  HorizontalAlignment="Center" Height="30" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Content="數據導入" Foreground="White"></Button>
+        <Button VerticalAlignment="Center"  Grid.Column="0" Style="{StaticResource MaterialDesignRaisedDarkButton}"  HorizontalAlignment="Center" Height="30" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Content="數據導入" Foreground="White" Click="Button_Click"></Button>
         <Button x:Name="btnExportExcel" Click="BtnExportExcel_Click" VerticalAlignment="Center" Grid.Column="1"  Style="{StaticResource MaterialDesignRaisedDarkButton}"  HorizontalAlignment="Center" Height="30" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Content="模板導出" Foreground="White"></Button>
 
     </Grid>
