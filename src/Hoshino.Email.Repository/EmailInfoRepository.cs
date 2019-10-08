@@ -10,27 +10,22 @@ namespace Hoshino.Email.Repository
         /// <summary>
         /// 新增
         /// </summary>
-        public bool Insert(EmailInfoEntity model)
+        public int Insert(EmailInfoEntity model)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            if (model.EmailID != null)
-            {
-                dic["EmailID"] = model.EmailID;
-            }
             if (model.EmailTitle != null)
             {
                 dic["EmailTitle"] = model.EmailTitle;
             }
-            dic["EmailCreateTime"] = model.EmailCreateTime;
-            dic["EmailLastTime"] = model.EmailLastTime;
+            //dic["EmailCreateTime"] = model.EmailCreateTime;
+            //dic["EmailLastTime"] = model.EmailLastTime;
             if (model.EmailFilePath != null)
             {
                 dic["EmailFilePath"] = model.EmailFilePath;
             }
-            dic["EmailIsDel"] = model.EmailIsDel;
             dic["EmailState"] = model.EmailState;
             dic["EmailStartSendTime"] = model.EmailStartSendTime;
-            return SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailinfo", dic) > 0;
+            return SQLHelperFactory.Instance.QueryForObjectByT<int>("Insert_emailinfo", dic);
         }
 
         /// <summary>
@@ -39,23 +34,21 @@ namespace Hoshino.Email.Repository
         public bool Update(EmailInfoEntity model)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            if (model.EmailID != null)
-            {
-                dic["EmailID"] = model.EmailID;
-            }
-            if (model.EmailTitle != null)
-            {
-                dic["EmailTitle"] = model.EmailTitle;
-            }
-            dic["EmailCreateTime"] = model.EmailCreateTime;
-            dic["EmailLastTime"] = model.EmailLastTime;
-            if (model.EmailFilePath != null)
-            {
-                dic["EmailFilePath"] = model.EmailFilePath;
-            }
-            dic["EmailIsDel"] = model.EmailIsDel;
+
+            dic["EmailID"] = model.EmailID;
+
+            //if (model.EmailTitle != null)
+            //{
+            //    dic["EmailTitle"] = model.EmailTitle;
+            //}
+            //dic["EmailCreateTime"] = model.EmailCreateTime;
+            //dic["EmailLastTime"] = model.EmailLastTime;
+            //if (model.EmailFilePath != null)
+            //{
+            //    dic["EmailFilePath"] = model.EmailFilePath;
+            //}
             dic["EmailState"] = model.EmailState;
-            dic["EmailStartSendTime"] = model.EmailStartSendTime;
+            //dic["EmailStartSendTime"] = model.EmailStartSendTime;
             return SQLHelperFactory.Instance.ExecuteNonQuery("Update_emailinfo", dic) > 0;
         }
 

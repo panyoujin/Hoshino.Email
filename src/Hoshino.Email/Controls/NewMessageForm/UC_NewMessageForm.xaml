@@ -25,15 +25,16 @@
 
         <Button Grid.Column="1" x:Name="btnExportEml" Click="BtnExportEml_Click" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Center"  Height="27" Width="70"  Content="導入eml"  Foreground="White" Padding="0"></Button>
         <TextBox x:Name="tbPath" Grid.Column="2" Margin="10 0 10 0"  materialDesign:HintAssist.Hint="導入路徑"   Height="30" />
-        <DatePicker Grid.Column="3" Width="100"
-          materialDesign:HintAssist.Hint="發送時間" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
 
+        <DatePicker Grid.Column="3" Width="100" HorizontalAlignment="Left" Margin="0 0 0 1"
+          materialDesign:HintAssist.Hint="發送日期" x:Name="dpSendDate" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+        <materialDesign:TimePicker Grid.Column="3" x:Name="tpSendTime" materialDesign:HintAssist.Hint="發送時間" Margin="100 0 0 1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Is24Hours="True"  Width="100" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"/>
 
         <Button x:Name="btnSent" Click="BtnSent_Click" Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Center"  Height="27" Width="70"  Content="發件人(S)"  Foreground="White" Padding="0"></Button>
-        <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"  Margin="10 0 10 0"    Height="32" />
+        <TextBox x:Name="tbSendEmail" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"  Margin="10 0 10 0"    Height="32" />
         <Button x:Name="btnReceipt" Click="BtnReceipt_Click" Grid.Row="2" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Center"  Height="27" Width="70"  Content="抄送人(C)"  Foreground="White" Padding="0"></Button>
-        <TextBox Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="10 0 10 0"   Height="32" />
-        <Button Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Center"  Height="56" Width="70"  Content="發送(S)"  Foreground="White" Padding="0"></Button>
+        <TextBox x:Name="tbBccs" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="10 0 10 0"   Height="32" />
+        <Button x:Name="btnSend" Click="BtnSend_Click" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Center"  Height="56" Width="70"  Content="發送(S)"  Foreground="White" Padding="0"></Button>
 
         <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="主題(U)"></Label>
         <TextBox x:Name="tbTheme" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"  Margin="10 0 10 0"   Height="32" />

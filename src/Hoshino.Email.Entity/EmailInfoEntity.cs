@@ -42,7 +42,7 @@ namespace Hoshino.Email.Entity
         /// <summary>
         /// 启动发送的时间
         /// </summary>
-        public DateTime EmailStartSendTime { get; set; }
+        public DateTime? EmailStartSendTime { get; set; }
 
     }
 }

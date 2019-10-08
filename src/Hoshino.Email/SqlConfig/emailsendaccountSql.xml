@@ -4,7 +4,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                INSERT INTO emailsendaccount (EmailID,EmailAccountID,EmailSendAccountCreateTime) VALUES(@@EmailID@@,@@EmailAccountID@@,@@EmailSendAccountCreateTime@@);
+                INSERT INTO emailsendaccount (EmailID,EmailAccountID,EmailSendAccountCreateTime) VALUES(@@EmailID@@,@@EmailAccountID@@,NOW());
                 ]]>
             </SqlCommand>
         </SqlDefinition>

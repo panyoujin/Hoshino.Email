@@ -26,16 +26,16 @@ namespace Hoshino.Email.Controls.EmailInfoManage
         /// <summary>
         /// 已经选择的发送人列表
         /// </summary>
-        List<EmailAccountEntity> SendMailList = new List<EmailAccountEntity>();
+        public List<EmailAccountEntity> SendMailList = new List<EmailAccountEntity>();
 
         /// <summary>
         /// 获取查询的结果数据
         /// </summary>
         List<EmailAccountEntity> EmailList=new List<EmailAccountEntity>();
+
         public Win_SentEmailList()
         {
             InitializeComponent();
-
             this.Loaded += Win_SentEmailList_Loaded;
         }
 
@@ -60,7 +60,6 @@ namespace Hoshino.Email.Controls.EmailInfoManage
 
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            NewMessageForm.UC_NewMessageForm._SendMailList = SendMailList;
             this.Close();
         }
 
@@ -84,7 +83,7 @@ namespace Hoshino.Email.Controls.EmailInfoManage
 
         private void BtnAll_Click(object sender, RoutedEventArgs e)
         {
-            NewMessageForm.UC_NewMessageForm._SendMailList = EA_Repository.GetEmailAccountList(this.tbAddress.Text, this.tbGroup.Text).ToList();
+            SendMailList = EA_Repository.GetEmailAccountList(this.tbAddress.Text, this.tbGroup.Text).ToList();
             this.Close();
         }
     }

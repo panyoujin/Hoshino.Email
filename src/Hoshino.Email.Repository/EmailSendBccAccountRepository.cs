@@ -13,27 +13,11 @@ namespace Hoshino.Email.Repository
         public bool Insert(EmailSendBccAccountEntity model)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            if (model.EmailSendBccAccountID != null)
-            {
-                dic["EmailSendBccAccountID"] = model.EmailSendBccAccountID;
-            }
-            if (model.EmailID != null)
-            {
-                dic["EmailID"] = model.EmailID;
-            }
-            if (model.EmailBccAccountID != null)
-            {
-                dic["EmailBccAccountID"] = model.EmailBccAccountID;
-            }
-            if (model.EmailAccountID != null)
-            {
-                dic["EmailAccountID"] = model.EmailAccountID;
-            }
+
+            dic["EmailID"] = model.EmailID;
+            dic["EmailBccAccountID"] = model.EmailBccAccountID;
             dic["EmailSendBccAccountState"] = model.EmailSendBccAccountState;
-            dic["EmailSendBccAccountCreateTime"] = model.EmailSendBccAccountCreateTime;
-            dic["EmailSendBccAccountLastTime"] = model.EmailSendBccAccountLastTime;
-            dic["EmailSendBccAccountSendTime"] = model.EmailSendBccAccountSendTime;
-            dic["Result"] = model.Result;
+
             return SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailsendbccaccount", dic) > 0;
         }
 

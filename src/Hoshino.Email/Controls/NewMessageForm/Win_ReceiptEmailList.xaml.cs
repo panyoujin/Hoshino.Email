@@ -26,7 +26,7 @@ namespace Hoshino.Email.Controls.EmailInfoManage
         /// <summary>
         /// 已经选择的收件人列表
         /// </summary>
-        List<EmailBccAccountEntity> BccMailList = new List<EmailBccAccountEntity>();
+        public List<EmailBccAccountEntity> BccMailList = new List<EmailBccAccountEntity>();
         /// <summary>
         /// 获取查询的结果数据
         /// </summary>
@@ -81,13 +81,12 @@ namespace Hoshino.Email.Controls.EmailInfoManage
 
         private void BtnAll_Click(object sender, RoutedEventArgs e)
         {
-            NewMessageForm.UC_NewMessageForm._BccMailList = EBA_Repository.GetBccEmailList(this.tbBccAccount.Text, this.tbGroup.Text).ToList();
+            BccMailList = EBA_Repository.GetBccEmailList(this.tbBccAccount.Text, this.tbGroup.Text).ToList();
             this.Close();
         }
 
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            NewMessageForm.UC_NewMessageForm._BccMailList = BccMailList;
             this.Close();
         }
     }

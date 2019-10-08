@@ -5,6 +5,8 @@
             <SqlCommand>
                 <![CDATA[
                 INSERT INTO emailinfo (EmailTitle,EmailCreateTime,EmailLastTime,EmailFilePath,EmailState,EmailStartSendTime) VALUES(@@EmailTitle@@,NOW(),NOW(),@@EmailFilePath@@,@@EmailState@@,@@EmailStartSendTime@@);
+                
+                select IFNULL(MAX(EmailID),0) from `emailinfo`;
                 ]]>
             </SqlCommand>
         </SqlDefinition>
