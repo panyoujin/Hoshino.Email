@@ -28,7 +28,10 @@ namespace Hoshino.Email.Controls.NewMessageForm
         /// 發件人
         /// </summary>
         public static List<EmailAccountEntity> _SendMailList = new List<EmailAccountEntity>();
-
+        /// <summary>
+        /// 密送人
+        /// </summary>
+        public static List<EmailBccAccountEntity> _BccMailList = new List<EmailBccAccountEntity>();
 
         public UC_NewMessageForm()
         {
@@ -38,9 +41,10 @@ namespace Hoshino.Email.Controls.NewMessageForm
         ~UC_NewMessageForm()
         {
             _SendMailList.Clear();
+            _BccMailList.Clear();
         }
 
-        #region 空間event
+        #region 控件event
         /// <summary>
         /// 導入eml
         /// </summary>

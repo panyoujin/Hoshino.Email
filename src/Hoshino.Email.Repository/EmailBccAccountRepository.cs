@@ -92,5 +92,25 @@ namespace Hoshino.Email.Repository
             return (list, total);
         }
 
+        /// <summary>
+        /// 获取列表
+        /// </summary>
+        public IEnumerable<EmailBccAccountEntity> GetBccEmailList(string address, string group)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            if (!string.IsNullOrWhiteSpace(address))
+            {
+                dic["EmailBccAccountAddress"] = address;
+            }
+            if (!string.IsNullOrWhiteSpace(group))
+            {
+                EmailBccAccountCategoryRepository repository = new EmailBccAccountCategoryRepository();
+                var idList = repository.GetIDList(group).Select(i => i.ID);
+                dic["EmailBccAccountCategoryID"] = string.Join("','", idList);
+            }
+            return SQLHelperFactory.Instance.QueryForListByT<EmailBccAccountEntity>("Select_emailbccaccount_All", dic);
+        }
+
+        
     }
 }
