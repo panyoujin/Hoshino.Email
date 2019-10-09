@@ -2,9 +2,13 @@
 using Hoshino.Email.Entity;
 using Hoshino.Email.Repository;
 using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 
@@ -81,6 +85,97 @@ namespace Hoshino.Email.Controls.ContactsForm
         private void BtnDataExport_Click(object sender, RoutedEventArgs e)
         {
 
+
+            System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
+            sfd.Filter = "Excel文件(*.xlsx)|*.xlsx|Excel文件(*.xls)|*.xls|所有文件(*.*)|*.*";
+            sfd.FileName = "ReceiptMail.xlsx";
+            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Thread t = new Thread((obj) =>
+                {
+                    Stopwatch st = new Stopwatch();
+                    st.Start();
+                    var dic = obj as Dictionary<string, string>;
+                    var list = EBA_Repository.GetBccEmailListByExport(dic["EmailAccount"], dic["Group"]);
+                    if (list != null && list.Count > 0)
+                    {
+                        this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("準備導出【{0}】條", list.Count));
+                        string path = ExportExcel("Bcc", list);
+                        if (File.Exists(path))
+                        {
+                            FileInfo fi = new FileInfo(path);
+                            fi.CopyTo(dic["FileName"], true);
+                            st.Stop();
+                            this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("導出【{0}】條完成,耗時{1}", list.Count, st.ElapsedMilliseconds / 1000));
+                        }
+                    }
+                });
+                t.Start(new Dictionary<string, string> { ["FileName"] = sfd.FileName, ["EmailAccount"] = this.tbEmailAccount.Text.Trim(), ["Group"] = this.tbGroup.Text.Trim() });
+            }
+        }
+
+        Dictionary<string, Dictionary<string, string>> DicColumn = new Dictionary<string, Dictionary<string, string>>
+        {
+            ["Bcc"] = new Dictionary<string, string>
+            {
+                ["Name"] = "名稱",
+                ["Address"] = "郵箱地址",
+                ["CategoryName"] = "分类"
+            }
+
+        };
+        private string ExportExcel(string Model, List<dynamic> list)
+        {
+            string sFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Files", "Temp");
+            if (!Directory.Exists(sFileName))
+            {
+                Directory.CreateDirectory(sFileName);
+            }
+            sFileName = Path.Combine(sFileName, "ReceiptMail.xlsx");
+            if (System.IO.File.Exists(sFileName))
+            {
+                System.IO.File.Delete(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, sFileName));
+            }
+
+            var cloumns = DicColumn[Model];
+            using (var fs = new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, sFileName), FileMode.Create, FileAccess.Write))
+            {
+                IWorkbook workbook = new XSSFWorkbook();
+                ISheet sheet1 = workbook.CreateSheet(Model);
+                var rowIndex = 0;
+                var cloumnIndex = 0;
+                IRow row = sheet1.CreateRow(rowIndex);
+                foreach (var c in cloumns)
+                {
+                    var cc = row.CreateCell(cloumnIndex);
+                    cc.SetCellValue(c.Value);
+                    sheet1.AutoSizeColumn(cloumnIndex++);
+                }
+                Stopwatch st = new Stopwatch();
+                st.Start();
+                DateTime t2 = DateTime.Now;
+                foreach (var item in list)
+                {
+                    rowIndex++;
+                    if (rowIndex % 10 == 0)
+                    {
+                        this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("導出中【{0}/{1}】條,當前10條耗時{2},總耗時{3}", rowIndex, list.Count, (DateTime.Now - t2).Milliseconds, st.ElapsedMilliseconds));
+                        t2 = DateTime.Now;
+                    }
+                    IRow rowData = sheet1.CreateRow(rowIndex);
+                    cloumnIndex = 0;
+                    foreach (var c in cloumns)
+                    {
+                        var dics = item as System.Collections.Generic.IDictionary<string, object>;
+                        var dic = dics[c.Key];
+                        var cc = rowData.CreateCell(cloumnIndex);
+                        cc.SetCellValue(dic == null ? "" : dic.ToString());
+                    }
+                }
+                st.Stop();
+                workbook.Write(fs);
+            }
+            return sFileName;
         }
 
         private void BtnImport_Click(object sender, RoutedEventArgs e)
@@ -104,11 +199,13 @@ namespace Hoshino.Email.Controls.ContactsForm
                         var list = s as string[];
                         foreach (var file in list)
                         {
-                            DateTime t = DateTime.Now;
+                            Stopwatch st = new Stopwatch();
+                            st.Start();
                             this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("準備導入【{0}】", file));
-                            ImportData(file);
+                            ImportData(file, st);
                             EBA_Repository.CopyEmailBccAccount();
-                            this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("導入【{0}】完成,耗時:{1}ms", file, (DateTime.Now - t).TotalMilliseconds));
+                            st.Stop();
+                            this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("導入【{0}】完成,耗時:{1}ms", file, st.ElapsedMilliseconds));
                         }
                     });
                     thread.Start(op.FileNames);
@@ -123,7 +220,7 @@ namespace Hoshino.Email.Controls.ContactsForm
             }
         }
 
-        private void ImportData(string filePath)
+        private void ImportData(string filePath, Stopwatch st)
         {
             try
             {
@@ -139,7 +236,7 @@ namespace Hoshino.Email.Controls.ContactsForm
                 //最后一列的标号  即总的行数
                 int rowCount = sheet.LastRowNum;
                 int rowFirst = sheet.FirstRowNum;
-                this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("當前導入數據{0}行", rowCount - rowFirst));
+                this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("當前預計導入數據{0}行", rowCount - rowFirst));
                 for (int i = (rowFirst + 1); i < rowCount + 1; i++)
                 {
                     HSSFRow row = (HSSFRow)sheet.GetRow(i);
@@ -158,7 +255,7 @@ namespace Hoshino.Email.Controls.ContactsForm
                 stream.Close();
                 EBA_Repository.DeleteTemp();
                 EBA_Repository.InsertTemp(list);
-                this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("導入數據{0}行成功", rowCount - rowFirst));
+                this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("準備複製數據請稍候,耗時{0}", st.ElapsedMilliseconds));
             }
             catch (Exception ex)
             {
@@ -224,11 +321,12 @@ namespace Hoshino.Email.Controls.ContactsForm
                         var list = s as string[];
                         foreach (var file in list)
                         {
-                            DateTime t = DateTime.Now;
+                            Stopwatch st = new Stopwatch();
+                            st.Start();
                             this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("準備導入【{0}】", file));
-                            ImportData(file);
+                            ImportData(file, st);
                             EBA_Repository.ImportDelete();
-                            this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("導入【{0}】完成,耗時:{1}ms", file, (DateTime.Now - t).TotalMilliseconds));
+                            this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("導入【{0}】完成,耗時:{1}ms", file, st.ElapsedMilliseconds));
                         }
                     });
                     thread.Start(op.FileNames);

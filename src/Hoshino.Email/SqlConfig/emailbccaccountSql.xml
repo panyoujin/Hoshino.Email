@@ -139,5 +139,15 @@ LIMIT 0,100;
       </SqlCommand>
     </SqlDefinition>
   </Data>
+
+  <Data name="Select_emailbccaccount_by_export">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                SELECT eba.EmailBccAccountCategoryName AS CategoryName,eba.EmailBccAccountAddress AS Address,eba.EmailBccAccountName AS Name FROM emailbccaccount AS eba WHERE eba.EmailBccAccountIsDel = 0 <R%= AND eba.EmailBccAccountCategoryID IN ('@@EmailBccAccountCategoryID@@')%R><R%= AND eba.EmailBccAccountAddress LIKE '%@@EmailBccAccountAddress@@%' %R> ORDER BY eba.EmailBccAccountID  ;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
 </SqlSetting>
 

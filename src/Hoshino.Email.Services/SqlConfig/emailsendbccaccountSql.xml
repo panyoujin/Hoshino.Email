@@ -57,14 +57,14 @@
             </SqlCommand>
         </SqlDefinition>
     </Data>
-
+<!--先分配，再獲取發送-->
   <Data name="Select_EmailSendBccAccount_List_ByEmailAccountAndEmailID">
     <SqlDefinition type="MySql" ConnStringName="backstage_connection">
       <SqlCommand>
         <![CDATA[
                 
 UPDATE `emailsendbccaccount` esb SET esb.`EmailAccountID`=@@EmailAccountID@@,esb.`EmailSendBccAccountState`=0,EmailSendBccAccountLastTime=NOW() 
-WHERE esb.`EmailID`=@@EmailID@@ AND esb.`EmailAccountID` IS NULL AND esb.`EmailSendBccAccountState`=0 LIMIT @@SendCount@@;
+WHERE esb.`EmailID`=@@EmailID@@ AND (esb.`EmailAccountID` IS NULL OR esb.`EmailAccountID` = @@EmailAccountID@@) AND esb.`EmailSendBccAccountState`=0 ORDER BY esb.`EmailAccountID` DESC,esb.EmailSendBccAccountID LIMIT @@SendCount@@;
 
 SELECT esb.EmailSendBccAccountID,esb.EmailID,esb.EmailBccAccountID,esb.EmailAccountID,esb.EmailSendBccAccountState,esb.EmailSendBccAccountCreateTime,esb.EmailSendBccAccountLastTime,esb.EmailSendBccAccountSendTime,esb.Result,eb.`EmailBccAccountAddress`,eb.`EmailBccAccountName`,eb.`EmailBccAccountIsDel` FROM `emailsendbccaccount` esb 
 LEFT JOIN `emailbccaccount` eb ON esb.`EmailBccAccountID`=eb.`EmailBccAccountID` 
@@ -73,6 +73,6 @@ WHERE esb.`EmailID`=@@EmailID@@ AND esb.`EmailAccountID`=@@EmailAccountID@@ AND 
       </SqlCommand>
     </SqlDefinition>
   </Data>
-  
+
 </SqlSetting>
 

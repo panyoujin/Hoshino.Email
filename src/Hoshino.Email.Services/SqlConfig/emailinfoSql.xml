@@ -59,12 +59,43 @@ UPDATE `emailinfo` ei SET ei.`EmailState`=1,EmailLastTime=NOW() WHERE NOT EXISTS
         </SqlDefinition>
     </Data>
 
-
+  <!--获取分配完成并有分配给自己但是没发送的邮件-->
+  <Data name="Select_AssignSendEmailInfoByEmailAccount">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+        SELECT ei.* FROM `emailsendaccount` esa 
+        INNER JOIN `emailinfo` ei ON ei.`EmailID`=esa.`EmailID` 
+        INNER JOIN (SELECT `EmailID` FROM `emailsendbccaccount` WHERE `EmailSendBccAccountState` = 0 AND `EmailAccountID`=1 GROUP BY `EmailID`) AS esb ON esb.`EmailID` = ei.`EmailID`
+        WHERE esa.`EmailAccountID`=1 AND ei.`EmailIsDel`=0 
+        ORDER BY ei.`EmailStartSendTime` LIMIT 1;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+<!--獲取當前郵箱能發送的郵件，并且是正在发送中的-->
   <Data name="Select_NextSendEmailInfoByEmailAccount">
     <SqlDefinition type="MySql" ConnStringName="backstage_connection">
       <SqlCommand>
         <![CDATA[
-                SELECT ei.* FROM `emailsendaccount` esa LEFT JOIN `emailinfo` ei ON ei.`EmailID`=esa.`EmailID` WHERE esa.`EmailAccountID`='1' AND ei.`EmailIsDel`=0 AND ei.`EmailState`=0 ORDER BY ei.`EmailStartSendTime` LIMIT 1;
+                SELECT ei.* FROM `emailsendaccount` esa 
+                LEFT JOIN `emailinfo` ei ON ei.`EmailID`=esa.`EmailID` 
+                WHERE esa.`EmailAccountID`=@@EmailAccountID@@ AND ei.`EmailIsDel`=0 AND ei.`EmailState` = 0 
+                ORDER BY ei.`EmailStartSendTime` LIMIT 1;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+
+
+  <Data name="Update_EmaiInfoQTY_ByEmailID">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+        SELECT COUNT(0) INTO @Total FROM `emailsendbccaccount` WHERE EmailID=1 AND `EmailSendBccAccountState` = 1;
+        UPDATE `emailinfo` SET AlreadySendQty = @Total WHERE `EmailID` = @@EmailID@@;
+        SELECT COUNT(0) AS @fTotal FROM `emailsendbccaccount` WHERE EmailID=1 AND `EmailSendBccAccountState` =- 1;
+        UPDATE `emailinfo` SET `FailQty` = @fTotal WHERE `EmailID` = @@EmailID@@;
                 ]]>
       </SqlCommand>
     </SqlDefinition>

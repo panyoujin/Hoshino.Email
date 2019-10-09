@@ -78,6 +78,10 @@ namespace Hoshino.Email.Repository
             {
                 EmailBccAccountCategoryRepository repository = new EmailBccAccountCategoryRepository();
                 var idList = repository.GetIDList(group).Select(i => i.ID);
+                if (idList == null || idList.Count() <= 0)
+                {
+                    return (new List<EmailBccAccountEntity>(), 0);
+                }
                 dic["EmailBccAccountCategoryID"] = string.Join("','", idList);
             }
             if (pageindex >= 0)
@@ -106,11 +110,37 @@ namespace Hoshino.Email.Repository
             {
                 EmailBccAccountCategoryRepository repository = new EmailBccAccountCategoryRepository();
                 var idList = repository.GetIDList(group).Select(i => i.ID);
+                if (idList == null || idList.Count() <= 0)
+                {
+                    return new List<EmailBccAccountEntity>();
+                }
                 dic["EmailBccAccountCategoryID"] = string.Join("','", idList);
             }
             return SQLHelperFactory.Instance.QueryForListByT<EmailBccAccountEntity>("Select_emailbccaccount_All", dic);
         }
 
+        /// <summary>
+        /// 获取列表
+        /// </summary>
+        public List<dynamic> GetBccEmailListByExport(string address, string group)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            if (!string.IsNullOrWhiteSpace(address))
+            {
+                dic["EmailBccAccountAddress"] = address;
+            }
+            if (!string.IsNullOrWhiteSpace(group))
+            {
+                EmailBccAccountCategoryRepository repository = new EmailBccAccountCategoryRepository();
+                var idList = repository.GetIDList(group).Select(i => i.ID);
+                if (idList == null || idList.Count() <= 0)
+                {
+                    return null;
+                }
+                dic["EmailBccAccountCategoryID"] = string.Join("','", idList);
+            }
+            return SQLHelperFactory.Instance.QueryForList("Select_emailbccaccount_by_export", dic);
+        }
 
         /// <summary>
         /// 判斷temp表是否有數據

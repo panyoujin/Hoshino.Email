@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using Hoshino.Email.Core;
-using Hoshino.Email.Entity;
+﻿using Hoshino.Email.Core;
 using Hoshino.Email.Repository;
 using Hoshino.Email.Services.Tasks;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using Topshelf;
 
 namespace Hoshino.Email.Services
 {
-    public class MainServices
+    public class MainServices : ServiceControl
     {
-        public readonly static Dictionary<string, SmartSendEmail> EmailAccountDic = new Dictionary<string, SmartSendEmail>();
+        public readonly static Dictionary<int, SmartSendEmail> EmailAccountDic = new Dictionary<int, SmartSendEmail>();
         EmailAccountRepository Repository = new EmailAccountRepository();
 
         Thread _Thread;
         public bool IsStart = false;
         int Interval = 60;
 
-        public void Start()
+        public bool Start(HostControl hostControl)
         {
             if (!IsStart)
             {
@@ -68,11 +66,12 @@ namespace Hoshino.Email.Services
                 });
                 _Thread.Start();
             }
+            return true;
 
         }
 
 
-        public void Stop()
+        public bool Stop(HostControl hostControl)
         {
             try
             {
@@ -118,6 +117,7 @@ namespace Hoshino.Email.Services
             {
 
             }
+            return true;
         }
 
         public void SleepInterval(int interval)
@@ -128,5 +128,6 @@ namespace Hoshino.Email.Services
                 interval -= 10;
             }
         }
+
     }
 }

@@ -77,7 +77,7 @@ namespace Hoshino.Email.Repository
         /// <summary>
         /// 修改剩余数量和下次发送时间
         /// </summary>
-        public bool UpdateRemainCount(string EmailAccountID, int EmailAccountRemainEmailCount, DateTime EmailAccountNextSendTime)
+        public bool UpdateRemainCount(int EmailAccountID, int EmailAccountRemainEmailCount, DateTime EmailAccountNextSendTime)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic["EmailAccountID"] = EmailAccountID;

@@ -32,6 +32,8 @@ namespace Hoshino.Email.Services.Tasks
                     {
                         try
                         {
+                            //每一次賦值為10秒
+                            Interval = 10;
                             //1. 重新获取邮箱信息，判断邮箱是否被占用，如果占用时间太久并不进行发送操作可以认为已经异常结束占用
                             EmailAccount = EA_Repository.Get(EmailAccount.EmailAccountID);
                             //2. 修改邮箱使用的服务器信息-增加占用信息和占用时间
@@ -47,23 +49,39 @@ namespace Hoshino.Email.Services.Tasks
                             {
                                 //还没到时间执行
                                 Interval = (EmailAccount.EmailAccountNextSendTime - DateTime.Now).Seconds + 1;
+                                if (Interval > (EmailAccount.EmailAccountSpace * 60 / 3))
+                                {
+                                    Interval = (EmailAccount.EmailAccountSpace * 60 / 3);
+                                }
                                 continue;
                             }
+                            //本次可發送的數量
+                            var sendCount = EmailAccount.EmailAccountRemainEmailCount;
+                            //如果减少了最大发送数量，或者上一次发送离现在已经超过一个间隔,或者下一次发送已经过去一个间隔
+                            if (sendCount > EmailAccount.EmailAccountMaxEmailCount
+                            || EmailAccount.EmailAccountPreSendTime.AddMinutes(EmailAccount.EmailAccountSpace) < DateTime.Now || emailAccount.EmailAccountNextSendTime.AddMinutes(EmailAccount.EmailAccountSpace) < DateTime.Now)
+                            {
+                                sendCount = EmailAccount.EmailAccountMaxEmailCount;
+                            }
+                            //if (sendCount <= 0)
+                            //{
+                            //    continue;
+                            //}
                             //4. 获取发送列表，按照指定数量获取
-                            var emailInfo = E_Repository.GetNextSendEmailInfoByEmailAccount(EmailAccount.EmailAccountID);
-                            if (emailInfo == null || string.IsNullOrWhiteSpace(emailInfo.EmailID))
+                            //先获取已分配但是未发送的
+                            var emailInfo = E_Repository.GetAssignSendEmailInfoByEmailAccount(EmailAccount.EmailAccountID);
+                            if (emailInfo == null || emailInfo.EmailID <= 0)
+                            {
+                                //获取发送中还没开始分配的
+                                emailInfo = E_Repository.GetNextSendEmailInfoByEmailAccount(EmailAccount.EmailAccountID);
+                            }
+                            if (emailInfo == null || emailInfo.EmailID <= 0)
                             {
                                 //如果本次没需要发送的邮件，则60查看一次
                                 Interval = 60;
                                 continue;
                             }
-                            var sendCount = EmailAccount.EmailAccountRemainEmailCount;
-                            //如果减少了最大发送数量，或者上一次发送离现在已经超过一个间隔
-                            if (sendCount > EmailAccount.EmailAccountMaxEmailCount
-                            || EmailAccount.EmailAccountPreSendTime.AddMinutes(EmailAccount.EmailAccountSpace) < DateTime.Now)
-                            {
-                                sendCount = EmailAccount.EmailAccountMaxEmailCount;
-                            }
+                            //分配以及獲取分配好的記錄，防止因上次異常分配導致的分配數量超出可發送數量的問題
                             var sendList = ESB_Repository.GetListByEmailAccountAndEmailID(emailInfo.EmailID, EmailAccount.EmailAccountID, sendCount);
                             if (sendList == null || sendList.Count() <= 0)
                             {
@@ -87,11 +105,11 @@ namespace Hoshino.Email.Services.Tasks
                             }
                             //6. 记录结果
                             ESB_Repository.UpdateState(sendList.ToList());
-
+                            E_Repository.Update_EmaiInfoQTY_ByEmailID(emailInfo.EmailID);
                             List<EmailSendFailureEntity> FailList = new List<EmailSendFailureEntity>();
                             foreach (var f in sendList.Where(l => l.EmailSendBccAccountState == -1))
                             {
-                                FailList.Add(new EmailSendFailureEntity() { EmailSendFailureID = Guid.NewGuid().ToString(), EmailID = f.EmailID, EmailAccountID = f.EmailAccountID, EmailBccAccountID = f.EmailBccAccountID, EmailSendFailureSendTime = DateTime.Now, Result = f.Result });
+                                FailList.Add(new EmailSendFailureEntity() { EmailID = f.EmailID, EmailAccountID = f.EmailAccountID, EmailBccAccountID = f.EmailBccAccountID, EmailSendFailureSendTime = DateTime.Now, Result = f.Result });
                             }
                             if (FailList != null && FailList.Count > 0)
                             {
@@ -100,7 +118,7 @@ namespace Hoshino.Email.Services.Tasks
 
                             //7. 修改信息
                             var RemainCount = sendCount - sendList.Count();
-                            var nextSendTime = DateTime.Now;
+                            var nextSendTime = DateTime.Now;//舍弃一次不足，防止计算重复的问题
                             if (RemainCount <= 0)
                             {
                                 nextSendTime = DateTime.Now.AddMinutes(EmailAccount.EmailAccountSpace);

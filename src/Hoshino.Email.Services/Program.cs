@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Topshelf;
 
 namespace Hoshino.Email.Services
 {
@@ -9,7 +6,13 @@ namespace Hoshino.Email.Services
     {
         static void Main(string[] args)
         {
-
+            HostFactory.Run(x =>
+            {
+                x.Service<MainServices>();
+                x.SetDescription("HoshinoEmail");
+                x.SetDisplayName("HoshinoEmail");
+                x.SetServiceName("HoshinoEmail");
+            });
         }
     }
 }

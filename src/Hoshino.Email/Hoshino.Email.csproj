@@ -300,6 +300,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="app.config" />
+    <None Include="Files\excel\ReceiptMail.xlsx" />
+    <None Include="Files\excel\SendMail.xlsx" />
     <None Include="SqlConfig\emailaccountcategorySql.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

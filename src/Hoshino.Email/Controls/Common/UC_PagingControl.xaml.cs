@@ -49,6 +49,7 @@ namespace Hoshino.Email.Controls.Common
             }
         }
         public int PageTotal;
+        public int Total;
         public UC_PagingControl()
         {
             InitializeComponent();
@@ -57,6 +58,7 @@ namespace Hoshino.Email.Controls.Common
         }
         public void InitData(int total)
         {
+            this.Total = total;
             this.PageTotal = (int)Math.Ceiling((decimal)total / this.PageSize);
             this.lblTotal.Content = total + "";
             this.lblPage.Content = string.Format("{0}/{1}", this.PageIndex, this.PageTotal);

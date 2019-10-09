@@ -110,7 +110,7 @@ namespace Hoshino.Email.Repository
         /// <summary>
         /// 获取列表
         /// </summary>
-        public IEnumerable<EmailSendBccAccountEntity> GetListByEmailAccountAndEmailID(string EmailID, string EmailAccountID, int SendCount)
+        public IEnumerable<EmailSendBccAccountEntity> GetListByEmailAccountAndEmailID(int EmailID, int EmailAccountID, int SendCount)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic["EmailID"] = EmailID;

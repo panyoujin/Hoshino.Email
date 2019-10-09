@@ -99,7 +99,7 @@ namespace Hoshino.Email.Repository
         /// <summary>
         /// 根据邮箱ID 获取下一个发送的邮件信息
         /// </summary>
-        public EmailInfoEntity GetNextSendEmailInfoByEmailAccount(string EmailAccountID)
+        public EmailInfoEntity GetNextSendEmailInfoByEmailAccount(int EmailAccountID)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic["EmailAccountID"] = EmailAccountID;
@@ -108,5 +108,29 @@ namespace Hoshino.Email.Repository
             return SQLHelperFactory.Instance.QueryForObjectByT<EmailInfoEntity>("Select_NextSendEmailInfoByEmailAccount", dic);
         }
 
+
+        /// <summary>
+        /// 根据邮箱ID 获取下一个发送的邮件信息
+        /// </summary>
+        public EmailInfoEntity GetAssignSendEmailInfoByEmailAccount(int EmailAccountID)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic["EmailAccountID"] = EmailAccountID;
+            //先把已经完成的状态进行修改
+            SQLHelperFactory.Instance.ExecuteNonQuery("Update_EmailInfo_EmailState", dic);
+            return SQLHelperFactory.Instance.QueryForObjectByT<EmailInfoEntity>("Select_AssignSendEmailInfoByEmailAccount", dic);
+        }
+
+        /// <summary>
+        /// 修改已發送數量
+        /// </summary>
+        /// <param name="EmailID"></param>
+        public void Update_EmaiInfoQTY_ByEmailID(int EmailID)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic["EmailID"] = EmailID;
+            //修改已發送數量
+            SQLHelperFactory.Instance.ExecuteNonQuery("Update_EmaiInfoQTY_ByEmailID", dic);
+        }
     }
 }
