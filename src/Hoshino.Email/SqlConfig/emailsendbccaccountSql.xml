@@ -1,50 +1,67 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <SqlSetting>
-    <Data name="Insert_emailsendbccaccount">
-        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
-            <SqlCommand>
-                <![CDATA[
+  <Data name="Insert_emailsendbccaccount">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
                 INSERT INTO emailsendbccaccount (EmailID,EmailBccAccountID,EmailSendBccAccountState,EmailSendBccAccountCreateTime,EmailSendBccAccountLastTime) VALUES(@@EmailID@@,@@EmailBccAccountID@@,@@EmailSendBccAccountState@@,NOW(),NOW());
                 ]]>
-            </SqlCommand>
-        </SqlDefinition>
-    </Data>
-    <Data name="Update_emailsendbccaccount">
-        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
-            <SqlCommand>
-                <![CDATA[
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+  <Data name="Update_emailsendbccaccount">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
                 UPDATE emailsendbccaccount SET EmailSendBccAccountID=@@EmailSendBccAccountID@@ <%=,EmailID=@@EmailID@@%><%=,EmailBccAccountID=@@EmailBccAccountID@@%><%=,EmailAccountID=@@EmailAccountID@@%><%=,EmailSendBccAccountState=@@EmailSendBccAccountState@@%><%=,EmailSendBccAccountCreateTime=@@EmailSendBccAccountCreateTime@@%><%=,EmailSendBccAccountLastTime=@@EmailSendBccAccountLastTime@@%><%=,EmailSendBccAccountSendTime=@@EmailSendBccAccountSendTime@@%><%=,Result=@@Result@@%> WHERE EmailSendBccAccountID=@@EmailSendBccAccountID@@;
                 ]]>
-            </SqlCommand>
-        </SqlDefinition>
-    </Data>
-    <Data name="Delete_emailsendbccaccount">
-        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
-            <SqlCommand>
-                <![CDATA[
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+  <Data name="Delete_emailsendbccaccount">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
                 DELETE FROM emailsendbccaccount WHERE EmailSendBccAccountID=@@EmailSendBccAccountID@@;
                 ]]>
-            </SqlCommand>
-        </SqlDefinition>
-    </Data>
-    <Data name="Select_emailsendbccaccount">
-        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
-            <SqlCommand>
-                <![CDATA[
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+
+  <Data name="Delete_emailsendbccaccount_all">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                DELETE FROM emailsendbccaccount WHERE EmailID=@@EmailID@@ <%= AND EmailSendBccAccountState=@@EmailSendBccAccountState@@%>;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+  <Data name="Select_emailsendbccaccount">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
                 SELECT esba.EmailSendBccAccountID,esba.EmailID,esba.EmailBccAccountID,esba.EmailAccountID,esba.EmailSendBccAccountState,esba.EmailSendBccAccountCreateTime,esba.EmailSendBccAccountLastTime,esba.EmailSendBccAccountSendTime,esba.Result FROM emailsendbccaccount AS esba WHERE 1=1 <%= AND esba.EmailSendBccAccountID=@@EmailSendBccAccountID@@%> <%= AND esba.EmailID=@@EmailID@@%> <%= AND esba.EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND esba.EmailAccountID=@@EmailAccountID@@%> <%= AND esba.EmailSendBccAccountState=@@EmailSendBccAccountState@@%> <%= AND esba.EmailSendBccAccountCreateTime=@@EmailSendBccAccountCreateTime@@%> <%= AND esba.EmailSendBccAccountLastTime=@@EmailSendBccAccountLastTime@@%> <%= AND esba.EmailSendBccAccountSendTime=@@EmailSendBccAccountSendTime@@%> <%= AND esba.Result=@@Result@@%>;
                 ]]>
-            </SqlCommand>
-        </SqlDefinition>
-    </Data>
-    <Data name="Select_emailsendbccaccount_List">
-        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
-            <SqlCommand>
-                <![CDATA[
-                SELECT esba.EmailSendBccAccountID,esba.EmailID,esba.EmailBccAccountID,esba.EmailAccountID,esba.EmailSendBccAccountState,esba.EmailSendBccAccountCreateTime,esba.EmailSendBccAccountLastTime,esba.EmailSendBccAccountSendTime,esba.Result FROM emailsendbccaccount AS esba WHERE 1=1 <%= AND esba.EmailSendBccAccountID=@@EmailSendBccAccountID@@%> <%= AND esba.EmailID=@@EmailID@@%> <%= AND esba.EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND esba.EmailAccountID=@@EmailAccountID@@%> <%= AND esba.EmailSendBccAccountState=@@EmailSendBccAccountState@@%> <%= AND esba.EmailSendBccAccountCreateTime=@@EmailSendBccAccountCreateTime@@%> <%= AND esba.EmailSendBccAccountLastTime=@@EmailSendBccAccountLastTime@@%> <%= AND esba.EmailSendBccAccountSendTime=@@EmailSendBccAccountSendTime@@%> <%= AND esba.Result=@@Result@@%> LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
-                SELECT COUNT(0) AS row_count FROM emailsendbccaccount AS esba WHERE 1=1 <%= AND esba.EmailSendBccAccountID=@@EmailSendBccAccountID@@%> <%= AND esba.EmailID=@@EmailID@@%> <%= AND esba.EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND esba.EmailAccountID=@@EmailAccountID@@%> <%= AND esba.EmailSendBccAccountState=@@EmailSendBccAccountState@@%> <%= AND esba.EmailSendBccAccountCreateTime=@@EmailSendBccAccountCreateTime@@%> <%= AND esba.EmailSendBccAccountLastTime=@@EmailSendBccAccountLastTime@@%> <%= AND esba.EmailSendBccAccountSendTime=@@EmailSendBccAccountSendTime@@%> <%= AND esba.Result=@@Result@@%>;
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+  <Data name="Select_emailsendbccaccount_List">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                SELECT esba.EmailSendBccAccountID,esba.EmailID,esba.EmailBccAccountID,esba.EmailAccountID,esba.EmailSendBccAccountState,esba.EmailSendBccAccountCreateTime,esba.EmailSendBccAccountLastTime,esba.EmailSendBccAccountSendTime,esba.Result,eba.`EmailBccAccountAddress`,ea.`EmailAccountAddress`
+                FROM emailsendbccaccount AS esba
+                JOIN `emailbccaccount` AS eba ON esba.`EmailBccAccountID`=eba.`EmailBccAccountID`
+                LEFT JOIN `emailaccount` AS ea ON esba.`EmailAccountID`=ea.`EmailAccountID`
+                 WHERE 1=1 <%= AND esba.EmailSendBccAccountID=@@EmailSendBccAccountID@@%> <%= AND esba.EmailID=@@EmailID@@%> <%= AND esba.EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND esba.EmailAccountID=@@EmailAccountID@@%> <%= AND esba.EmailSendBccAccountState=@@EmailSendBccAccountState@@%> <%= AND esba.EmailSendBccAccountCreateTime=@@EmailSendBccAccountCreateTime@@%> <%= AND esba.EmailSendBccAccountLastTime=@@EmailSendBccAccountLastTime@@%> <%= AND esba.EmailSendBccAccountSendTime=@@EmailSendBccAccountSendTime@@%> <%= AND esba.Result=@@Result@@%> <R%= AND eba.EmailBccAccountAddress LIKE '%@@EmailBccAccountAddress@@%'%R>  LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
+                SELECT COUNT(0) AS row_count FROM emailsendbccaccount AS esba
+                JOIN `emailbccaccount` AS eba ON esba.`EmailBccAccountID`=eba.`EmailBccAccountID`
+                LEFT JOIN `emailaccount` AS ea ON esba.`EmailAccountID`=ea.`EmailAccountID`
+                WHERE 1=1  <%= AND esba.EmailSendBccAccountID=@@EmailSendBccAccountID@@%> <%= AND esba.EmailID=@@EmailID@@%> <%= AND esba.EmailBccAccountID=@@EmailBccAccountID@@%> <%= AND esba.EmailAccountID=@@EmailAccountID@@%> <%= AND esba.EmailSendBccAccountState=@@EmailSendBccAccountState@@%> <%= AND esba.EmailSendBccAccountCreateTime=@@EmailSendBccAccountCreateTime@@%> <%= AND esba.EmailSendBccAccountLastTime=@@EmailSendBccAccountLastTime@@%> <%= AND esba.EmailSendBccAccountSendTime=@@EmailSendBccAccountSendTime@@%> <%= AND eba.EmailBccAccountAddress LIKE '%@@EmailBccAccountAddress@@%'%> <%= AND esba.Result=@@Result@@%>;
                 ]]>
-            </SqlCommand>
-        </SqlDefinition>
-    </Data>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
 </SqlSetting>
 

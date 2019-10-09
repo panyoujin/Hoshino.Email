@@ -183,7 +183,7 @@ namespace Hoshino.Email.Controls.NewMessageForm
                     ESBR_Repository.Insert(entity);
                 }
                 //LogHelper.Info("插入發送信息時間：" + DateTime.Now + ",插入密送人數量：" + _BccMailList.Count);
-
+                email.EmailID = EmailID;
                 email.EmailState = 0;
                 ER_Repository.Update(email);
             });

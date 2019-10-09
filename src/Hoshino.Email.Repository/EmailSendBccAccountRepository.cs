@@ -54,13 +54,26 @@ namespace Hoshino.Email.Repository
         /// <summary>
         /// 删除
         /// </summary>
-        public bool Delete(string EmailSendBccAccountID)
+        public bool Delete(int EmailSendBccAccountID)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic["EmailSendBccAccountID"] = EmailSendBccAccountID;
             return SQLHelperFactory.Instance.ExecuteNonQuery("Delete_emailsendbccaccount", dic) > 0;
         }
 
+        /// <summary>
+        /// 根據emailID刪除數據
+        /// </summary>
+        public bool DeleteAllByEmailID(int EmailID,int EmailSendBccAccountState=-2)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic["EmailID"] = EmailID;
+            if (EmailSendBccAccountState > -2)
+            {
+                dic["EmailSendBccAccountState"] = EmailSendBccAccountState;
+            }
+            return SQLHelperFactory.Instance.ExecuteNonQuery("Delete_emailsendbccaccount_all", dic) > 0;
+        }
         /// <summary>
         /// 获取单个
         /// </summary>
@@ -74,9 +87,14 @@ namespace Hoshino.Email.Repository
         /// <summary>
         /// 获取列表
         /// </summary>
-        public (IEnumerable<EmailSendBccAccountEntity>, int) GetList(int pageindex, int pagesize)
+        public (IEnumerable<EmailSendBccAccountEntity>, int) GetList(int EmailID, string EmailBccAccountAddress, int pageindex, int pagesize)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic["EmailID"] = EmailID;
+            if (!string.IsNullOrWhiteSpace(EmailBccAccountAddress))
+            {
+                dic["EmailBccAccountAddress"] = EmailBccAccountAddress;
+            }
             if (pageindex >= 0)
             {
                 dic["StartIndex"] = pageindex <= 1 ? 0 : (pageindex - 1) * pagesize;

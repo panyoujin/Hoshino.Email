@@ -29,11 +29,11 @@
                 <ColumnDefinition Width="100"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <TextBox Height="50" Grid.Column="1" VerticalAlignment="Center"  Text="" materialDesign:HintAssist.Hint="請輸入查詢郵件" Style="{StaticResource MaterialDesignFloatingHintTextBox}" ></TextBox>
+            <TextBox x:Name="tbBccAddress" Height="50" Grid.Column="1" VerticalAlignment="Center"  Text="" materialDesign:HintAssist.Hint="請輸入查詢收件箱" Style="{StaticResource MaterialDesignFloatingHintTextBox}" ></TextBox>
 
-            <Button Grid.Column="3" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="查詢" Foreground="White" Padding="0"></Button>
-            <Button Grid.Column="5" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="80" ToolTip="Resource name: MaterialDesignRaisedButton" Content="刪除全部" Foreground="White"  Padding="0"></Button>
-            <Button Grid.Column="7" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Content="刪除失敗記錄" Foreground="White"  Padding="0"></Button>
+            <Button x:Name="btnQuery" Click="BtnQuery_Click" Grid.Column="3" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="查詢" Foreground="White" Padding="0"></Button>
+            <Button x:Name="btnDeleteAll" Click="BtnDeleteAll_Click" Grid.Column="5" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="80" ToolTip="Resource name: MaterialDesignRaisedButton" Content="刪除全部" Foreground="White"  Padding="0"></Button>
+            <Button x:Name="btnDeleteFailEmail" Click="BtnDeleteFailEmail_Click" Grid.Column="7" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Content="刪除失敗記錄" Foreground="White"  Padding="0"></Button>
         </Grid>
 
         <DataGrid Grid.Row="1" x:Name="dgEmail" Height="355" VerticalAlignment="Top"
@@ -54,16 +54,39 @@
             </DataGrid.CellStyle>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="郵件標題" Width="200" Binding="{Binding EmailTitle}"/>
-                <DataGridTextColumn Header="收件箱" Width="150" Binding="{Binding EmailBccAccountName}"/>
-                <DataGridTextColumn Header="發件箱" Width="150" Binding="{Binding EmailAccountName}"/>
-                <DataGridTextColumn Header="發送狀態" Width="60" Binding="{Binding EmailSendBccAccountState}"/>
-                <DataGridTextColumn Header="發送時間" Width="150" Binding="{Binding EmailSendBccAccountSendTime}"/>
+                <DataGridTemplateColumn Width="200" Header="抄送人（收件箱）">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EmailBccAccountAddress}" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="200" Header="發件箱">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EmailAccountAddress}" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="100" Header="狀態">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EmailSendBccAccountStateStr}" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="200" Header="發送時間">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EmailSendBccAccountSendTime}" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="操作" >
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252" Margin="3 0 0 0" Height="28" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="刪除" Foreground="White"></Button>
+                                <Button x:Name="btnDelete" Tag="{Binding EmailBccAccountID}" Click="BtnDelete_Click" Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252" Margin="3 0 0 0" Height="28" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="刪除" Foreground="White"></Button>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

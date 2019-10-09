@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 
 namespace Hoshino.Email.Entity
 {
@@ -35,7 +36,7 @@ namespace Hoshino.Email.Entity
         public int EmailIsDel { get; set; }
 
         /// <summary>
-        /// 0:启动发送;1:发送完毕;2:草稿; 3:分配完毕
+        /// 0:启动发送;1:发送完毕;2:草稿; 3:分配完毕；4:停止發送
         /// </summary>
         public int EmailState { get; set; }
         /// <summary>
@@ -60,6 +61,9 @@ namespace Hoshino.Email.Entity
                     case 3:
                         str = "分配完毕";
                         break;
+                    case 4:
+                        str = "已停止";
+                        break;
                 }
                 return str;
             }
@@ -76,7 +80,7 @@ namespace Hoshino.Email.Entity
         /// <summary>
         /// 已發送數量
         /// </summary>
-        public int AlreadySentQty { get; set; }
+        public int AlreadySendQty { get; set; }
         /// <summary>
         /// 失敗發送數量
         /// </summary>
@@ -88,8 +92,50 @@ namespace Hoshino.Email.Entity
         {
             get
             {
-                return TotalQty - AlreadySentQty;
+                return TotalQty - AlreadySendQty;
             }
         }
+
+
+        #region 操作按鈕相關邏輯
+        /// <summary>
+        /// 操作按鈕顯示的文本
+        /// </summary>
+        public string OperationContent
+        {
+            get
+            {
+                string str = "";
+                switch (EmailState)
+                {
+                    case 0:
+                        str = "停止發送";
+                        break;
+                    case 1:
+                        str = "发送完毕";
+                        break;
+                    case 2:
+                        str = "開始發送";
+                        break;
+                    case 4:
+                        str = "繼續發送";
+                        break;
+                }
+                return str;
+            }
+        }
+
+        public Visibility Visibility
+        {
+            get
+            {
+                
+                if (EmailState == 1)
+                    return Visibility.Collapsed;
+                else
+                    return Visibility.Visible;
+            }
+        }
+        #endregion
     }
 }

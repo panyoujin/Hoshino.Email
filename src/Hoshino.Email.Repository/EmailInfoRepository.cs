@@ -57,7 +57,7 @@ namespace Hoshino.Email.Repository
         /// <summary>
         /// 删除
         /// </summary>
-        public bool Delete(string EmailID)
+        public bool Delete(int EmailID)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic["EmailID"] = EmailID;

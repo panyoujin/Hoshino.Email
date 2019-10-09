@@ -22,7 +22,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                UPDATE emailbccaccount SET EmailBccAccountIsDel = 1 WHERE EmailBccAccountID=@@EmailBccAccountID@@;
+                DELETE FROM emailbccaccount WHERE EmailBccAccountID=@@EmailBccAccountID@@;
                 ]]>
             </SqlCommand>
         </SqlDefinition>
