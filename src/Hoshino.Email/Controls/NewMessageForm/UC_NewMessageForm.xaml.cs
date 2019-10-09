@@ -188,8 +188,9 @@ namespace Hoshino.Email.Controls.NewMessageForm
                 ER_Repository.Update(email);
             });
             thread.Start();
-            "正在後臺進行郵件新建,請關閉當前窗口".ShowDialog();
+            "正在後臺進行郵件新建,將會關閉當前窗口，草稿狀態==正在創建郵件中".ShowDialog();
 
+            this.Dispatcher.BeginInvoke(MainWindow.GotoPage, "郵件管理");
         }
 
         #endregion

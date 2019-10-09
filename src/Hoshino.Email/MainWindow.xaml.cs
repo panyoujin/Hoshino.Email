@@ -17,6 +17,7 @@ namespace Hoshino.Email
     public partial class MainWindow : Window
     {
         public static Action<string> ShowMessage;
+        public static Action<string> GotoPage;
         public class Menu
         {
             public string Name { set; get; }
@@ -31,12 +32,31 @@ namespace Hoshino.Email
             InitializeComponent();
             Init();
             ItemsListBox.ItemsSource = MenuList;
-            MainContent.Content = new UC_ContactsManage();
+            MainContent.Content = new UC_EmailInfoManage();
             ShowMessage = (message) =>
             {
                 this.Dispatcher.Invoke(() =>
                 {
                     this.tbMessage.Text = message;
+                });
+            };
+
+            GotoPage = (pagename) =>
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    switch (pagename)
+                    {
+                        case "發件箱管理":
+                            MainContent.Content = new UC_SendEmailManage();
+                            break;
+                        case "通訊錄":
+                            MainContent.Content = new UC_ContactsManage();
+                            break;
+                        case "郵件管理":
+                            MainContent.Content = new UC_EmailInfoManage();
+                            break;
+                    }
                 });
             };
         }
@@ -63,6 +83,7 @@ namespace Hoshino.Email
                 LeftMenu.IsLeftDrawerOpen = false;
             }
         }
+
         #endregion
     }
 }
