@@ -24,5 +24,13 @@ namespace Hoshino.Email.Entity
         /// </summary>
         public DateTime EmailSendAccountCreateTime { get; set; }
 
+        /// <summary>
+        /// 發件人
+        /// </summary>
+        public string EmailAccountAddress { set; get; }
+        /// <summary>
+        /// 郵件標題
+        /// </summary>
+        public string EmailTitle { set; get; }
     }
 }

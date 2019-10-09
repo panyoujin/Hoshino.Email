@@ -38,7 +38,32 @@ namespace Hoshino.Email.Entity
         /// 0:启动发送;1:发送完毕;2:草稿; 3:分配完毕
         /// </summary>
         public int EmailState { get; set; }
-
+        /// <summary>
+        /// 發送狀態對應的文本
+        /// </summary>
+        public string EmailStateStr
+        {
+            get
+            {
+                string str = "";
+                switch (EmailState)
+                {
+                    case 0:
+                        str = "启动发送";
+                        break;
+                    case 1:
+                        str = "发送完毕";
+                        break;
+                    case 2:
+                        str = "草稿";
+                        break;
+                    case 3:
+                        str = "分配完毕";
+                        break;
+                }
+                return str;
+            }
+        }
         /// <summary>
         /// 启动发送的时间
         /// </summary>
@@ -56,5 +81,15 @@ namespace Hoshino.Email.Entity
         /// 失敗發送數量
         /// </summary>
         public int FailQty { get; set; }
+        /// <summary>
+        /// 還需要發送的數量
+        /// </summary>
+        public int NeedSentQty
+        {
+            get
+            {
+                return TotalQty - AlreadySentQty;
+            }
+        }
     }
 }

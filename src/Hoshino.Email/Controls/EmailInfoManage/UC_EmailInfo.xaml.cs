@@ -59,7 +59,12 @@ namespace Hoshino.Email.Controls.EmailInfoManage
 
         private void BtnSentList_Click(object sender, RoutedEventArgs e)
         {
-            new Win_SentList().Show();
+            Button bt= sender as Button;
+            if (bt != null&& bt.Tag!=null)
+            {
+                new Win_SentList((int)bt.Tag).Show();
+            }
+            
         }
     }
 }

@@ -80,5 +80,27 @@ namespace Hoshino.Email.Repository
             return (list, total);
         }
 
+        /// <summary>
+        /// 获取列表
+        /// </summary>
+        public (IEnumerable<EmailSendAccountEntity>, int) GetEmailInfoSendAccountList(int EmailID, string EmailAccountAddress, int pageindex, int pagesize)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic["EmailID"] = EmailID;
+            if (!string.IsNullOrWhiteSpace(EmailAccountAddress))
+            {
+                dic["EmailAccountAddress"] = EmailAccountAddress;
+            }
+            if (pageindex >= 0)
+            {
+                dic["StartIndex"] = pageindex <= 1 ? 0 : (pageindex - 1) * pagesize;
+            }
+            if (pagesize > 0)
+            {
+                dic["SelectCount"] = pagesize;
+            }
+            var list = SQLHelperFactory.Instance.QueryMultipleByPage<EmailSendAccountEntity>("Select_emailInfo_sendaccount_List", dic, out int total);
+            return (list, total);
+        }
     }
 }

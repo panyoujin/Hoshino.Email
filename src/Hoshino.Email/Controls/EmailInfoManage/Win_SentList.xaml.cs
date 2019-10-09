@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hoshino.Email.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,35 @@ namespace Hoshino.Email.Controls.EmailInfoManage
     /// </summary>
     public partial class Win_SentList : Window
     {
-        public Win_SentList()
+        EmailSendAccountRepository ESAR_Repository = new EmailSendAccountRepository();
+
+        int EmailID = 0;
+        public Win_SentList(int EmailID)
         {
             InitializeComponent();
+            this.EmailID = EmailID;
+            this.Loaded += Win_SentList_Loaded;
+            this.ucPage.ChangePageAction = () =>
+            {
+                GetList();
+            };
+        }
+
+        private void Win_SentList_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.ucPage.RefreshList();
+        }
+
+        private void GetList()
+        {
+            var (list, total) = ESAR_Repository.GetEmailInfoSendAccountList(EmailID,this.tbAccount.Text,  this.ucPage.PageIndex, this.ucPage.PageSize);
+            dgEmail.ItemsSource = list;
+            this.ucPage.InitData(total);
+        }
+
+        private void BtnQuery_Click(object sender, RoutedEventArgs e)
+        {
+            GetList();
         }
     }
 }

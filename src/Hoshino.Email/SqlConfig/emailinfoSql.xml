@@ -42,7 +42,8 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                SELECT ei.EmailID,ei.EmailTitle,ei.EmailCreateTime,ei.EmailLastTime,ei.EmailFilePath,ei.EmailIsDel,ei.EmailState,ei.EmailStartSendTime FROM emailinfo AS ei WHERE ei.EmailIsDel= 0 <%= AND ei.EmailTitle LIKE '%@@EmailTitle@@%'%> <%= AND ei.EmailState=@@EmailState@@%> ORDER BY ei.EmailID LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
+                SELECT ei.EmailID,ei.EmailTitle,ei.EmailCreateTime,ei.EmailLastTime,ei.EmailFilePath,ei.EmailIsDel,ei.EmailState,ei.EmailStartSendTime ,ei.TotalQty ,ei.AlreadySentQty ,ei.FailQty  
+                FROM emailinfo AS ei WHERE ei.EmailIsDel= 0 <%= AND ei.EmailTitle LIKE '%@@EmailTitle@@%'%> <%= AND ei.EmailState=@@EmailState@@%> ORDER BY ei.EmailID desc LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
                 SELECT COUNT(0) AS row_count FROM emailinfo AS ei WHERE ei.EmailIsDel= 0 <%= AND ei.EmailTitle LIKE '%@@EmailTitle@@%'%> <%= AND ei.EmailState=@@EmailState@@%>;
                 ]]>
             </SqlCommand>

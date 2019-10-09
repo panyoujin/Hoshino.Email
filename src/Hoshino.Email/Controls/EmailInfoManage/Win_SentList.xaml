@@ -29,9 +29,9 @@
                 <ColumnDefinition Width="100"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <TextBox Height="50" Grid.Column="1" VerticalAlignment="Center"  Text="" materialDesign:HintAssist.Hint="請輸入查詢郵件" Style="{StaticResource MaterialDesignFloatingHintTextBox}" ></TextBox>
+            <TextBox Height="50" Grid.Column="1" VerticalAlignment="Center"  Text="" materialDesign:HintAssist.Hint="請輸入查詢郵件" Style="{StaticResource MaterialDesignFloatingHintTextBox}" x:Name="tbAccount"></TextBox>
 
-            <Button Grid.Column="3" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="查詢" Foreground="White" Padding="0"></Button>
+            <Button x:Name="btnQuery" Click="BtnQuery_Click" Grid.Column="3" Margin="0 0 0 13" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="查詢" Foreground="White" Padding="0"></Button>
 
         </Grid>
 
@@ -53,18 +53,21 @@
             </DataGrid.CellStyle>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="郵件標題" Width="300" Binding="{Binding EmailTitle}"/>
-                <DataGridTextColumn Header="發件箱" Width="200" Binding="{Binding EmailAccountName}"/>
-
-                <!--<DataGridTemplateColumn Header="操作" >
-                    <DataGridTemplateColumn.CellTemplate >
+                <DataGridTemplateColumn Width="400" Header="郵件標題">
+                    <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252" Margin="3 0 0 0" Height="28" Width="60" ToolTip="Resource name: MaterialDesignRaisedButton" Content="刪除" Foreground="White"></Button>
-                            </StackPanel>
+                            <TextBlock Text="{Binding EmailTitle}" VerticalAlignment="Center"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>-->
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="200" Header="發件箱">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EmailAccountAddress}" Foreground="Red" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
             </DataGrid.Columns>
         </DataGrid>
 

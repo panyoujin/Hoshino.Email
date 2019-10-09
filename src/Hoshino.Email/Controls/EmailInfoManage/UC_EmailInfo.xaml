@@ -51,20 +51,57 @@
             </DataGrid.CellStyle>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="郵件標題" Width="300" Binding="{Binding EmailTitle}"/>
-                <DataGridTextColumn Header="總數量" Width="50" Binding="{Binding TotalQty}"/>
-                <DataGridTextColumn Header="已發送" Width="50" Binding="{Binding AlreadySentQty}"/>
-                <DataGridTextColumn Header="剩餘" Width="50" Binding="{Binding NeedSentQty}"/>
-                <DataGridTextColumn Header="失敗" Width="50" Binding="{Binding FailQty}"/>
-                <DataGridTextColumn Header="狀態" Width="150" Binding="{Binding EmailState}"/>
+                <DataGridTemplateColumn Width="400" Header="郵件標題">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EmailTitle}" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="50" Header="總數量">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding TotalQty}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="50" Header="已發送">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding AlreadySentQty}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="50" Header="剩餘">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding NeedSentQty}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="50" Header="失敗">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding FailQty}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="90" Header="狀態">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EmailStateStr}" HorizontalAlignment="Left" Foreground="Red" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="操作" >
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="28" Width="80"  Content="發送列表" x:Name="btnReceiptList" Click="BtnReceiptList_Click" Foreground="White" Padding="0"></Button>
-                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Margin="3 0 0 0" Height="28" Width="80" Content="發送賬號" x:Name="btnSentList" Click="BtnSentList_Click" Foreground="White" Padding="0"></Button>
-                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252" Margin="3 0 0 0" Height="28" Width="80"  Content="停止發送" Foreground="White" Padding="0"></Button>
-                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="#ff5252" Margin="3 0 0 0" Height="28" Width="50"  Content="刪除" Foreground="White" Padding="0"></Button>
+                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Tag="{Binding EmailID}" Margin="3 0 0 0" Height="28" Width="80" Content="發送賬號" x:Name="btnSentList" Click="BtnSentList_Click" Foreground="White" Padding="0"></Button>
+                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="28" Width="80"  Content="接收列表" x:Name="btnReceiptList" Click="BtnReceiptList_Click" Tag="{Binding EmailID}" Foreground="White" Padding="0"></Button>
+       
+                                <!--<Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Tag="{Binding EmailID}" Background="#ff5252" Margin="3 0 0 0" Height="28" Width="80"  Content="停止發送" Foreground="White" Padding="0"></Button>-->
+                                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Tag="{Binding EmailID}" Background="#ff5252" Margin="3 0 0 0" Height="28" Width="50" x:Name="btnDelete"  Content="刪除" Foreground="White" Padding="0"></Button>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
