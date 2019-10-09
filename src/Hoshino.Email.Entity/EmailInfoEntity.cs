@@ -44,5 +44,17 @@ namespace Hoshino.Email.Entity
         /// </summary>
         public DateTime? EmailStartSendTime { get; set; }
 
+        /// <summary>
+        /// 發送總數量
+        /// </summary>
+        public int TotalQty { get; set; }
+        /// <summary>
+        /// 已發送數量
+        /// </summary>
+        public int AlreadySentQty { get; set; }
+        /// <summary>
+        /// 失敗發送數量
+        /// </summary>
+        public int FailQty { get; set; }
     }
 }

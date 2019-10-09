@@ -25,6 +25,8 @@ namespace Hoshino.Email.Repository
             }
             dic["EmailState"] = model.EmailState;
             dic["EmailStartSendTime"] = model.EmailStartSendTime;
+            dic["TotalQty"] = model.TotalQty;
+            dic["EmailStartSendTime"] = model.EmailStartSendTime;
             return SQLHelperFactory.Instance.QueryForObjectByT<int>("Insert_emailinfo", dic);
         }
 

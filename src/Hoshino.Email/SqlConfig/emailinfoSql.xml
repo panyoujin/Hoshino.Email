@@ -4,7 +4,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                INSERT INTO emailinfo (EmailTitle,EmailCreateTime,EmailLastTime,EmailFilePath,EmailState,EmailStartSendTime) VALUES(@@EmailTitle@@,NOW(),NOW(),@@EmailFilePath@@,@@EmailState@@,@@EmailStartSendTime@@);
+                INSERT INTO emailinfo (EmailTitle,EmailCreateTime,EmailLastTime,EmailFilePath,EmailState,EmailStartSendTime,TotalQty) VALUES(@@EmailTitle@@,NOW(),NOW(),@@EmailFilePath@@,@@EmailState@@,@@EmailStartSendTime@@,@@TotalQty@@);
                 
                 select IFNULL(MAX(EmailID),0) from `emailinfo`;
                 ]]>

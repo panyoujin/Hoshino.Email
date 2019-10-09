@@ -117,6 +117,11 @@ namespace Hoshino.Email.Controls.NewMessageForm
         /// <param name="e"></param>
         private void BtnSend_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(htmlEditor.ContentHtml))
+            {
+                "郵件内容不能爲空".ShowDialog();
+                return;
+            }
             DateTime? startDatetime = null;
 
             if ((!dpSendDate.SelectedDate.HasValue && tpSendTime.SelectedTime.HasValue) || (dpSendDate.SelectedDate.HasValue && !tpSendTime.SelectedTime.HasValue))
@@ -148,7 +153,8 @@ namespace Hoshino.Email.Controls.NewMessageForm
             EmailInfoEntity email = new EmailInfoEntity();
             email.EmailTitle = tbTheme.Text;
             email.EmailFilePath = htmlEditor.ContentHtml;
-            email.EmailState = 2;
+            email.EmailState = 2;//新增的時候，是草稿狀態；等新增完成會修改狀態為0
+            email.TotalQty = _BccMailList.Count;
             if (startDatetime.HasValue)
                 email.EmailStartSendTime = startDatetime.Value;
 
