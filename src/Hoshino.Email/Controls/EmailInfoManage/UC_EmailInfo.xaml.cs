@@ -23,6 +23,7 @@ namespace Hoshino.Email.Controls.EmailInfoManage
     public partial class UC_EmailInfo : UserControl
     {
         EmailInfoRepository EI_Repository = new EmailInfoRepository();
+        EmailSendBccAccountRepository ESBAR_Repository = new EmailSendBccAccountRepository();
 
         List<EmailInfoEntity> EmailInfoList = new List<EmailInfoEntity>();
 
@@ -105,7 +106,9 @@ namespace Hoshino.Email.Controls.EmailInfoManage
                     {
                         case 0:
                             //設置停止發送
-                            entity.EmailState =4;
+                            entity.EmailState = 4;
+                            //修改密送記錄的郵件狀態
+                            ESBAR_Repository.Update(emailInfo.EmailID,2,0);
                             break;
                         case 2:
                             //設置開始發送
@@ -114,12 +117,43 @@ namespace Hoshino.Email.Controls.EmailInfoManage
                         case 4:
                             //設置繼續發送
                             entity.EmailState = 0;
+                            //修改密送記錄的郵件狀態
+                            ESBAR_Repository.Update(emailInfo.EmailID, 0, 2);
                             break;
                     }
                     EI_Repository.Update(entity);
                     GetList();
                 }
             }
+        }
+
+        private void BtnExport_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgEmail.SelectedItem == null)
+            {
+                "請選擇導出的郵件信息".ShowDialog();
+                return;
+            }
+            var selectItem = dgEmail.SelectedItem as EmailInfoEntity;
+            Win_ExportExcel win = new Win_ExportExcel(selectItem.EmailID);
+            win.Show();
+
+        }
+
+        private void BtnSendFail_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgEmail.SelectedItem == null)
+            {
+                "請選擇重新發送的的郵件信息".ShowDialog();
+                return;
+            }
+            var selectItem = dgEmail.SelectedItem as EmailInfoEntity;
+            EI_Repository.Update(new EmailInfoEntity {EmailID= selectItem.EmailID,EmailState=0 });
+
+            //修改密送記錄的郵件狀態
+            ESBAR_Repository.Update(selectItem.EmailID, 0, -1);
+
+            "狀態修改成功".ShowDialog();
         }
     }
 }

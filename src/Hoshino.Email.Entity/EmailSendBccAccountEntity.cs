@@ -25,9 +25,11 @@ namespace Hoshino.Email.Entity
         public int EmailAccountID { get; set; }
 
         /// <summary>
-        /// 1:已发送;0:未发送;-1:发送失败
+        /// 1:已发送;0:未发送;-1:发送失败;2:停止发送
         /// </summary>
         public int EmailSendBccAccountState { get; set; }
+
+
         public string EmailSendBccAccountStateStr
         {
             get

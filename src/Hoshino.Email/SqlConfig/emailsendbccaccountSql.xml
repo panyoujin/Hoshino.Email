@@ -13,7 +13,7 @@
     <SqlDefinition type="MySql" ConnStringName="backstage_connection">
       <SqlCommand>
         <![CDATA[
-                UPDATE emailsendbccaccount SET EmailSendBccAccountID=@@EmailSendBccAccountID@@ <%=,EmailID=@@EmailID@@%><%=,EmailBccAccountID=@@EmailBccAccountID@@%><%=,EmailAccountID=@@EmailAccountID@@%><%=,EmailSendBccAccountState=@@EmailSendBccAccountState@@%><%=,EmailSendBccAccountCreateTime=@@EmailSendBccAccountCreateTime@@%><%=,EmailSendBccAccountLastTime=@@EmailSendBccAccountLastTime@@%><%=,EmailSendBccAccountSendTime=@@EmailSendBccAccountSendTime@@%><%=,Result=@@Result@@%> WHERE EmailSendBccAccountID=@@EmailSendBccAccountID@@;
+                UPDATE emailsendbccaccount SET EmailSendBccAccountLastTime=NOW() <%=,EmailSendBccAccountState=@@EmailSendBccAccountState@@%> <%=,EmailSendBccAccountSendTime=@@EmailSendBccAccountSendTime@@%><%=,Result=@@Result@@%> WHERE EmailID=@@EmailID@@ <%= AND EmailSendBccAccountState=@@OldState@@%>;
                 ]]>
       </SqlCommand>
     </SqlDefinition>
@@ -63,5 +63,19 @@
       </SqlCommand>
     </SqlDefinition>
   </Data>
+  
+  <Data name="Select_ExportEmailBccAccount_List">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                SELECT eba.*
+                FROM emailsendbccaccount AS esba
+                JOIN `emailbccaccount` AS eba ON esba.`EmailBccAccountID`=eba.`EmailBccAccountID`
+                 WHERE 1=1 AND esba.EmailID=@@EmailID@@ <%= AND esba.EmailSendBccAccountState=@@EmailSendBccAccountState@@%>;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+  
 </SqlSetting>
 

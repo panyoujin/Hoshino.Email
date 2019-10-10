@@ -24,30 +24,30 @@ namespace Hoshino.Email.Repository
         /// <summary>
         /// 修改
         /// </summary>
-        public bool Update(EmailSendBccAccountEntity model)
+        public bool Update(int EmailID,int newState, int oldState)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            if (model.EmailSendBccAccountID != null)
-            {
-                dic["EmailSendBccAccountID"] = model.EmailSendBccAccountID;
-            }
-            if (model.EmailID != null)
-            {
-                dic["EmailID"] = model.EmailID;
-            }
-            if (model.EmailBccAccountID != null)
-            {
-                dic["EmailBccAccountID"] = model.EmailBccAccountID;
-            }
-            if (model.EmailAccountID != null)
-            {
-                dic["EmailAccountID"] = model.EmailAccountID;
-            }
-            dic["EmailSendBccAccountState"] = model.EmailSendBccAccountState;
-            dic["EmailSendBccAccountCreateTime"] = model.EmailSendBccAccountCreateTime;
-            dic["EmailSendBccAccountLastTime"] = model.EmailSendBccAccountLastTime;
-            dic["EmailSendBccAccountSendTime"] = model.EmailSendBccAccountSendTime;
-            dic["Result"] = model.Result;
+            dic["EmailID"] = EmailID;
+
+            //if (model.EmailSendBccAccountID != null)
+            //{
+            //    dic["EmailSendBccAccountID"] = model.EmailSendBccAccountID;
+            //}
+
+            //if (model.EmailBccAccountID != null)
+            //{
+            //    dic["EmailBccAccountID"] = model.EmailBccAccountID;
+            //}
+            //if (model.EmailAccountID != null)
+            //{
+            //    dic["EmailAccountID"] = model.EmailAccountID;
+            //}
+            dic["EmailSendBccAccountState"] = newState;
+            dic["OldState"] = oldState;
+            //dic["EmailSendBccAccountCreateTime"] = model.EmailSendBccAccountCreateTime;
+            //dic["EmailSendBccAccountLastTime"] = model.EmailSendBccAccountLastTime;
+            //dic["EmailSendBccAccountSendTime"] = model.EmailSendBccAccountSendTime;
+            //dic["Result"] = model.Result;
             return SQLHelperFactory.Instance.ExecuteNonQuery("Update_emailsendbccaccount", dic) > 0;
         }
 
@@ -143,6 +143,18 @@ namespace Hoshino.Email.Repository
                 dicList.Add(dic);
             }
             return SQLHelperFactory.Instance.ExecuteNonQuery("Update_emailsendbccaccount_state", dicList) > 0;
+        }
+
+        /// <summary>
+        /// 获取根据状态需要导出的列表列表
+        /// </summary>
+        public IEnumerable<EmailBccAccountEntity> GetExportEmailBccAccountList(int EmailID, int state)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic["EmailID"] = EmailID;
+            dic["EmailSendBccAccountState"] = state;
+            var list = SQLHelperFactory.Instance.QueryForListByT<EmailBccAccountEntity>("Select_ExportEmailBccAccount_List", dic);
+            return list;
         }
     }
 }

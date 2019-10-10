@@ -130,6 +130,9 @@
     <Compile Include="Controls\EmailInfoManage\UC_EmailInfoManage.xaml.cs">
       <DependentUpon>UC_EmailInfoManage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EmailInfoManage\Win_ExportExcel.xaml.cs">
+      <DependentUpon>Win_ExportExcel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\EmailInfoManage\Win_SentList.xaml.cs">
       <DependentUpon>Win_SentList.xaml</DependentUpon>
     </Compile>
@@ -161,6 +164,7 @@
       <DependentUpon>Win_NewOneEmail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extentions\StringExt.cs" />
+    <Compile Include="Helper\ExportBccAccountHelper.cs" />
     <Compile Include="SampleData\EmailInfoDataSource\EmailInfoDataSource.xaml.cs">
       <DependentUpon>EmailInfoDataSource.xaml</DependentUpon>
     </Compile>
@@ -208,6 +212,10 @@
     <Page Include="Controls\EmailInfoManage\UC_EmailInfoManage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EmailInfoManage\Win_ExportExcel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\EmailInfoManage\Win_SentList.xaml">
       <Generator>MSBuild:Compile</Generator>
