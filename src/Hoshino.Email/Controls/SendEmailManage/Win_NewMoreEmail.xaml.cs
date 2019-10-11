@@ -84,6 +84,8 @@ namespace Hoshino.Email.Controls.SendEmailManage
                     }
 
                     string.Format("導入總數量{0},成功{1},失敗{2}", total, total - faliTotal, faliTotal).ShowDialog();
+                    this.DialogResult = true;
+                    this.Close();
                 }
             }
             catch (Exception ex)

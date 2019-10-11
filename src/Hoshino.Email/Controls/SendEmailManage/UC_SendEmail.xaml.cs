@@ -50,8 +50,11 @@ namespace Hoshino.Email.Controls.SendEmailManage
 
         private void BtnNewMoreEmail_Click(object sender, RoutedEventArgs e)
         {
-            new Win_NewMoreEmail().Show();
-
+            bool? result= new Win_NewMoreEmail().ShowDialog();
+            if (result.HasValue && result.Value)
+            {
+                GetList();
+            }
         }
         /// <summary>
         /// 編輯
