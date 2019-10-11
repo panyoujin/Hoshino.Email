@@ -5,6 +5,7 @@ using Hoshino.Email.Repository;
 using LumiSoft.Net.MIME;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -160,6 +161,11 @@ namespace Hoshino.Email.Controls.NewMessageForm
 
             Thread thread = new Thread(s =>
             {
+                Stopwatch st = new Stopwatch();
+                st.Start();
+                int bccTotal = _BccMailList.Count;
+                this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("正在新增邮件，进度：{0}/{1}，耗時：{2}秒",0, bccTotal, 0));
+
                 //新增郵件
                 int EmailID = ER_Repository.Insert(email);
                 if (EmailID <= 0)
@@ -173,19 +179,27 @@ namespace Hoshino.Email.Controls.NewMessageForm
                     entity.EmailAccountID = send.EmailAccountID ;
                     ESR_Repository.Insert(entity);
                 }
+
+
                 //LogHelper.Info("插入發送信息時間：" + DateTime.Now + ",插入密送人數量：" + _BccMailList.Count);
+                int bccCount = 0;
                 foreach (var bcc in _BccMailList)
                 {
+                    bccCount++;
                     EmailSendBccAccountEntity entity = new EmailSendBccAccountEntity();
                     entity.EmailID = EmailID;
                     entity.EmailBccAccountID = bcc.EmailBccAccountID;
                     entity.EmailSendBccAccountState = 0;
                     ESBR_Repository.Insert(entity);
+
+                    this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("正在新增邮件，进度：{0}/{1}，耗時：{2}秒", bccCount, bccTotal, st.ElapsedMilliseconds / 1000));
                 }
-                //LogHelper.Info("插入發送信息時間：" + DateTime.Now + ",插入密送人數量：" + _BccMailList.Count);
+
                 email.EmailID = EmailID;
                 email.EmailState = 0;
                 ER_Repository.Update(email);
+                st.Stop();
+                this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("新增邮件完成，进度：{0}/{1}，耗時：{2}秒", bccCount, bccTotal, st.ElapsedMilliseconds / 1000));
             });
             thread.Start();
             "正在後臺進行郵件新建,將會關閉當前窗口，草稿狀態==正在創建郵件中".ShowDialog();
