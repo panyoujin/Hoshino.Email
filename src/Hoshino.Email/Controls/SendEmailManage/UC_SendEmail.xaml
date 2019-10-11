@@ -42,7 +42,6 @@
         <DataGrid Grid.Row="1" x:Name="dgEmail" Height="355" VerticalAlignment="Top"
           Margin="0 8 0 0" AutoGenerateColumns="False" CanUserResizeColumns="False"
           CanUserAddRows="False" CanUserSortColumns="False" IsReadOnly="True"
-             
           materialDesign:DataGridAssist.ColumnHeaderPadding="2 2 2 2" DataContext="{Binding Source={StaticResource MainDataSource}}" ItemsSource="{Binding Collection}" >
 
             <!--設置選中行的時候不顯示邊框-->
@@ -57,13 +56,84 @@
             </DataGrid.CellStyle>
 
             <DataGrid.Columns>
-                <!--<DataGridTextColumn  Header="序號" Width="50" Binding="{Binding Num}"/>-->
-                <DataGridTextColumn Header="郵件地址" Width="200" Binding="{Binding EmailAccountAddress}"/>
-                <DataGridTextColumn Header="類別" Width="200" Binding="{Binding EmailAccountCategoryName}"/>
-                <DataGridTextColumn Header="發送間隔" Width="100" Binding="{Binding EmailAccountSpace}"/>
-                <DataGridTextColumn Header="最大" Width="50" Binding="{Binding EmailAccountMaxEmailCount}"/>
-                <DataGridTextColumn Header="剩餘" Width="50" Binding="{Binding EmailAccountRemainEmailCount}"/>
-                <DataGridTextColumn Header="下次發送時間" Width="150" Binding="{Binding EmailAccountNextSendTime}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="200" Text="郵件地址" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EmailAccountAddress}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="200" Text="類別" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EmailAccountCategoryName}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="100" Text="發送間隔" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="100" Text="{Binding EmailAccountSpace}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="50" Text="最大" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EmailAccountMaxEmailCount}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="50" Text="剩餘" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EmailAccountRemainEmailCount}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="150" Text="下次發送時間" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EmailAccountNextSendTime,StringFormat='yyyy-MM-dd HH:mm:ss'}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
                 <DataGridTemplateColumn Header="操作" >
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>

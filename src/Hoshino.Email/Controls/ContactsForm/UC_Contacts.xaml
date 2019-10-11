@@ -73,20 +73,32 @@
             </DataGrid.CellStyle>
 
             <DataGrid.Columns>
-                <!--<DataGridTemplateColumn Width="30">
-                        <DataGridTemplateColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <CheckBox></CheckBox>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.HeaderTemplate>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox></CheckBox>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>-->
-                <DataGridTextColumn Header="郵件" Width="200" Binding="{Binding EmailBccAccountName}"/>
-                <DataGridTextColumn Header="類別" Width="200" Binding="{Binding EmailBccAccountCategoryName}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="200" Text="郵件" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EmailBccAccountName}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="200" Text="類別" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EmailBccAccountCategoryName}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
                 <!--<DataGridTemplateColumn Header="狀態" Width="60">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -97,8 +109,20 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>-->
                 <!--<DataGridTextColumn Header="狀態" Width="60" Binding="{Binding Status}"/>-->
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="200" Text="創建時間" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding EmailBccAccountCreateTime,StringFormat='yyyy-MM-dd HH:mm:ss'}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
 
-                <DataGridTextColumn Header="創建時間" Width="200" Binding="{Binding EmailBccAccountCreateTime}"/>
                 <DataGridTemplateColumn Header="操作" >
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>

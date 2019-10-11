@@ -51,9 +51,32 @@
             </DataGrid.CellStyle>
 
             <DataGrid.Columns>
-                <!--<DataGridTextColumn  Header="序號" Width="50" Binding="{Binding EmailBccAccountName}"/>-->
-                <DataGridTextColumn Header="類別" Width="300" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="創建時間" Width="300" Binding="{Binding CreateTime}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="300" Text="類別" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="300" Text="創建時間" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding CreateTime,StringFormat='yyyy-MM-dd HH:mm:ss'}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
                 <DataGridTemplateColumn Header="操作" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
