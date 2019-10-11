@@ -108,7 +108,7 @@ namespace Hoshino.Email.Controls.EmailInfoManage
                             //設置停止發送
                             entity.EmailState = 4;
                             //修改密送記錄的郵件狀態
-                            ESBAR_Repository.Update(emailInfo.EmailID,2,0);
+                            ESBAR_Repository.Update(emailInfo.EmailID, 2, 0);
                             break;
                         case 2:
                             //設置開始發送
@@ -148,10 +148,11 @@ namespace Hoshino.Email.Controls.EmailInfoManage
                 return;
             }
             var selectItem = dgEmail.SelectedItem as EmailInfoEntity;
-            EI_Repository.Update(new EmailInfoEntity {EmailID= selectItem.EmailID,EmailState=0 });
+            EI_Repository.Update(new EmailInfoEntity { EmailID = selectItem.EmailID, EmailState = 0 });
 
             //修改密送記錄的郵件狀態
             ESBAR_Repository.Update(selectItem.EmailID, 0, -1);
+            ESBAR_Repository.Update(selectItem.EmailID, 0, 2);
 
             "狀態修改成功".ShowDialog();
         }
