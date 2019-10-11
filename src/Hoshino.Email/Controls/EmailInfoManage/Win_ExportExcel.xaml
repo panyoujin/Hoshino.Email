@@ -1,0 +1,29 @@
+﻿<Window x:Class="Hoshino.Email.Controls.EmailInfoManage.Win_ExportExcel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hoshino.Email.Controls.SendEmailManage"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" 
+        Title="導出數據" Background="White"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         Height="300" Width="200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button VerticalAlignment="Center" x:Name="btnSuccess" Click="BtnSuccess_Click"  Grid.Row="0" Style="{StaticResource MaterialDesignRaisedDarkButton}"  HorizontalAlignment="Center" Height="40" Width="150" ToolTip="導出成功的郵箱" Content="導出成功的郵箱" Foreground="White" ></Button>
+
+        <Button VerticalAlignment="Center" x:Name="btnFail" Click="BtnFail_Click"  Grid.Row="1" Style="{StaticResource MaterialDesignRaisedDarkButton}"  HorizontalAlignment="Center" Height="40" Width="150" ToolTip="導出失敗的郵箱" Content="導出失敗的郵箱" Foreground="White" ></Button>
+
+        <Button VerticalAlignment="Center" x:Name="btnStop" Click="BtnStop_Click" Grid.Row="2" Style="{StaticResource MaterialDesignRaisedDarkButton}"  HorizontalAlignment="Center" Height="40" Width="150" ToolTip="導出停止的郵箱" Content="導出停止的郵箱" Foreground="White" ></Button>
+
+        <Button VerticalAlignment="Center" x:Name="btnNoStart" Click="BtnNoStart_Click" Grid.Row="3" Style="{StaticResource MaterialDesignRaisedDarkButton}"  HorizontalAlignment="Center" Height="40" Width="150" ToolTip="導出未發送郵箱" Content="導出未發送郵箱" Foreground="White" ></Button>
+
+
+    </Grid>
+</Window>
