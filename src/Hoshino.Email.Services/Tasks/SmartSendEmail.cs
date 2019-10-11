@@ -93,7 +93,7 @@ namespace Hoshino.Email.Services.Tasks
                             {
                                 //5. 发送邮件
                                 CDOSendEmail cdoSend = new CDOSendEmail();
-                                cdoSend.SendEmail(emailInfo, emailAccount, sendList.ToList());
+                                cdoSend.SendEmail(emailInfo, EmailAccount, sendList.ToList());
                             }
                             catch (Exception ex)
                             {

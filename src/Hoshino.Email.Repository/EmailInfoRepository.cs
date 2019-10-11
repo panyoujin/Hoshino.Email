@@ -131,6 +131,7 @@ namespace Hoshino.Email.Repository
             dic["EmailID"] = EmailID;
             //修改已發送數量
             SQLHelperFactory.Instance.ExecuteNonQuery("Update_EmaiInfoQTY_ByEmailID", dic);
+            SQLHelperFactory.Instance.ExecuteNonQuery("Update_EmailInfo_EmailState", dic);
         }
     }
 }

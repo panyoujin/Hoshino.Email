@@ -31,7 +31,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                SELECT EmailAccountID,OccupyIP,OccupyTime,EmailAccountPreSendTime,EmailAccountNextSendTime FROM emailaccount;
+                SELECT EmailAccountID,EmailAccountAddress,EmailAccountPassWord,EmailAccountName,EmailAccountSMTP,EmailAccountSMTPPort,EmailAccountPOP3,EmailAccountPOP3Port,EmailAccountIsSSL,EmailAccountMaxEmailCount,EmailAccountRemainEmailCount,EmailAccountSpace,SendState,SendMode,OccupyIP,OccupyTime,EmailAccountPreSendTime,EmailAccountNextSendTime FROM emailaccount where EmailAccountState=1;
                 ]]>
             </SqlCommand>
         </SqlDefinition>

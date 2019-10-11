@@ -33,7 +33,7 @@ namespace Hoshino.Email.Services
                             {
 
                                 SmartSendEmail task;
-                                if (!EmailAccountDic.ContainsKey(ea.EmailAccountID))
+                                if (EmailAccountDic.ContainsKey(ea.EmailAccountID))
                                 {
                                     task = EmailAccountDic[ea.EmailAccountID];
                                     //如果服务线程已经终止，则重新启动

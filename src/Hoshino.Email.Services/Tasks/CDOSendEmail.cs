@@ -19,7 +19,7 @@ namespace Hoshino.Email.Services.Tasks
                 Configuration conf = new ConfigurationClass();
                 conf.Fields[CdoConfiguration.cdoSendUsingMethod].Value = CdoSendUsing.cdoSendUsingPort;
                 conf.Fields[CdoConfiguration.cdoSMTPAuthenticate].Value = CdoProtocolsAuthentication.cdoBasic;
-                conf.Fields[CdoConfiguration.cdoSMTPUseSSL].Value = false;
+                conf.Fields[CdoConfiguration.cdoSMTPUseSSL].Value = emailAccount.EmailAccountIsSSL == 1;
                 conf.Fields[CdoConfiguration.cdoSMTPServer].Value = emailAccount.EmailAccountSMTP;//必填，而且要真实可用   
                 conf.Fields[CdoConfiguration.cdoSMTPServerPort].Value = emailAccount.EmailAccountSMTPPort;
                 conf.Fields[CdoConfiguration.cdoSendEmailAddress].Value = emailAccount.EmailAccountAddress;

@@ -26,7 +26,7 @@ namespace Hoshino.Email.Core
                 }
 
                 //返回本机的局域网IP
-                return addressList[0].ToString();
+                return addressList[addressList.Length-1].ToString();
             }
         }
         #endregion

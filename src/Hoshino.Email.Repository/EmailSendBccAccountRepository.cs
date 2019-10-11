@@ -136,7 +136,7 @@ namespace Hoshino.Email.Repository
                 }
                 dic["EmailSendBccAccountState"] = model.EmailSendBccAccountState;
                 dic["Result"] = "无";
-                if (string.IsNullOrWhiteSpace(model.Result))
+                if (!string.IsNullOrWhiteSpace(model.Result))
                 {
                     dic["Result"] = model.Result;
                 }

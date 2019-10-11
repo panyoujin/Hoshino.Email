@@ -23,9 +23,9 @@
       <SqlCommand>
         <![CDATA[
                 
-UPDATE `emailinfo` ei SET ei.`EmailState`=3,EmailLastTime=NOW() WHERE NOT EXISTS (SELECT esb.`EmailID` FROM `emailsendbccaccount` esb WHERE esb.`EmailID` = ei.`EmailID` AND esb.`EmailAccountID` IS NULL AND esb.`EmailSendBccAccountState`=0);
+UPDATE `emailinfo` ei SET ei.`EmailState`=3,EmailLastTime=NOW() WHERE ei.`EmailState` =0 and  NOT EXISTS (SELECT esb.`EmailID` FROM `emailsendbccaccount` esb WHERE esb.`EmailID` = ei.`EmailID` AND esb.`EmailAccountID` IS NULL AND esb.`EmailSendBccAccountState`=0);
 
-UPDATE `emailinfo` ei SET ei.`EmailState`=1,EmailLastTime=NOW() WHERE NOT EXISTS (SELECT esb.`EmailID` FROM `emailsendbccaccount` esb WHERE esb.`EmailID` = ei.`EmailID` AND esb.`EmailSendBccAccountState`=0);
+UPDATE `emailinfo` ei SET ei.`EmailState`=1,EmailLastTime=NOW() WHERE  ei.`EmailState`  in (0,3) and NOT EXISTS (SELECT esb.`EmailID` FROM `emailsendbccaccount` esb WHERE esb.`EmailID` = ei.`EmailID` AND esb.`EmailSendBccAccountState`=0);
                 ]]>
       </SqlCommand>
     </SqlDefinition>
@@ -66,8 +66,8 @@ UPDATE `emailinfo` ei SET ei.`EmailState`=1,EmailLastTime=NOW() WHERE NOT EXISTS
         <![CDATA[
         SELECT ei.* FROM `emailsendaccount` esa 
         INNER JOIN `emailinfo` ei ON ei.`EmailID`=esa.`EmailID` 
-        INNER JOIN (SELECT `EmailID` FROM `emailsendbccaccount` WHERE `EmailSendBccAccountState` = 0 AND `EmailAccountID`=1 GROUP BY `EmailID`) AS esb ON esb.`EmailID` = ei.`EmailID`
-        WHERE esa.`EmailAccountID`=1 AND ei.`EmailIsDel`=0 
+        INNER JOIN (SELECT `EmailID` FROM `emailsendbccaccount` WHERE `EmailSendBccAccountState` = 0 AND `EmailAccountID`=@@EmailAccountID@@ GROUP BY `EmailID`) AS esb ON esb.`EmailID` = ei.`EmailID`
+        WHERE esa.`EmailAccountID`=@@EmailAccountID@@ AND ei.`EmailIsDel`=0 
         ORDER BY ei.`EmailStartSendTime` LIMIT 1;
                 ]]>
       </SqlCommand>
@@ -92,9 +92,9 @@ UPDATE `emailinfo` ei SET ei.`EmailState`=1,EmailLastTime=NOW() WHERE NOT EXISTS
     <SqlDefinition type="MySql" ConnStringName="backstage_connection">
       <SqlCommand>
         <![CDATA[
-        SELECT COUNT(0) INTO @Total FROM `emailsendbccaccount` WHERE EmailID=1 AND `EmailSendBccAccountState` = 1;
+        SELECT COUNT(0) INTO @Total FROM `emailsendbccaccount` WHERE EmailID=@@EmailID@@ AND `EmailSendBccAccountState` = 1;
         UPDATE `emailinfo` SET AlreadySendQty = @Total WHERE `EmailID` = @@EmailID@@;
-        SELECT COUNT(0) AS @fTotal FROM `emailsendbccaccount` WHERE EmailID=1 AND `EmailSendBccAccountState` =- 1;
+        SELECT COUNT(0) INTO @fTotal FROM `emailsendbccaccount` WHERE EmailID=@@EmailID@@ AND `EmailSendBccAccountState` =-1;
         UPDATE `emailinfo` SET `FailQty` = @fTotal WHERE `EmailID` = @@EmailID@@;
                 ]]>
       </SqlCommand>

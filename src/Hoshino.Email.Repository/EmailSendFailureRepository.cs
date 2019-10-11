@@ -16,25 +16,21 @@ namespace Hoshino.Email.Repository
             foreach (var model in list)
             {
                 Dictionary<string, object> dic = new Dictionary<string, object>();
-                if (model.EmailSendFailureID != null)
                 {
                     dic["EmailSendFailureID"] = model.EmailSendFailureID;
                 }
-                if (model.EmailID != null)
                 {
                     dic["EmailID"] = model.EmailID;
                 }
-                if (model.EmailBccAccountID != null)
                 {
                     dic["EmailBccAccountID"] = model.EmailBccAccountID;
                 }
-                if (model.EmailAccountID != null)
                 {
                     dic["EmailAccountID"] = model.EmailAccountID;
                 }
                 dic["EmailSendFailureSendTime"] = model.EmailSendFailureSendTime;
-                dic["Result"] = "无";
-                if (string.IsNullOrWhiteSpace(model.Result))
+                dic["Result"] = "無";
+                if (!string.IsNullOrWhiteSpace(model.Result))
                 {
                     dic["Result"] = model.Result;
                 }
@@ -49,19 +45,15 @@ namespace Hoshino.Email.Repository
         public bool Update(EmailSendFailureEntity model)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            if (model.EmailSendFailureID != null)
             {
                 dic["EmailSendFailureID"] = model.EmailSendFailureID;
             }
-            if (model.EmailID != null)
             {
                 dic["EmailID"] = model.EmailID;
             }
-            if (model.EmailBccAccountID != null)
             {
                 dic["EmailBccAccountID"] = model.EmailBccAccountID;
             }
-            if (model.EmailAccountID != null)
             {
                 dic["EmailAccountID"] = model.EmailAccountID;
             }
