@@ -53,17 +53,28 @@
             </DataGrid.CellStyle>
 
             <DataGrid.Columns>
-                <DataGridTemplateColumn Width="400" Header="郵件標題">
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="400" Text="郵件標題" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding EmailTitle}" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{Binding EmailTitle}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="200" Header="發件箱">
+                
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="200" Text="發件箱" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding EmailAccountAddress}" Foreground="Red" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{Binding EmailAccountAddress}" TextAlignment="Center"  Foreground="Red" VerticalAlignment="Center"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

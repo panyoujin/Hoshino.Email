@@ -54,34 +54,58 @@
             </DataGrid.CellStyle>
 
             <DataGrid.Columns>
-                <DataGridTemplateColumn Width="200" Header="抄送人（收件箱）">
+                <DataGridTemplateColumn >
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="200" Text="抄送人（收件箱）" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding EmailBccAccountAddress}" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{Binding EmailBccAccountAddress}"  TextAlignment="Center"  VerticalAlignment="Center"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="200" Header="發件箱">
+                
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="200" Text="發件箱" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding EmailAccountAddress}" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{Binding EmailAccountAddress}" TextAlignment="Center"  VerticalAlignment="Center"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="100" Header="狀態">
+                
+                <DataGridTemplateColumn >
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="100" Text="狀態" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding EmailSendBccAccountStateStr}" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{Binding EmailSendBccAccountStateStr}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="200" Header="發送時間">
+                
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="200" Text="發送時間" TextAlignment="Center"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding EmailSendBccAccountSendTime}" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{Binding EmailSendBccAccountSendTime}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                
                 <DataGridTemplateColumn Header="操作" >
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>
