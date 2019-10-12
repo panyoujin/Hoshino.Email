@@ -170,6 +170,7 @@ namespace Hoshino.Email.Controls.ContactsForm
                         var dic = dics[c.Key];
                         var cc = rowData.CreateCell(cloumnIndex);
                         cc.SetCellValue(dic == null ? "" : dic.ToString());
+                        cloumnIndex++;
                     }
                 }
                 st.Stop();
