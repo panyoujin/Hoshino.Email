@@ -87,8 +87,8 @@ namespace Hoshino.Email.Controls.ContactsForm
 
 
             System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
-            sfd.Filter = "Excel文件(*.xlsx)|*.xlsx|Excel文件(*.xls)|*.xls|所有文件(*.*)|*.*";
-            sfd.FileName = "ReceiptMail.xlsx";
+            sfd.Filter = "Excel文件(*.xls)|*.xlsx|Excel文件(*.xlsx)|*.xls|所有文件(*.*)|*.*";
+            sfd.FileName = "ReceiptMail.xls";
             if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 Thread t = new Thread((obj) =>
@@ -131,7 +131,7 @@ namespace Hoshino.Email.Controls.ContactsForm
             {
                 Directory.CreateDirectory(sFileName);
             }
-            sFileName = Path.Combine(sFileName, "ReceiptMail.xlsx");
+            sFileName = Path.Combine(sFileName, "ReceiptMail.xls");
             if (System.IO.File.Exists(sFileName))
             {
                 System.IO.File.Delete(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, sFileName));
@@ -140,7 +140,7 @@ namespace Hoshino.Email.Controls.ContactsForm
             var cloumns = DicColumn[Model];
             using (var fs = new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, sFileName), FileMode.Create, FileAccess.Write))
             {
-                IWorkbook workbook = new XSSFWorkbook();
+                IWorkbook workbook = new HSSFWorkbook();
                 ISheet sheet1 = workbook.CreateSheet(Model);
                 var rowIndex = 0;
                 var cloumnIndex = 0;
@@ -151,6 +151,7 @@ namespace Hoshino.Email.Controls.ContactsForm
                     cc.SetCellValue(c.Value);
                     sheet1.AutoSizeColumn(cloumnIndex++);
                 }
+
                 Stopwatch st = new Stopwatch();
                 st.Start();
                 DateTime t2 = DateTime.Now;
