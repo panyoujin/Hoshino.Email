@@ -7,16 +7,19 @@ namespace Hoshino.Email.Services
     {
         static void Main(string[] args)
         {
+#if DEBUG
             MainServices s = new MainServices();
             s.Start(null);
             Console.Read();
-            //HostFactory.Run(x =>
-            //{
-            //    x.Service<MainServices>();
-            //    x.SetDescription("HoshinoEmail");
-            //    x.SetDisplayName("HoshinoEmail");
-            //    x.SetServiceName("HoshinoEmail");
-            //});
+            return;
+#endif
+            HostFactory.Run(x =>
+            {
+                x.Service<MainServices>();
+                x.SetDescription("HoshinoEmail");
+                x.SetDisplayName("HoshinoEmail");
+                x.SetServiceName("HoshinoEmail");
+            });
         }
     }
 }
