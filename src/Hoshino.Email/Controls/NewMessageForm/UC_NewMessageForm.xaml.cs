@@ -46,10 +46,16 @@ namespace Hoshino.Email.Controls.NewMessageForm
             InitializeComponent();
         }
 
-        ~UC_NewMessageForm()
+        void ClearControl()
         {
-            _SendMailList.Clear();
-            _BccMailList.Clear();
+
+            tbPath.Text = "";
+            tbSendEmail.Text = "";
+            tbBccs.Text = "";
+            tbTheme.Text = "";
+            dpSendDate.Text = "";
+            tpSendTime.Text = "";
+            htmlEditor.ContentHtml = "";
         }
 
         #region 控件event
@@ -200,11 +206,15 @@ namespace Hoshino.Email.Controls.NewMessageForm
                 ER_Repository.Update(email);
                 st.Stop();
                 this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("新增邮件完成，进度：{0}/{1}，耗時：{2}秒", bccCount, bccTotal, st.ElapsedMilliseconds / 1000));
+                _SendMailList.Clear();
+                _BccMailList.Clear();
             });
             thread.Start();
             "正在後臺進行郵件新建,將會關閉當前窗口，草稿狀態==正在創建郵件中".ShowDialog();
 
             this.Dispatcher.BeginInvoke(MainWindow.GotoPage, "郵件管理");
+
+            ClearControl();
         }
 
         #endregion
