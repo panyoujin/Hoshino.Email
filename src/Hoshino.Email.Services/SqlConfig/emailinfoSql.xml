@@ -22,7 +22,8 @@
     <SqlDefinition type="MySql" ConnStringName="backstage_connection">
       <SqlCommand>
         <![CDATA[
-                
+UPDATE `emailinfo` ei SET ei.`EmailState`=0,EmailLastTime=NOW() WHERE ei.`EmailState` =2 and  EmailStartSendTime <= NOW();
+
 UPDATE `emailinfo` ei SET ei.`EmailState`=3,EmailLastTime=NOW() WHERE ei.`EmailState` =0 and  NOT EXISTS (SELECT esb.`EmailID` FROM `emailsendbccaccount` esb WHERE esb.`EmailID` = ei.`EmailID` AND esb.`EmailAccountID` IS NULL AND esb.`EmailSendBccAccountState`=0);
 
 UPDATE `emailinfo` ei SET ei.`EmailState`=1,EmailLastTime=NOW() WHERE  ei.`EmailState`  in (0,3) and NOT EXISTS (SELECT esb.`EmailID` FROM `emailsendbccaccount` esb WHERE esb.`EmailID` = ei.`EmailID` AND esb.`EmailSendBccAccountState`=0);
@@ -80,7 +81,7 @@ UPDATE `emailinfo` ei SET ei.`EmailState`=1,EmailLastTime=NOW() WHERE  ei.`Email
         <![CDATA[
                 SELECT ei.* FROM `emailsendaccount` esa 
                 LEFT JOIN `emailinfo` ei ON ei.`EmailID`=esa.`EmailID` 
-                WHERE esa.`EmailAccountID`=@@EmailAccountID@@ AND ei.`EmailIsDel`=0 AND ei.`EmailState` = 0 
+                WHERE esa.`EmailAccountID`=@@EmailAccountID@@ AND ei.`EmailIsDel`=0 AND ei.`EmailState` = 0  AND (ei. EmailStartSendTime IS NULL OR ei. EmailStartSendTime <=@@EmailStartSendTime@@)
                 ORDER BY ei.`EmailStartSendTime` LIMIT 1;
                 ]]>
       </SqlCommand>

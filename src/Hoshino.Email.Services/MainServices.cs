@@ -3,6 +3,7 @@ using Hoshino.Email.Repository;
 using Hoshino.Email.Services.Tasks;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Topshelf;
 
@@ -15,7 +16,7 @@ namespace Hoshino.Email.Services
 
         Thread _Thread;
         public bool IsStart = false;
-        int Interval = 60;
+        int Interval = 30;
 
         public bool Start(HostControl hostControl)
         {
@@ -29,6 +30,7 @@ namespace Hoshino.Email.Services
                         try
                         {
                             var list = Repository.GetList();
+                            LogHelper.Debug(string.Format("MainServices : 获取到发件箱数量【{0}】", list.Count()));
                             foreach (var ea in list)
                             {
 
@@ -39,24 +41,32 @@ namespace Hoshino.Email.Services
                                     //如果服务线程已经终止，则重新启动
                                     if (!task.IsStart)
                                     {
+                                        LogHelper.Info(string.Format("MainServices : 再次启动已经停止的发件箱【{0}:{1}】", ea.EmailAccountID, ea.EmailAccountAddress));
                                         task.Run(ea);
                                         EmailAccountDic[ea.EmailAccountID] = task;
                                     }
                                 }
                                 else
                                 {
+                                    LogHelper.Debug(string.Format("MainServices : 准备将发件箱【{0}:{1}】的占用IP改为【{2} -> {3}】", ea.EmailAccountID, ea.EmailAccountAddress, ea.OccupyIP, NetHelper.LANIP));
                                     //2. 修改邮箱使用的服务器信息-增加占用信息和占用时间
                                     ea.OccupyIP = NetHelper.LANIP;
                                     if (!Repository.UpdateEmailAccountOccupy(ea))
                                     {
+                                        LogHelper.Debug(string.Format("MainServices : 将发件箱【{0}:{1}】的占用IP改为【{2} -> {3}】失败", ea.EmailAccountID, ea.EmailAccountAddress, ea.OccupyIP, NetHelper.LANIP));
                                         //占用失败，已经被其他服务器占用，跳过当前邮箱
                                         continue;
                                     }
+                                    LogHelper.Info(string.Format("MainServices : 将发件箱【{0}:{1}】的占用IP改为【{2} -> {3}】成功", ea.EmailAccountID, ea.EmailAccountAddress, ea.OccupyIP, NetHelper.LANIP));
                                     task = new SmartSendEmail();
                                     task.Run(ea);
                                     EmailAccountDic[ea.EmailAccountID] = task;
                                 }
                             }
+                        }
+                        catch (Exception ex)
+                        {
+                            LogHelper.Error(string.Format("MainServices : Exception:{0}", ex.Message), ex);
                         }
                         finally
                         {
@@ -86,7 +96,7 @@ namespace Hoshino.Email.Services
                         }
                         catch (Exception ex)
                         {
-
+                            LogHelper.Error(string.Format("MainServices : 停止线程 Exception:{0}", ex.Message), ex);
                         }
                     }
                     _Thread = null;
@@ -94,7 +104,7 @@ namespace Hoshino.Email.Services
             }
             catch (Exception ex)
             {
-
+                LogHelper.Error(string.Format("MainServices : 停止发件线程 Exception:{0}", ex.Message), ex);
             }
             try
             {
@@ -109,13 +119,13 @@ namespace Hoshino.Email.Services
                     }
                     catch (Exception e)
                     {
-
+                        LogHelper.Error(string.Format("MainServices : 停止发件线程 Exception:{0}", e.Message), e);
                     }
                 }
             }
             catch (Exception ex)
             {
-
+                LogHelper.Error(string.Format("MainServices : 停止发件线程 Exception:{0}", ex.Message), ex);
             }
             return true;
         }
@@ -124,8 +134,8 @@ namespace Hoshino.Email.Services
         {
             while (interval > 0 && IsStart)
             {
-                Thread.Sleep((interval > 10 ? 10 : interval) * 1000);
-                interval -= 10;
+                Thread.Sleep((interval > 5 ? 5 : interval) * 1000);
+                interval -= 5;
             }
         }
 

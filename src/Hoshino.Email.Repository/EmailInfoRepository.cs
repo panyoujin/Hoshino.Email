@@ -103,6 +103,7 @@ namespace Hoshino.Email.Repository
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic["EmailAccountID"] = EmailAccountID;
+            dic["EmailStartSendTime"] = DateTime.Now;
             //先把已经完成的状态进行修改
             SQLHelperFactory.Instance.ExecuteNonQuery("Update_EmailInfo_EmailState", dic);
             return SQLHelperFactory.Instance.QueryForObjectByT<EmailInfoEntity>("Select_NextSendEmailInfoByEmailAccount", dic);

@@ -22,7 +22,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                SELECT EmailAccountID,EmailAccountAddress,EmailAccountPassWord,EmailAccountName,EmailAccountSMTP,EmailAccountSMTPPort,EmailAccountPOP3,EmailAccountPOP3Port,EmailAccountIsSSL,EmailAccountMaxEmailCount,EmailAccountRemainEmailCount,EmailAccountSpace,SendState,SendMode,OccupyIP,OccupyTime,EmailAccountPreSendTime,EmailAccountNextSendTime FROM emailaccount WHERE EmailAccountID=@@EmailAccountID@@;
+                SELECT EmailAccountID,EmailAccountAddress,EmailAccountPassWord,EmailAccountName,EmailAccountSMTP,EmailAccountSMTPPort,EmailAccountPOP3,EmailAccountPOP3Port,EmailAccountIsSSL,EmailAccountMaxEmailCount,EmailAccountRemainEmailCount,EmailAccountSpace,SendState,SendMode,OccupyIP,OccupyTime,EmailAccountPreSendTime,EmailAccountNextSendTime FROM emailaccount WHERE EmailAccountState=1 AND EmailAccountID=@@EmailAccountID@@;
                 ]]>
             </SqlCommand>
         </SqlDefinition>
