@@ -92,7 +92,7 @@ namespace Hoshino.Email.Entity
         {
             get
             {
-                return TotalQty - AlreadySendQty;
+                return TotalQty - AlreadySendQty- FailQty;
             }
         }
 
@@ -116,6 +116,9 @@ namespace Hoshino.Email.Entity
                         break;
                     case 2:
                         str = "開始發送";
+                        break;
+                    case 3:
+                        str = "停止發送";
                         break;
                     case 4:
                         str = "繼續發送";

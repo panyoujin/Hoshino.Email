@@ -155,6 +155,7 @@ namespace Hoshino.Email.Controls.EmailInfoManage
             ESBAR_Repository.Update(selectItem.EmailID, 0, 2);
 
             "狀態修改成功".ShowDialog();
+            GetList();
         }
     }
 }

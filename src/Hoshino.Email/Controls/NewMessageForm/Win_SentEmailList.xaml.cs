@@ -37,6 +37,10 @@ namespace Hoshino.Email.Controls.EmailInfoManage
         {
             InitializeComponent();
             this.Loaded += Win_SentEmailList_Loaded;
+            this.ucPage.ChangePageAction = () =>
+            {
+                GetList();
+            };
         }
 
         private void Win_SentEmailList_Loaded(object sender, RoutedEventArgs e)
