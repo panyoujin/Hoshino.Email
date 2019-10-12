@@ -7,12 +7,12 @@ namespace Hoshino.Email.Services
     {
         static void Main(string[] args)
         {
-#if DEBUG
-            MainServices s = new MainServices();
-            s.Start(null);
-            Console.Read();
-            return;
-#endif
+//#if DEBUG
+//            MainServices s = new MainServices();
+//            s.Start(null);
+//            Console.Read();
+//            return;
+//#endif
             HostFactory.Run(x =>
             {
                 x.Service<MainServices>();
