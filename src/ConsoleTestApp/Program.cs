@@ -25,9 +25,9 @@ namespace ConsoleTestApp
                 Configuration conf = new ConfigurationClass();
                 conf.Fields[CdoConfiguration.cdoSendUsingMethod].Value = CdoSendUsing.cdoSendUsingPort;
                 conf.Fields[CdoConfiguration.cdoSMTPAuthenticate].Value = CdoProtocolsAuthentication.cdoBasic;
-                conf.Fields[CdoConfiguration.cdoSMTPUseSSL].Value = true;
+                conf.Fields[CdoConfiguration.cdoSMTPUseSSL].Value = false;
                 conf.Fields[CdoConfiguration.cdoSMTPServer].Value = "smtp.sina.com";//必填，而且要真实可用   
-                conf.Fields[CdoConfiguration.cdoSMTPServerPort].Value = 465;
+                conf.Fields[CdoConfiguration.cdoSMTPServerPort].Value = 25;
                 conf.Fields[CdoConfiguration.cdoSendEmailAddress].Value = "xuxujiang00@sina.com";
                 conf.Fields[CdoConfiguration.cdoSendUserName].Value = "xuxujiang00@sina.com";//真实的邮件地址   
                 conf.Fields[CdoConfiguration.cdoSendPassword].Value = "5e5d277c167bd275";   //为邮箱密码，必须真实   
