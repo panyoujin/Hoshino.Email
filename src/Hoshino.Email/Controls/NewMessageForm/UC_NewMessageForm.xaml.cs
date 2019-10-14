@@ -189,6 +189,7 @@ namespace Hoshino.Email.Controls.NewMessageForm
 
                 //LogHelper.Info("插入發送信息時間：" + DateTime.Now + ",插入密送人數量：" + _BccMailList.Count);
                 int bccCount = 0;
+                List<EmailSendBccAccountEntity> sendBcc = new List<EmailSendBccAccountEntity>();
                 foreach (var bcc in _BccMailList)
                 {
                     bccCount++;
@@ -196,9 +197,17 @@ namespace Hoshino.Email.Controls.NewMessageForm
                     entity.EmailID = EmailID;
                     entity.EmailBccAccountID = bcc.EmailBccAccountID;
                     entity.EmailSendBccAccountState = 0;
-                    ESBR_Repository.Insert(entity);
-
-                    this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("正在新增邮件，进度：{0}/{1}，耗時：{2}秒", bccCount, bccTotal, st.ElapsedMilliseconds / 1000));
+                    sendBcc.Add(entity);
+                    if (bccCount > 100)
+                    {
+                        ESBR_Repository.InsertBatch(sendBcc);
+                        this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("新增郵件中，進度：{0}/{1}，耗時：{2}秒", bccCount, bccTotal, st.ElapsedMilliseconds / 1000));
+                        sendBcc.Clear();
+                    }
+                }
+                if (sendBcc.Count > 0)
+                {
+                    ESBR_Repository.InsertBatch(sendBcc);
                 }
 
                 email.EmailID = EmailID;

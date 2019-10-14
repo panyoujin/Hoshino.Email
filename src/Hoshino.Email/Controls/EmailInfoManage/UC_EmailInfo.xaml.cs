@@ -148,7 +148,7 @@ namespace Hoshino.Email.Controls.EmailInfoManage
                 return;
             }
             var selectItem = dgEmail.SelectedItem as EmailInfoEntity;
-            EI_Repository.Update(new EmailInfoEntity { EmailID = selectItem.EmailID, EmailState = 0 });
+            EI_Repository.Update(new EmailInfoEntity { EmailID = selectItem.EmailID, EmailState = 0,FailQty=0 });
 
             //修改密送記錄的郵件狀態
             ESBAR_Repository.Update(selectItem.EmailID, 0, -1);

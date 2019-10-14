@@ -49,6 +49,7 @@ namespace Hoshino.Email.Repository
             //{
             //    dic["EmailFilePath"] = model.EmailFilePath;
             //}
+            dic["FailQty"] = model.FailQty;
             dic["EmailState"] = model.EmailState;
             //dic["EmailStartSendTime"] = model.EmailStartSendTime;
             return SQLHelperFactory.Instance.ExecuteNonQuery("Update_emailinfo", dic) > 0;

@@ -15,7 +15,7 @@
         <SqlDefinition type="MySql" ConnStringName="backstage_connection">
             <SqlCommand>
                 <![CDATA[
-                UPDATE emailinfo SET EmailID=@@EmailID@@ <%=,EmailTitle=@@EmailTitle@@%><%=,EmailCreateTime=@@EmailCreateTime@@%><%=,EmailLastTime=@@EmailLastTime@@%><%=,EmailFilePath=@@EmailFilePath@@%><%=,EmailIsDel=@@EmailIsDel@@%><%=,EmailState=@@EmailState@@%><%=,EmailStartSendTime=@@EmailStartSendTime@@%> WHERE EmailID=@@EmailID@@;
+                UPDATE emailinfo SET EmailID=@@EmailID@@ <%=,EmailTitle=@@EmailTitle@@%><%=,EmailCreateTime=@@EmailCreateTime@@%><%=,EmailLastTime=@@EmailLastTime@@%><%=,EmailFilePath=@@EmailFilePath@@%><%=,EmailIsDel=@@EmailIsDel@@%><%=,EmailState=@@EmailState@@%><%=,EmailStartSendTime=@@EmailStartSendTime@@%><%=,FailQty=@@FailQty@@%> WHERE EmailID=@@EmailID@@;
                 ]]>
             </SqlCommand>
         </SqlDefinition>

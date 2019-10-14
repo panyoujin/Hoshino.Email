@@ -21,6 +21,21 @@ namespace Hoshino.Email.Repository
             return SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailsendbccaccount", dic) > 0;
         }
 
+        public bool InsertBatch(List<EmailSendBccAccountEntity> model)
+        {
+            List<Dictionary<string, object>> dics = new List<Dictionary<string, object>>();
+            foreach (var item in model)
+            {
+                Dictionary<string, object> dic = new Dictionary<string, object>();
+
+                dic["EmailID"] = item.EmailID;
+                dic["EmailBccAccountID"] = item.EmailBccAccountID;
+                dic["EmailSendBccAccountState"] = item.EmailSendBccAccountState;
+                dics.Add(dic);
+            }
+            return SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailsendbccaccount", dics) > 0;
+        }
+
         /// <summary>
         /// 修改
         /// </summary>
