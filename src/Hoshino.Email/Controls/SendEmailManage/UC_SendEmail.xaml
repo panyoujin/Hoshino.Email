@@ -64,7 +64,7 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding EmailAccountAddress}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Width="200" Text="{Binding EmailAccountAddress}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using DBHelper.SQLHelper;
 using Hoshino.Email.Entity;
@@ -155,6 +156,31 @@ namespace Hoshino.Email.Repository
         /// <summary>
         /// 新增
         /// </summary>
+        public bool InsertTempBatch(List<EmailBccAccountEntity> list)
+        {
+            List<Dictionary<string, object>> dics = new List<Dictionary<string, object>>();
+            foreach (var model in list)
+            {
+                Dictionary<string, object> dic = new Dictionary<string, object>
+                {
+                    ["EmailBccAccountAddress"] = model.EmailBccAccountAddress,
+                    ["EmailBccAccountName"] = model.EmailBccAccountName,
+                    ["EmailBccAccountCategoryName"] = model.EmailBccAccountCategoryName
+                };
+                dics.Add(dic);
+                if (dics.Count > 100)
+                {
+                    SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailbccaccount_temp", dics);
+                    dics.Clear();
+                }
+            }
+            if (dics.Count > 0)
+            {
+                SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailbccaccount_temp", dics);
+            }
+            return true;
+        }
+
         public bool InsertTemp(List<EmailBccAccountEntity> list)
         {
             List<Dictionary<string, object>> dics = new List<Dictionary<string, object>>();
@@ -167,11 +193,6 @@ namespace Hoshino.Email.Repository
                     ["EmailBccAccountCategoryName"] = model.EmailBccAccountCategoryName
                 };
                 dics.Add(dic);
-                if (dics.Count > 1000)
-                {
-                    SQLHelperFactory.Instance.ExecuteNonQuery("Insert_emailbccaccount_temp", dics);
-                    dics.Clear();
-                }
             }
             if (dics.Count > 0)
             {

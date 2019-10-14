@@ -207,7 +207,7 @@ namespace Hoshino.Email.Controls.ContactsForm
                             ImportData(file, st);
                             EBA_Repository.CopyEmailBccAccount();
                             st.Stop();
-                            this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("導入【{0}】完成,耗時:{1}ms", file, st.ElapsedMilliseconds));
+                            this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("導入【{0}】完成,耗時:{1}秒", file, st.ElapsedMilliseconds / 1000));
                         }
                     });
                     thread.Start(op.FileNames);
@@ -238,7 +238,9 @@ namespace Hoshino.Email.Controls.ContactsForm
                 //最后一列的标号  即总的行数
                 int rowCount = sheet.LastRowNum;
                 int rowFirst = sheet.FirstRowNum;
-                this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("當前預計導入數據{0}行", rowCount - rowFirst));
+                int bccCount = sheet.LastRowNum - sheet.FirstRowNum;
+                this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("當前預計載入數據{0}行,已耗時:{1}秒", bccCount, st.ElapsedMilliseconds / 1000));
+
                 for (int i = (rowFirst + 1); i < rowCount + 1; i++)
                 {
                     HSSFRow row = (HSSFRow)sheet.GetRow(i);
@@ -252,11 +254,35 @@ namespace Hoshino.Email.Controls.ContactsForm
                             bccAccountName = row.GetCell(0).ToString().Trim();
                         }
                         list.Add(new EmailBccAccountEntity() { EmailBccAccountName = bccAccountName, EmailBccAccountAddress = bccAccountAddress, EmailBccAccountCategoryName = bccCategoryName });
+
+                        this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("載入進度{0}/{1},已耗時:{2}秒", i, bccCount, st.ElapsedMilliseconds / 1000));
                     }
                 }
+
+                this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("載入數據完成,已耗時:{0}秒", st.ElapsedMilliseconds / 1000));
+
                 stream.Close();
                 EBA_Repository.DeleteTemp();
-                EBA_Repository.InsertTemp(list);
+                List<EmailBccAccountEntity> BccOneBatch = new List<EmailBccAccountEntity>();
+                int alertCount = 0;
+                int totalCount = list.Count;
+                foreach (var model in list)
+                {
+                    alertCount++;
+                    BccOneBatch.Add(model);
+                    if (BccOneBatch.Count > 100)
+                    {
+                        EBA_Repository.InsertTemp(BccOneBatch);
+                        BccOneBatch.Clear();
+                        this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("導入臨時表進度{0}/{1},已耗時:{2}秒", alertCount, totalCount, st.ElapsedMilliseconds / 1000));
+                    }
+                }
+                if (BccOneBatch.Count > 0)
+                {
+                    EBA_Repository.InsertTemp(BccOneBatch);
+                }
+
+
                 this.Dispatcher.BeginInvoke(MainWindow.ShowMessage, string.Format("準備複製數據請稍候,耗時{0}", st.ElapsedMilliseconds));
             }
             catch (Exception ex)
