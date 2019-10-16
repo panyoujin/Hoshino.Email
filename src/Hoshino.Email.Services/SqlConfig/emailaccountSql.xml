@@ -13,7 +13,7 @@
     <SqlDefinition type="MySql" ConnStringName="backstage_connection">
       <SqlCommand>
         <![CDATA[
-        UPDATE `emailaccount` ea SET ea.`OccupyIP`=@@OccupyIP@@ , ea.`OccupyTime`=NOW(),EmailAccountLastTime=NOW() WHERE ea.`EmailAccountID`=@@EmailAccountID@@ AND (ea.`OccupyIP` IS NULL OR ea.`OccupyIP` = '' OR ea.`OccupyIP`=@@OccupyIP@@ OR ea.`OccupyTime`<DATE_SUB(NOW(),INTERVAL ea.`EmailAccountSpace`/2 MINUTE));
+        UPDATE `emailaccount` ea SET ea.`OccupyIP`=@@OccupyIP@@ , ea.`OccupyTime`=NOW(),EmailAccountLastTime=NOW() WHERE ea.`EmailAccountID`=@@EmailAccountID@@ AND (ea.`OccupyIP` IS NULL OR ea.`OccupyIP` = '' OR ea.`OccupyIP`=@@OccupyIP@@ OR ea.`OccupyTime`<DATE_SUB(NOW(),INTERVAL ea.`EmailAccountSpace`/5 MINUTE));
                 ]]>
       </SqlCommand>
     </SqlDefinition>
