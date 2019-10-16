@@ -9,6 +9,8 @@ namespace Hoshino.Email.Services.Tasks
 {
     public class CDOSendEmail
     {
+        public static object SendLock = new object();
+
         public void SendEmail(EmailInfoEntity emailInfo, EmailAccountEntity emailAccount, List<EmailSendBccAccountEntity> toMails)
         {
             try
@@ -86,8 +88,11 @@ namespace Hoshino.Email.Services.Tasks
                 {
                     oMsg.AddRelatedBodyPart(imgUrl.Value, imgUrl.Key, CdoReferenceType.cdoRefTypeId);
                 }
+                lock (SendLock)
+                {
+                    oMsg.Send();
+                }
 
-                oMsg.Send();
             }
             catch (Exception ex)
             {
