@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SqlSetting>
+    <Data name="Insert_emailbccaccount">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                INSERT INTO emailbccaccount (EmailBccAccountCategoryID,EmailBccAccountCategoryName,EmailBccAccountAddress,EmailBccAccountName,EmailBccAccountCreateTime,EmailBccAccountLastTime) VALUES(@@EmailBccAccountCategoryID@@,@@EmailBccAccountCategoryName@@,@@EmailBccAccountAddress@@,@@EmailBccAccountName@@,NOW(),NOW());
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Update_emailbccaccount">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                UPDATE emailbccaccount SET EmailBccAccountCategoryID=@@EmailBccAccountCategoryID@@,EmailBccAccountCategoryName=@@EmailBccAccountCategoryName@@,EmailBccAccountAddress=@@EmailBccAccountAddress@@,EmailBccAccountName=@@EmailBccAccountName@@,EmailBccAccountLastTime=NOW() WHERE EmailBccAccountID=@@EmailBccAccountID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Delete_emailbccaccount">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                DELETE FROM emailbccaccount WHERE EmailBccAccountID=@@EmailBccAccountID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+    <Data name="Select_emailbccaccount">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                SELECT eba.EmailBccAccountID,eba.EmailBccAccountCategoryID,eba.EmailBccAccountCategoryName,eba.EmailBccAccountAddress,eba.EmailBccAccountName,eba.EmailBccAccountCreateTime,eba.EmailBccAccountLastTime,eba.EmailBccAccountIsDel FROM emailbccaccount AS eba WHERE eba.EmailBccAccountID=@@EmailBccAccountID@@;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+  <Data name="Select_EmailBccAccountByAddress">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                SELECT eba.EmailBccAccountID FROM emailbccaccount AS eba WHERE eba.EmailBccAccountAddress=@@EmailBccAccountAddress@@ AND eba.EmailBccAccountIsDel = 0;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+    <Data name="Select_emailbccaccount_ListByPage">
+        <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+            <SqlCommand>
+                <![CDATA[
+                SELECT eba.EmailBccAccountID,eba.EmailBccAccountCategoryID,eba.EmailBccAccountCategoryName,eba.EmailBccAccountAddress,eba.EmailBccAccountName,eba.EmailBccAccountCreateTime,eba.EmailBccAccountLastTime,eba.EmailBccAccountIsDel FROM emailbccaccount AS eba WHERE eba.EmailBccAccountIsDel = 0 <R%= AND eba.EmailBccAccountCategoryID IN ('@@EmailBccAccountCategoryID@@')%R><R%= AND eba.EmailBccAccountAddress LIKE '%@@EmailBccAccountAddress@@%' %R> ORDER BY eba.EmailBccAccountID LIMIT <R%= @@StartIndex@@, @@SelectCount@@ %R> ;
+                SELECT COUNT(0) AS row_count FROM emailbccaccount AS eba WHERE eba.EmailBccAccountIsDel = 0 <R%= AND eba.EmailBccAccountCategoryID IN ('@@EmailBccAccountCategoryID@@')%R><R%= AND eba.EmailBccAccountAddress LIKE '%@@EmailBccAccountAddress@@%' %R>;
+                ]]>
+            </SqlCommand>
+        </SqlDefinition>
+    </Data>
+  <Data name="Select_emailbccaccount_All">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                SELECT eba.EmailBccAccountID,eba.EmailBccAccountCategoryID,eba.EmailBccAccountCategoryName,eba.EmailBccAccountAddress,eba.EmailBccAccountName,eba.EmailBccAccountCreateTime,eba.EmailBccAccountLastTime,eba.EmailBccAccountIsDel FROM emailbccaccount AS eba WHERE eba.EmailBccAccountIsDel = 0 <R%= AND eba.EmailBccAccountCategoryID IN ('@@EmailBccAccountCategoryID@@')%R><R%= AND eba.EmailBccAccountAddress LIKE '%@@EmailBccAccountAddress@@%' %R> ORDER BY eba.EmailBccAccountID  ;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+  
+  
+  <Data name="Exists_emailbccaccount_temp">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+        select EmailBccAccountCategoryName from emailbccaccount_temp where EmailBccAccountCreateTime>SUBDATE(NOW(),INTERVAL 10 MINUTE) limit 1;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+  <Data name="Delete_emailbccaccount_temp">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+        TRUNCATE TABLE emailbccaccount_temp;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+
+  <Data name="Insert_emailbccaccount_temp">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+        INSERT INTO emailbccaccount_temp (EmailBccAccountCategoryName,EmailBccAccountAddress,EmailBccAccountName,EmailBccAccountCreateTime) VALUES(@@EmailBccAccountCategoryName@@,@@EmailBccAccountAddress@@,@@EmailBccAccountName@@,NOW());
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+
+  <Data name="copy_emailbccaccount_temp">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+        
+INSERT INTO `emailbccaccountcategory`(`Name`,`Sort`,`CreateTime`,`LastTime`)
+SELECT `EmailBccAccountCategoryName`,0,NOW(),NOW() 
+FROM `emailbccaccount_temp` et
+LEFT JOIN `emailbccaccountcategory` ec ON ec.`Name`=et.`EmailBccAccountCategoryName` 
+WHERE ec.`ID` IS NULL
+GROUP BY `EmailBccAccountCategoryName`;
+INSERT INTO `emailbccaccount`(`EmailBccAccountCategoryID`,`EmailBccAccountCategoryName`,`EmailBccAccountAddress`,`EmailBccAccountName`,`EmailBccAccountCreateTime`,`EmailBccAccountLastTime`,`EmailBccAccountIsDel`)
+SELECT ec.`ID`,et.`EmailBccAccountCategoryName`,et.`EmailBccAccountAddress`,et.`EmailBccAccountName`,NOW(),NOW(),0 
+FROM `emailbccaccount_temp` et
+LEFT JOIN `emailbccaccount` ebc ON et.`EmailBccAccountAddress`=ebc.`EmailBccAccountAddress` AND ebc.EmailBccAccountIsDel = 0
+LEFT JOIN `emailbccaccountcategory` ec ON ec.`Name`=et.`EmailBccAccountCategoryName`
+WHERE ebc.`EmailBccAccountID` IS NULL;
+TRUNCATE TABLE `emailbccaccount_temp`;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+
+  <Data name="Get_Delete_emailbccaccount_import">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                SELECT eba.`EmailBccAccountID` FROM `emailbccaccount_temp` ebat,`emailbccaccount` eba
+WHERE eba.`EmailBccAccountAddress`=ebat.`EmailBccAccountAddress` 
+LIMIT 0,100;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+  <Data name="Delete_emailbccaccount_import">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                DELETE FROM  `emailbccaccount`
+<R%= WHERE EmailBccAccountID in (@@EmailBccAccountID@@) %R>
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+
+  <Data name="Select_emailbccaccount_by_export">
+    <SqlDefinition type="MySql" ConnStringName="backstage_connection">
+      <SqlCommand>
+        <![CDATA[
+                SELECT eba.EmailBccAccountCategoryName AS CategoryName,eba.EmailBccAccountAddress AS Address,eba.EmailBccAccountName AS Name FROM emailbccaccount AS eba WHERE eba.EmailBccAccountIsDel = 0 <R%= AND eba.EmailBccAccountCategoryID IN ('@@EmailBccAccountCategoryID@@')%R><R%= AND eba.EmailBccAccountAddress LIKE '%@@EmailBccAccountAddress@@%' %R> ORDER BY eba.EmailBccAccountID  ;
+                ]]>
+      </SqlCommand>
+    </SqlDefinition>
+  </Data>
+</SqlSetting>
+

@@ -37,10 +37,10 @@ namespace Hoshino.Email.Controls.EmailInfoManage
             InitializeComponent();
 
             this.Loaded += Win_ReceiptEmailList_Loaded;
-            //this.ucPage.ChangePageAction = () =>
-            //{
-            //    GetList();
-            //};
+            this.ucPage.ChangePageAction = () =>
+            {
+                GetList();
+            };
         }
 
         private void Win_ReceiptEmailList_Loaded(object sender, RoutedEventArgs e)

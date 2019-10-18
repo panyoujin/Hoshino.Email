@@ -1,4 +1,7 @@
 ﻿using CDO;
+using Hoshino.Email.Core.Helper;
+using Hoshino.Email.Entity;
+using Hoshino.Email.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +20,9 @@ namespace ConsoleTestApp
 
         static void Main(string[] args)
         {
+            EmailInfoRepository ei = new EmailInfoRepository();
+            EmailInfoEntity info = ei.Get("27");
+
             try
             {
                 #region 设置基本信息
@@ -39,23 +45,24 @@ namespace ConsoleTestApp
                 #region htmlbody
 
                 string bodyStr = "test11";
-                //List<string> strList = MailHelper.GetHtmlImageUrlList(bodyStr);
-                //Dictionary<string, string> dicImage = new Dictionary<string, string>();
-                //foreach (var str in strList)
-                //{
-                //    string key = Guid.NewGuid().ToString();
-                //    string newUrl = "cid:" + key;
-                //    bodyStr = bodyStr.Replace(str, newUrl);
-                //    dicImage.Add(key, str);
-                //}
-                oMsg.HTMLBody = bodyStr;
+                List<string> strList = MailHelper.GetHtmlImageUrlList(bodyStr);
+                Dictionary<string, string> dicImage = new Dictionary<string, string>();
+                foreach (var str in strList)
+                {
+                    string key = Guid.NewGuid().ToString();
+                    string newUrl = "cid:" + key;
+                    bodyStr = bodyStr.Replace(str, newUrl);
+                    dicImage.Add(key, str);
+                }
+                oMsg.HTMLBody = info.EmailFilePath;
+
                 #endregion
                 StringBuilder title = new StringBuilder();
                 title.Append("=?BIG5?B?");
                 title.Append(ToBase64("titleTest"));
                 title.Append("?=");
                 oMsg.Subject = title.ToString();
-                oMsg.From = "\"" + "大獎" + "\"" + "xuxujiang00@sina.com";
+                oMsg.From = "\"" + "River" + "\"" + "xuxujiang00@sina.com";
                 ;//真实的邮件地址   
                 #region BCC
                 StringBuilder bccs = new StringBuilder();

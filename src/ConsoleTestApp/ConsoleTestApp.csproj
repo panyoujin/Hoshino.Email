@@ -56,5 +56,50 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hoshino.Email.Core\Hoshino.Email.Core.csproj">
+      <Project>{3852EE1A-C2B8-4D0F-B0D1-79046917D094}</Project>
+      <Name>Hoshino.Email.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hoshino.Email.Entity\Hoshino.Email.Entity.csproj">
+      <Project>{E80DD4F9-61C3-44C3-B591-5E9ADCF461D0}</Project>
+      <Name>Hoshino.Email.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hoshino.Email.Repository\Hoshino.Email.Repository.csproj">
+      <Project>{BC5DBA75-0EC4-44F9-8BDC-CF10A4886762}</Project>
+      <Name>Hoshino.Email.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlConfig\emailaccountcategorySql.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlConfig\emailaccountSql.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlConfig\emailbccaccountSql.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlConfig\emailinboxSql.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlConfig\emailinfoSql.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlConfig\emailsendaccountSql.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlConfig\emailsendbccaccountSql.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlConfig\emailsendfailureSql.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlConfig\emailbccaccountcategorySql.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

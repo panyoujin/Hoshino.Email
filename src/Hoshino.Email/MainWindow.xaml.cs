@@ -67,6 +67,7 @@ namespace Hoshino.Email
             MenuList.Add(new Menu { Name = "通訊錄", SysFunction = SysFunction.AddressBook, Content = new UC_ContactsManage() });
             MenuList.Add(new Menu { Name = "郵件管理", SysFunction = SysFunction.MailManagement, Content = new UC_EmailInfoManage() });
             MenuList.Add(new Menu { Name = "新增郵件", SysFunction = SysFunction.NewMail, Content = new UC_NewMessageForm() });
+            MenuList.Add(new Menu { Name = "新增郵件(HTML)", SysFunction = SysFunction.NewMail, Content = new UC_NewHtmlMessageForm() });
             MenuList.Add(new Menu { Name = "郵件篩選", SysFunction = SysFunction.MailScreening });
         }
 
