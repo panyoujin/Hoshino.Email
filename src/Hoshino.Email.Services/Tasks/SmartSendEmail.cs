@@ -121,6 +121,17 @@ namespace Hoshino.Email.Services.Tasks
                             }
                             catch (Exception ex)
                             {
+                                if (Constants.ErrorContinueList != null && Constants.ErrorContinueList.Count > 0)
+                                {
+                                    foreach (var message in Constants.ErrorContinueList)
+                                    {
+                                        if (ex.Message.IndexOf(message) >= 0)
+                                        {
+                                            Interval = 60;
+                                            throw ex;
+                                        }
+                                    }
+                                }
                                 LogHelper.Error(string.Format("SmartSendEmail : 发件箱【{0}:{1}】发送邮件【{2} ->{3}】Exception:{4}", EmailAccount.EmailAccountID, EmailAccount.EmailAccountAddress, emailInfo.EmailID, emailInfo.EmailTitle, ex.Message), ex);
                                 foreach (var f in sendList)
                                 {

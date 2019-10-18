@@ -73,11 +73,13 @@ namespace Hoshino.Email.Core
 
         private static string GetCallStackInfo()
         {
+            return "";
             StackFrame callstack = new StackFrame(2, true);
             return " " + callstack.GetMethod().DeclaringType.FullName + ", " + callstack.GetMethod().Name + ", [L" + callstack.GetFileLineNumber() + "], ";
         }
         private static string GetCallStackDetail()
         {
+            return "";
             //当前堆栈信息
             System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace();
             System.Diagnostics.StackFrame[] sfs = st.GetFrames();

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using CDO;
+using Hoshino.Email.Core;
 using Hoshino.Email.Core.Helper;
 using Hoshino.Email.Entity;
 
@@ -90,12 +92,16 @@ namespace Hoshino.Email.Services.Tasks
                 }
                 lock (SendLock)
                 {
+                    Constants.SleepInterval(Constants.SendWaitTime);
+                    LogHelper.Debug(string.Format("CDOSendEmail 发送邮件开始: 发件箱【{0}:{1}】发送邮件【{2} ->{3}】", emailAccount.EmailAccountID, emailAccount.EmailAccountAddress, emailInfo.EmailID, emailInfo.EmailTitle));
                     oMsg.Send();
+                    LogHelper.Debug(string.Format("CDOSendEmail 发送邮件完成: 发件箱【{0}:{1}】发送邮件【{2} ->{3}】完成", emailAccount.EmailAccountID, emailAccount.EmailAccountAddress, emailInfo.EmailID, emailInfo.EmailTitle));
                 }
 
             }
             catch (Exception ex)
             {
+                LogHelper.Error(string.Format("CDOSendEmail 发送邮件异常: 发件箱【{0}:{1}】发送邮件【{2} ->{3}】Exception:{4}", emailAccount.EmailAccountID, emailAccount.EmailAccountAddress, emailInfo.EmailID, emailInfo.EmailTitle, ex.Message), ex);
                 throw ex;
             }
         }
