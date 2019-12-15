@@ -23,7 +23,7 @@
     <SqlDefinition type="MySql" ConnStringName="backstage_connection">
       <SqlCommand>
         <![CDATA[
-        UPDATE emailaccount SET EmailAccountState = 0,EmailAccountLastTime=NOW() WHERE EmailAccountID=@@EmailAccountID@@;
+        UPDATE emailaccount SET EmailAccountState = 0,EmailAccountLastTime=NOW() WHERE 1=1 <%= AND EmailAccountID=@@EmailAccountID@@%>  <%= AND EmailAccountAddress=@@EmailAccountAddress@@%> ;
                 ]]>
       </SqlCommand>
     </SqlDefinition>

@@ -75,7 +75,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="200" Header="發件箱">
+                <DataGridTemplateColumn Width="350" Header="發件箱">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding EmailAccountAddress}" VerticalAlignment="Center"></TextBlock>
