@@ -108,6 +108,15 @@ namespace Hoshino.Email.Repository
         }
 
         /// <summary>
+        /// 删除
+        /// </summary>
+        public bool Delete(string EmailAccountAddress)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic["EmailAccountAddress"] = EmailAccountAddress;
+            return SQLHelperFactory.Instance.ExecuteNonQuery("Delete_emailaccount", dic) > 0;
+        }
+        /// <summary>
         /// 获取单个
         /// </summary>
         public EmailAccountEntity Get(int EmailAccountID)
