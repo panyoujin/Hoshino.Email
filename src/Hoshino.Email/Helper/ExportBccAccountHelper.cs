@@ -39,17 +39,22 @@ namespace Hoshino.Email.Helper
             ISheet sheet = workbook.CreateSheet("Sheet1");//创建工作表
             IRow row = sheet.CreateRow(0);//在工作表中添加一行
             ICell cellName = row.CreateCell(0);//在行中添加一列
-            cellName.SetCellValue("分類");//设置列的内容
+            cellName.SetCellValue("名稱");//设置列的内容
             ICell cellEmail = row.CreateCell(1);//在行中添加一列
             cellEmail.SetCellValue("郵箱地址");//设置列的内容
+            ICell cellClass = row.CreateCell(2);//在行中添加一列
+            cellClass.SetCellValue("分類");//设置列的内容
+
             int i = 1;
             foreach (var one in _EmailBccAccountEntity)
             {
                 IRow newRow = sheet.CreateRow(i);//在工作表中添加一行
                 ICell newCellName = newRow.CreateCell(0);//在行中添加一列
-                newCellName.SetCellValue(one.EmailBccAccountCategoryName);//设置列的内容
+                newCellName.SetCellValue(one.EmailBccAccountName);//设置列的内容
                 ICell newCellEmail = newRow.CreateCell(1);//在行中添加一列
                 newCellEmail.SetCellValue(one.EmailBccAccountAddress);//设置列的内容
+                ICell newCellClass = newRow.CreateCell(2);//在行中添加一列
+                newCellClass.SetCellValue(one.EmailBccAccountCategoryName);//设置列的内容
                 i++;
             }
             if (_OpenFileStream == null)
